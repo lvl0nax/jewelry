@@ -5,7 +5,8 @@ gem 'rails', '3.1.3'
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
+gem 'mysql'
+
 gem 'execjs'
 gem 'therubyracer'
 gem 'json'
@@ -20,6 +21,31 @@ end
 
 gem 'jquery-rails'
 
+gem 'inherited_resources', '1.3.0'
+gem 'has_scope', '0.5.1'
+
+gem "nifty-generators", :group => :development
+gem "bcrypt-ruby", :require => "bcrypt"
+gem "mocha", :group => :test
+
+gem 'devise' 
+gem 'cancan'
+
+gem 'omniauth'
+gem 'omniauth-vkontakte'
+gem 'omniauth-twitter'
+gem 'omniauth-facebook'
+
+ 
+
+
+##########################################################################################################
+#sudo apt-get install libxslt-dev libxml2-dev - необходимо прописать в консоли, чтоб поставить необходимые
+# библиотеки для дальнейшей корректной установки  нижеуказанных гемов.
+gem 'nokogiri'
+gem 'roo'
+##########################################################################################################
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
@@ -32,3 +58,4 @@ gem 'jquery-rails'
 # To use debugger
 # gem 'ruby-debug'
 
+gem "mocha", :group => :test

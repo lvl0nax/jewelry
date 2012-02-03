@@ -1,4 +1,20 @@
 AppTest::Application.routes.draw do
+
+  #for twitter authentfication
+  match '/auth/:provider/callback' => 'authentications#create'
+  resources :authentications
+
+  devise_for :users, :controller => {:registrations => 'registrations'}
+
+  resources :categories do
+    resources :products
+  end
+
+  resources :pages
+  
+  post "categories/test"
+
+  resources :products
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -48,7 +64,7 @@ AppTest::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+   root :to => 'categories#index'
 
   # See how all your routes lay out with "rake routes"
 

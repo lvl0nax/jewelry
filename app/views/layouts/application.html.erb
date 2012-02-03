@@ -2,13 +2,76 @@
 <html>
 <head>
   <title>AppTest</title>
-  <%= stylesheet_link_tag    "application" %>
+  
+  <%= javascript_include_tag "jquery" %>
   <%= javascript_include_tag "application" %>
+
   <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag "application" %>
 </head>
 <body>
+<div id = "wrapper">
+  <div class="header shadow">
+    <div class="headcontent">
+      <div class="logo">logo</div>
+      <div class="login">
+        <% if current_user %>
+          <%= 'Curent user: '%>
+          <%= current_user %> |
+          <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+        <%else %>
+          <%= link_to "Sign in", new_user_session_path %> |
+          <%= link_to "Registration", new_user_registration_path %>
+        <% end %>
+      </div>  
+      <div class = "top-menu">
+        <% allpages.each do |p| %>
+           | <%= link_to p.title, p %> | 
+        <% end %>
+      </div>
+    </div>
+  </div>
+  
+  <div class="conteiner nclear">
+    <div class="left-menu shadow">
+      <div class = "title-category"><h3>Категории</h3></div>
 
-<%= yield %>
+      <ul type="circle">
+        <% allcategories.each do |cat| %>
+          <li> <%= link_to cat.title, cat %> </li>
+        <% end %>
+      </ul>      
 
+
+    </div>
+    <div class="banner shadow">
+      <%= image_tag "66.png",  :alt => "banner" %>
+    </div>
+    <div class="search shadow">
+      Быстрый поиск
+
+    </div>
+    
+    <div class="content shadow">
+      <a href="javascript:void(0)" onclick="testPost()">test</a>
+
+      
+      <%= yield %>
+      <script type="text/javascript">
+          testPost = function(){
+            $.post('/categories/test', {ajax: 1}, function(data){
+             alert(data.text)
+            }, 'json');
+          }
+      </script>
+    </div>  
+  </div>
+  
+  <div class="footer shadow">
+    <div class="footcontent">
+      footer
+    </div>
+  </div>
+</div>
 </body>
 </html>
