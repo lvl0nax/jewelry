@@ -9,7 +9,7 @@ development:
   database: appmonah_dev
   pool: 5
   username: root
-  password: legenda
+  password: root
   host: localhost
 
 # Warning: The database defined as "test" will be erased and
@@ -21,7 +21,7 @@ test:
   database: appmonah_test
   pool: 5
   username: root
-  password: legenda
+  password: root
   host: localhost
 
 production:
@@ -30,5 +30,5 @@ production:
   database: appmonah_prod
   pool: 5
   username: root
-  password: legenda
+  password: root
   host: localhost
