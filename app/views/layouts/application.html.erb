@@ -33,38 +33,42 @@
   </div>
   
   <div class="conteiner nclear">
-    <div class="left-menu shadow">
-      <div class = "title-category"><h3>Категории</h3></div>
+    <div class="left-part shadow main-box">
+      <h3>Категории</h3>
 
-      <ul type="circle">
+      <ul class="categories">
+        <% if(allcategories.count == 0) %>
+            <li><%= link_to 'New Category', new_category_path %></li>
+        <% end %>
         <% allcategories.each do |cat| %>
           <li> <%= link_to cat.title, cat %> </li>
         <% end %>
-      </ul>      
-
-
-    </div>
-    <div class="banner shadow">
-      <%= image_tag "66.png",  :alt => "banner" %>
-    </div>
-    <div class="search shadow">
-      Быстрый поиск
+      </ul>
 
     </div>
-    
-    <div class="content shadow">
-      <a href="javascript:void(0)" onclick="testPost()">test</a>
 
-      
-      <%= yield %>
-      <script type="text/javascript">
-          testPost = function(){
-            $.post('/categories/test', {ajax: 1}, function(data){
-             alert(data.text)
-            }, 'json');
-          }
-      </script>
-    </div>  
+    <div class="center-part">
+      <div class="shadow main-box">
+          <div class="banner">
+            <%= image_tag "66.png",  :alt => "banner" %>
+          </div>
+        </div>
+
+        <div class="search shadow main-box">
+          Быстрый поиск
+        </div>
+
+        <div class="content shadow main-box">
+          <%= yield %>
+          <script type="text/javascript">
+              testPost = function(){
+                $.post('/categories/test', {ajax: 1}, function(data){
+                 alert(data.text)
+                }, 'json');
+              }
+          </script>
+        </div>
+    </div>
   </div>
   
   <div class="footer shadow">

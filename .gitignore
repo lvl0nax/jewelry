@@ -1,2 +1,18 @@
-tmp/*.*
+.bundle
+db/*.sqlite3
+log/*.log
+tmp/**/*
+.idea/
+config/database.yml
+public/uploads/
+.bundle
+db/*.sqlite3*
+log/*.log
+*.log
+/tmp/
+doc/
+*.swp
+*~
+.project
+.DS_Store
 
