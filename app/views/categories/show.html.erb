@@ -1,11 +1,20 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b>Title:</b>
+<h2>
   <%= @category.title %>
-</p>
+</h2>
 
+<% if(@category.products) %>
+    <ul id="list-products">
+        <% @category.products.each do |p|%>
+           <li data-id="<%= p.id%>" data-name="<%= p.article%>" data-price="<%= p.price%>">
+             <span class="price"><%= p.price.round(2)%></span>
+             <%= p.article%>
+           </li>
+        <% end %>
+    </ul>
+<% end %>
+<div class="admin-links">
 
-<%= link_to 'Edit', edit_category_path(@category) %> |
-<%= link_to 'add product', new_category_product_path(@category) %> |
-<%= link_to 'Back', categories_path %>
+  <%= link_to 'Редактировать категорию', edit_category_path(@category) %>
+  <%= link_to 'Добавить продукт в категорию', new_category_product_path(@category) %>
+
+</div>

@@ -12,16 +12,15 @@
 <body>
 <div id = "wrapper">
   <div class="header shadow">
-    <div class="headcontent">
-      <div class="logo">logo</div>
+    <div class="header-content">
+      <div class="logo">Бижютерия</div>
       <div class="login">
         <% if current_user %>
-          <%= 'Curent user: '%>
-          <%= current_user %> |
-          <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+          <span><%= current_user.email %></span><!--
+          --><%= link_to "Выйти", destroy_user_session_path, :method => :delete %>
         <%else %>
-          <%= link_to "Sign in", new_user_session_path %> |
-          <%= link_to "Registration", new_user_registration_path %>
+          <%= link_to "Войти", new_user_session_path %><!--
+          --><%= link_to "Регистрация", new_user_registration_path %>
         <% end %>
       </div>  
       <div class = "top-menu">
@@ -32,8 +31,8 @@
     </div>
   </div>
   
-  <div class="conteiner nclear">
-    <div class="left-part shadow main-box">
+  <div class="container nclear">
+    <div class="left-part shadow main-box brs-5">
       <h3>Категории</h3>
 
       <ul class="categories">
@@ -48,31 +47,24 @@
     </div>
 
     <div class="center-part">
-      <div class="shadow main-box">
+      <div class="shadow main-box brs-5">
           <div class="banner">
             <%= image_tag "66.png",  :alt => "banner" %>
           </div>
         </div>
 
-        <div class="search shadow main-box">
+        <div class="search shadow main-box brs-5">
           Быстрый поиск
         </div>
 
-        <div class="content shadow main-box">
+        <div class="content shadow main-box brs-5">
           <%= yield %>
-          <script type="text/javascript">
-              testPost = function(){
-                $.post('/categories/test', {ajax: 1}, function(data){
-                 alert(data.text)
-                }, 'json');
-              }
-          </script>
         </div>
     </div>
   </div>
   
   <div class="footer shadow">
-    <div class="footcontent">
+    <div class="footer-content">
       footer
     </div>
   </div>
