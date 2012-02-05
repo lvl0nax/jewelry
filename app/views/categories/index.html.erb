@@ -1,23 +1,17 @@
-<h1>Listing categories</h1>
+<h1>Список категорий</h1>
 
-<table>
-  <tr>
-    <th>Title</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<ul class="list-items">
+  <% @categories.each do |category| %>
+  <li>
+    <div class="admin-links">
+    <%= link_to category.title, category %>
+    <%= link_to 'Редактировать', edit_category_path(category) %>
+    <%= link_to 'Удалить', category, :confirm => 'Are you sure?', :method => :delete %>
+    </div>
+  </li>
+  <% end %>
+</ul>
 
-<% @categories.each do |category| %>
-  <tr>
-    <td><%= category.title %></td>
-    <td><%= link_to 'Show', category %></td>
-    <td><%= link_to 'Edit', edit_category_path(category) %></td>
-    <td><%= link_to 'Destroy', category, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
 
-<br />
 
-<%= link_to 'New Category', new_category_path %>
+<%= link_to 'Добавить категорию', new_category_path %>
