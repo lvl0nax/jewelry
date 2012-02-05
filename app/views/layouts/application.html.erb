@@ -22,12 +22,18 @@
           <%= link_to "Войти", new_user_session_path %><!--
           --><%= link_to "Регистрация", new_user_registration_path %>
         <% end %>
-      </div>  
+      </div>
+      <div class="card brs-3 empty">
+          <div class="card-title">Ваша корзина</div>
+          <div id="card-wrapper"></div>
+          <div id="card-chekout">Корзина пуста</div>
+      </div>
+      <!--
       <div class = "top-menu">
         <% allpages.each do |p| %>
            | <%= link_to p.title, p %> | 
         <% end %>
-      </div>
+      </div>       -->
     </div>
   </div>
   
@@ -37,7 +43,7 @@
 
       <ul class="categories">
         <% if(allcategories.count == 0) %>
-            <li><%= link_to 'New Category', new_category_path %></li>
+            <li><%= link_to 'Добавить категорию', new_category_path %></li>
         <% end %>
         <% allcategories.each do |cat| %>
           <li> <%= link_to cat.title, cat %> </li>

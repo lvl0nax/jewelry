@@ -50,19 +50,47 @@ a:hover{color: #E761E2;}
 /* layout */
 #wrapper{ background: #FBF9F6; min-height: 100%;position: relative;overflow: hidden;}
 
-.header{background-color: #fff;height: 100px;}
-.header-content{width: 1000px;margin: 0 auto;position: relative;}
+.header{background-color: #fff;height: 100px; position: relative; z-index: 2}
+.header-content{width: 1000px;margin: 0 auto;position: relative; height: 100px;}
 
 .left-part{float: left;background: #fff;width: 200px;position: relative;}
 .center-part{position: relative;margin: 0 0 0 260px;}
 
-.login{float: right;}
+.login{float: right; padding: 10px 0}
 
 .logo{
     font: 45px/45px "ParisianC";
-    position: absolute;top: 30px;left: 0;}
+    position: absolute;top: 30px;left: 0;
+}
 
 .top-menu{position: absolute;top: 70px;right: 10px;font-size: 19px;}
+.card{
+    cursor: pointer;
+    position: absolute;
+    top: 45px;
+    right: 0;
+    background: rgba(0,0,0,.9);
+    color: #fff;
+    min-height: 45px;
+    padding: 5px 10px;
+    box-shadow: 0 0 3px rgba(0,0,0,.4);
+    -moz-box-shadow: 0 0 3px rgba(0,0,0,.4);
+    -webkit-box-shadow: 0 0 3px rgba(0,0,0,.4);
+}
+.card.empty{cursor: default}
+.card .card-title{font-size: 15px; font-weight: bold; padding: 0 0 3px;}
+#card-wrapper{display: none; padding:5px 0 8px}
+#card-wrapper div{padding:0 0 5px}
+#card-wrapper .btn{
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    padding: 0 3px 2px;
+    line-height: 16px;
+    vertical-align: top;
+    font-size: 21px
+}
+#card-chekout{padding: 3px 0 0; border-top: 1px dashed #fff}
 
 .main-box{padding:10px 20px;margin: 0 0 20px}
 .container{width: 1000px;margin: 0 auto;padding: 30px 0 120px;}
@@ -122,6 +150,18 @@ a:hover{color: #E761E2;}
 .list-items li{padding: 0 0 20px; list-style: none}
 .list-items .admin-links{padding: 5px 0 0}
 /*helpers*/
+.fl-r{float: right}
+.fl-l{float: left}
+
+.ta-c{text-align: center}
+
+.d-ib{
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    vertical-align: top;
+}
+
 .nclear:after {content:"."}
 .nclear {display:inline-block}
 .nclear {display:block}
