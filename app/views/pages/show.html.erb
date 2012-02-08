@@ -1,15 +1,9 @@
 <p id="notice"><%= notice %></p>
-
-<p>
-  <b>Title:</b>
+<h1>
   <%= @page.title %>
-</p>
+</h1>
+<div class="page-content">
+  <%= raw @page.description %>
+</div>
 
-<p>
-  <b>Description:</b>
-  <%= @page.description %>
-</p>
-
-
-<%= link_to 'Edit', edit_page_path(@page) %> |
-<%= link_to 'Back', pages_path %>
+<%= link_to 'Редактировать', edit_page_path(@page) %>

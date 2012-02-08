@@ -11,10 +11,8 @@ AppTest::Application.routes.draw do
   end
 
   resources :pages
-  
-  post "categories/test"
-
   resources :products
+  resources :card
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

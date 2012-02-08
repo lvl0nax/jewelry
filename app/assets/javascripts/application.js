@@ -78,6 +78,7 @@ var card = (function(){
             if(tO.hasClass("empty")) return false;
             if(tO.hasClass("open")){
                 tO.removeClass("open");
+                $('.links').hide();
                 t.cardWrap.stop().slideUp(300, function(){
                     t.card.stop().animate({
                         "min-width": 100}, 300, function(){
@@ -86,15 +87,18 @@ var card = (function(){
             } else {
                 tO.addClass("open");
                 tO.stop().animate({
-                    "min-width": 350}, 300, function(){
-                    t.cardWrap.stop().slideDown(300);
+                    "min-width": 350
+                }, 300, function(){
+                    t.cardWrap.stop().slideDown(300, function(){
+                        $('.links').show();
+                    });
                 });
             }
         });
         if(cookieCard == null || (cookieCard != null && cookieCard.length < 3)){
             t.cardObj = {};
-            ck("card", JSON.stringify(t.cardObj));
-            t.cardCheck.html("Корзина пуста");
+            ck("card", JSON.stringify(t.cardObj),{path : "/"});
+            t.cardCheck.html("пуста");
         } else {
             t.cardObj = JSON.parse(cookieCard);
             t.card.removeClass("empty");
@@ -173,7 +177,7 @@ var card = (function(){
 
     t.writeToCard = function(){
 
-        ck("card", JSON.stringify(t.cardObj));
+        ck("card", JSON.stringify(t.cardObj),{path : "/"});
 
         t.card.removeClass("empty");
         t.cardWrap.html("");
@@ -184,9 +188,10 @@ var card = (function(){
 
             t.cardWrap.append('<div class="nclear">'+
                                 '<div class="fl-r">'+
-                                '<a class="btn btn-square" href="javascript: void(0)" onclick="card.minusOne(' + i + '); event.stopPropagation()"><b>-</b></a>'+
+                                '<a class="counters" href="javascript: void(0)" onclick="card.minusOne(' + i + '); event.stopPropagation()"><b>-</b></a>'+
                                 ' <span class="count-item">' + t.cardObj[i].count + '</span>'+
-                                ' <a href="javascript: void(0)" class="btn btn-square" onclick="card.plusOne(' + i + '); event.stopPropagation()"><b>+</b></a>'+
+                                ' <a href="javascript: void(0)" class="counters" onclick="card.plusOne(' + i + '); event.stopPropagation()"><b>+</b></a>'+
+                                ' = ' + (t.cardObj[i].count * t.cardObj[i].price ).toFixed(2) +
                                 //'&nbsp; <a href="javascript:" onclick="card.deleteItem('+i+')">del</a>'+
                                 '</div>'+
                                 t.cardObj[i].name +
@@ -198,15 +203,16 @@ var card = (function(){
         }
 
         t.cardTotalPrice = t.cardTotalPrice.toFixed(2);
-        t.cardCheck.html("<div>Товаров: " + t.cardTotalCount + ", на сумму: " + t.cardTotalPrice);
+        t.cardCheck.html(t.cardTotalCount + " товаров, на сумму: " + t.cardTotalPrice);
 
         if(services.sizeOfObj(t.cardObj) == null) {
-            t.cardCheck.html("Корзина пуста");
-            t.card.addClass("empty");
-            t.card.removeClass("open");
+            t.cardCheck.html("пуста");
+            t.card.addClass("empty").removeClass("open");
+            $('.links').hide();
             t.cardWrap.stop().slideUp(300, function(){
                 t.card.stop().animate({
-                    "min-width": 100}, 300, function(){
+                    "min-width": 100
+                }, 300, function(){
                 });
             });
         }

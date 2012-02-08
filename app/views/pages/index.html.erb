@@ -1,14 +1,6 @@
 <h1>Listing pages</h1>
 
 <table>
-  <tr>
-    <th>Title</th>
-    <th>Description</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
 <% @pages.each do |page| %>
   <tr>
     <td><%= page.title %></td>
@@ -22,4 +14,4 @@
 
 <br />
 
-<%= link_to 'New Page', new_page_path %>
+<%= link_to 'Добавить страницу', new_page_path %>

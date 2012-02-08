@@ -1,0 +1,10 @@
+<h1 class="title-main-box">Оформление заказа</h1>
+
+<ul class="list-products-card">
+  <% @card.each do |pc|%>
+  <li>
+    <span class="fl-r"><%=pc[1]["count"]%></span>
+    <%=pc[1]["name"]%>
+  </li>
+  <% end %>
+</ul>
