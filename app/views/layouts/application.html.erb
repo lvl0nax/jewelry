@@ -11,6 +11,17 @@
 </head>
 <body>
 <div id = "wrapper">
+  <% if(!@hide_card) %>
+  <div class="card empty">
+      <span class="card-title">Ваша корзина:</span>
+      <span id="card-chekout">пуста</span>
+      <div id="card-wrapper"></div>
+      <div class="links">
+        <a class="fl-r" href="javascript: void(0)" onclick="card.emptyCard()">Очистить корзину</a>
+        <a href="/card">Оформить заказ</a>
+      </div>
+  </div>
+  <% end %>
   <div class="header shadow">
     <div class="header-content">
       <div class="logo">Бижютерия</div>
@@ -23,17 +34,6 @@
           --><%= link_to "Регистрация", new_user_registration_path %>
         <% end %>
       </div>
-      <% if(!@hide_card) %>
-      <div class="card brs-3 empty">
-          <span class="card-title">Ваша корзина:</span>
-          <span id="card-chekout">пуста</span>
-          <div id="card-wrapper"></div>
-          <div class="links">
-            <a class="fl-r" href="javascript: void(0)" onclick="card.emptyCard()">Очистить корзину</a>
-            <a href="/card">Оформить заказ</a>
-          </div>
-      </div>
-      <% end %>
       <div class="top-menu">
         <% allpages.each do |p| %>
            <%= link_to p.title, p, {:class => (params[:controller] == "pages" && params[:action] == "show" && params[:id].to_i == p.id) ? "active" : "" }%>
@@ -60,7 +60,7 @@
     <div class="center-part">
         <% if(!@hide_banner) %>
         <div class="shadow main-box brs-5">
-          <div class="banner">
+          <div class="banner brs-5">
             <%= image_tag "66.jpg",  :alt => "banner" %>
           </div>
         </div>

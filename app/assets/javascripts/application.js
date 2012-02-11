@@ -73,6 +73,12 @@ var card = (function(){
         t.cardCheck = params.cardCheck;
         t.cardWrap = params.cardWrap;
 
+        var wiLogin = 500 - $(".login").width() - 10;
+
+        t.card.css({
+            "margin-right" : -wiLogin
+        }).fadeIn(200);
+
         t.card.click(function(){
             var tO = $(this);
             if(tO.hasClass("empty")) return false;
