@@ -11,8 +11,12 @@ AppTest::Application.routes.draw do
   end
 
   resources :pages
+
   resources :products
   resources :card
+
+  post 'card/add_to_card'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

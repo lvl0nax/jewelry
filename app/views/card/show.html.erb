@@ -1,0 +1,7 @@
+<% if @cards%>
+    <% @cards.each do |c| %>
+        <%= c.cardjson%><br><br>
+    <% end %>
+<% else %>
+    Список пуст
+<% end %>

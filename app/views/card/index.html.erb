@@ -27,13 +27,31 @@
         <td colspan="4" class="td-last">Итог: <%= card_total_price%></td>
       </tr>
     </table>
-    <div class="ta-r">
-      <a class="buttn" href="javascript: void(0)">оформить</a>
+    <% if(!current_user) %>
+        <div class="info-box">
+            Если вы хотите остлеживать состояние заказа, то вам необходимо <a href="/users/sign_up">зарегистрироваться</a>, либо если вы уже зарегистрировались у нас, то можете просто
+        <a href="/users/sign_in">войти</a> под своей учётной записью.
+        </div>
+    <% end %>
+    <div class="form">
+        <h4>Ваши контактные данные</h4>
+        <div class="form-raw">
+          <label class="f-label" for="fio">
+            ФИО :
+          </label>
+          <input type="text" id="fio">
+        </div>
+        <div class="form-raw">
+          <label class="f-label" for="mobile-number">
+            Мобильный телефон :
+          </label>
+          <input type="text" id="mobile-number">
+        </div>
     </div>
-<% end %>
-<% if(!current_user) %>
-    Если вы хотите остлеживать состояние заказа, то вам необходимо <a href="/users/sign_up">зарегистрироваться</a>, либо если вы уже регистрировались у нас, то можете просто
-    <a href="/users/sign_in">войти</a> под своей учётной записью.
+
+    <div class="btn-check">
+      <a class="buttn" href="javascript: void(0)" style="font-size:15px" onclick="check.getNextStep()">Оформить</a>
+    </div>
 <% end %>
 
 <script type="text/javascript">
@@ -41,6 +59,30 @@
       var t = {};
 
       t.table = $('.list-products-card');
+
+      t.getNextStep = function(){
+        var fioO = $("#fio"),
+            mobileNumberO = $("#mobile-number"),
+            cardJson = JSON.stringify(card.cardObj);
+
+        if(fioO.val().length == 0){
+            alert("Введите Ваше ФИО");
+            fioO.focus();
+            return false;
+        } else if(mobileNumberO.val().length == 0){
+            alert("Введите Ваш мобильный телефон");
+            mobileNumberO.focus();
+            return false;
+        }
+
+        $.post("/card/add_to_card", {ajax:true, fio: fioO.val(), phone: mobileNumberO.val()}, function(resp){
+            console.log(resp)
+            if(resp.res == 1){
+                location.href = "/card/list";
+            }
+        }, "json")
+
+      };
 
       t.addOneToCard = function(el, id){
 

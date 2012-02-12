@@ -265,4 +265,41 @@ brs-3-b{
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
 }
-.buttn:hover{background: #9244C5}
+.buttn:hover{background: #9244C5; color: #fff}
+
+.info-box{
+    padding: 10px 10px 10px 40px;
+    position: relative;
+    margin: 0 0 20px;
+    border: 1px solid #D3FBB4;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    background:#F7FFF1;
+}
+.info-box:before{
+    position: absolute;
+    left: 14px; top: 4px;
+    content: "!";
+    font-size: 36px;
+    font-weight: bold;
+    color: #5EE024;
+}
+.form h4{padding: 0 0 15px}
+.form-raw{padding: 0 0 10px}
+.form-raw .f-label{width: 150px; float: left; padding: 0 10px 0 0; line-height: 23px;}
+.form-raw input{
+    width: 200px;
+    padding: 2px 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15) inset;
+}
+.form-raw input:focus{
+    border: 1px solid #7D2DB1;
+   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15) inset, 0 0 3px #7D2DB1;
+}
+.btn-check{padding:10px 0 20px}
+
