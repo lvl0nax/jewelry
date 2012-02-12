@@ -18,9 +18,10 @@ h2{font-size:19px; padding: 0 0 8px}
 h3{font-size:17px; padding: 0 0 6px}
 h4{font-size:15px; padding: 0 0 5px}
 h1.title-main-box{
-    background: #AF9BF9;
+    background: #a9a9a9;
     color: #fff;
-    padding: 10px 20px;
+    font-size:17px;
+    padding: 7px 20px;
     margin: -10px -20px 0;
     border-radius: 5px 5px 0 0;
     -moz-border-radius: 5px 5px 0 0;
@@ -220,8 +221,14 @@ brs-3-b{
     -webkit-border-radius: 5px;
     -moz-radius: 5px;
 }
-.list-products-card{padding: 10px 0 20px; font-size: 15px;}
-.list-products-card li{padding: 10px 0 0; overflow: hidden;}
+.list-products-card{padding: 0 0 10px; margin: 20px 0 0; font-size: 15px; width: 100%}
+.list-products-card td{overflow: hidden; text-align: center; padding:5px 5px}
+.list-products-card tr td:first-child{text-align: left}
+.list-products-card .tr-bottom td{border-top: 1px solid #ccc}
+.list-products-card .tr-top td{border-bottom: 1px solid #ccc}
+.list-products-card .td-last{text-align: right!important}
+.list-products-card tr:hover{background: #f2f2f2}
+.list-products-card .tr-top:hover, .list-products-card .tr-bottom:hover{background: #fff}
 
 #list-products{margin: 0 0 0 -20px}
 #list-products li{
@@ -244,3 +251,18 @@ brs-3-b{
 }
 #list-products li:hover{cursor: pointer; background: #f2f2f2}
 #list-products li:hover .p-addcard{background: #9244C5}
+
+.buttn{
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    padding: 3px 8px 4px;
+    background: #7D2DB1;
+    color:#fff;
+    border: 1px solid #7D2DB1;
+    box-shadow: 0 3px 4px rgba(255, 255, 255, 0.2) inset, 0 -3px 4px rgba(0, 0, 0, 0.1) inset;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
+.buttn:hover{background: #9244C5}

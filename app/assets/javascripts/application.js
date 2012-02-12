@@ -227,13 +227,7 @@ var card = (function(){
         if(services.sizeOfObj(t.cardObj) == null) {
             t.cardCheck.html("пуста");
             t.card.addClass("empty").removeClass("open");
-            $('.links').hide();
-            t.cardWrap.stop().slideUp(300, function(){
-                t.card.stop().animate({
-                    "min-width": 100
-                }, 300, function(){
-                });
-            });
+            t.hideCard();
         }
 
     };

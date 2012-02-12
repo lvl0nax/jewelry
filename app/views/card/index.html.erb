@@ -1,10 +1,93 @@
 <h1 class="title-main-box">Оформление заказа</h1>
+<% if(@card) %>
+    <table class="list-products-card">
+      <tr class="tr-top">
+        <td>Наименование товара</td>
+        <td>Количество</td>
+        <td>Цена</td>
+        <td class="td-last">Сумма</td>
+      </tr>
+      <% card_total_price = 0 %>
+      <% @card.each do |pc|%>
 
-<ul class="list-products-card">
-  <% @card.each do |pc|%>
-  <li>
-    <span class="fl-r"><%=pc[1]["count"]%></span>
-    <%=pc[1]["name"]%>
-  </li>
-  <% end %>
-</ul>
+      <tr>
+        <td><%=pc[1]["name"]%></td>
+        <td>
+          <a href="javascript: void(0)" onclick="check.minusOneFromCard($(this), <%= pc[0]%>)"><b>-</b></a>
+          <span class="count"><%=pc[1]["count"]%></span>
+          <a href="javascript: void(0)" onclick="check.addOneToCard($(this), <%= pc[0]%>)"><b>+</b></a>
+        </td>
+        <td><%=pc[1]["price"]%></td>
+        <td class="td-last"><%=pc[1]["count"].to_i * pc[1]["price"].to_f%></td>
+      </tr>
+          <% card_total_price += pc[1]["count"].to_i * pc[1]["price"].to_f %>
+      <% end %>
+
+      <tr class="tr-bottom">
+        <td colspan="4" class="td-last">Итог: <%= card_total_price%></td>
+      </tr>
+    </table>
+    <div class="ta-r">
+      <a class="buttn" href="javascript: void(0)">оформить</a>
+    </div>
+<% end %>
+<% if(!current_user) %>
+    Если вы хотите остлеживать состояние заказа, то вам необходимо <a href="/users/sign_up">зарегистрироваться</a>, либо если вы уже регистрировались у нас, то можете просто
+    <a href="/users/sign_in">войти</a> под своей учётной записью.
+<% end %>
+
+<script type="text/javascript">
+  var check = (function(){
+      var t = {};
+
+      t.table = $('.list-products-card');
+
+      t.addOneToCard = function(el, id){
+
+          card.plusOne(id);
+
+          t.writeFromCard();
+      };
+
+      t.minusOneFromCard = function(el, id){
+
+          card.minusOne(id);
+
+          t.writeFromCard();
+      };
+
+      t.writeFromCard = function(){
+
+        t.table.html("");
+        t.tableInner = "<tr class='tr-top'><td>Наименование товара</td><td>Количество</td><td>Цена</td><td class='td-last'>Сумма</td></tr>";
+
+        for(i in card.cardObj){
+            t.tableInner += "<tr>"+
+                        "<td>" + card.cardObj[i].name + "</td>"+
+                        "<td>"+
+                            "<a onclick='check.minusOneFromCard($(this), " + i + ")' href='javascript: void(0)'><b>-</b></a>"+
+                            " <span class='count'>" + card.cardObj[i].count + "</span>"+
+                            " <a onclick='check.addOneToCard($(this), " + i + ")' href='javascript: void(0)'><b>+</b></a>"+
+                        "</td>"+
+                        "<td>" + card.cardObj[i].price + "</td>"+
+                        "<td class='td-last'>" +(card.cardObj[i].count * card.cardObj[i].price ).toFixed(2) + "</td>"+
+                    "</tr>"
+        }
+        t.tableInner += "<tr class='tr-bottom'><td class='td-last' colspan='4'>Итог: " + card.cardTotalPrice + "</td></tr>"
+
+
+        t.table.html(t.tableInner);
+
+        if(services.sizeOfObj(card.cardObj) == null) {
+            t.table.html("Корзина пуста, <a href='/'>выберите товар</a> и возвращайтесь!")
+        }
+
+      };
+
+      t.init = function(){
+        t.writeFromCard();
+      };
+      $(t.init);
+      return t;
+  }())
+</script>

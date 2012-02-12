@@ -13,17 +13,17 @@
 </head>
 <body>
 <div id = "wrapper">
-  <% if(!@hide_card) %>
-  <div class="card empty">
-      <span class="card-title">Ваша корзина:</span>
-      <span id="card-chekout">пуста</span>
-      <div id="card-wrapper"></div>
-      <div class="links">
-        <a class="fl-r" href="javascript: void(0)" onclick="card.emptyCard()">Очистить корзину</a>
-        <a href="/card">Оформить заказ</a>
+  <div class="<%= @hide_card ? 'h' : ''%>">
+      <div class="card empty">
+          <span class="card-title">Ваша корзина:</span>
+          <span id="card-chekout">пуста</span>
+          <div id="card-wrapper"></div>
+          <div class="links">
+            <a class="fl-r" href="javascript: void(0)" onclick="card.emptyCard()">Очистить корзину</a>
+            <a href="/card">Оформить заказ</a>
+          </div>
       </div>
   </div>
-  <% end %>
   <div class="header shadow">
     <div class="header-content">
       <div class="logo">Bujua</div>
