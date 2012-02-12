@@ -71,8 +71,8 @@ a:hover{color: #AF9BF9;}
     position: absolute;top: 30px;left: 0;
 }
 
-.top-menu{position: absolute;top: 70px;right: 10px;font-size: 19px;}
-.top-menu a{padding: 0 10px; color: #999; border-top: 3px solid #fff}
+.top-menu{position: absolute;top: 70px;right: 0;font-size: 19px;}
+.top-menu a{padding: 5px 10px 0; color: #999; border-top: 3px solid #fff}
 .top-menu a:hover{color: #666}
 .top-menu a.active{border-color: #7D2DB1; color: #666}
 .card{
@@ -127,7 +127,7 @@ a:hover{color: #AF9BF9;}
 .categories{padding: 5px 0 5px 10px;list-style-type: none;}
 .categories li{text-decoration:none;font-size: 13px;padding: 5px 0;}
 
-.banner{position: relative;overflow: hidden; margin: -15px -20px}
+.banner{position: relative;overflow: hidden; margin: -10px -20px}
 .banner img{width: 100%;}
 
 .authentications {margin-bottom: 30px;}
@@ -235,6 +235,12 @@ brs-3-b{
 }
 #list-products .p-title{display: block; padding: 0 0 9px; border-bottom: 1px solid #ccc; margin: 0 0 9px}
 #list-products .p-price{float: right}
-#list-products .p-addcard{padding: 3px 8px 4px;background: #196E95; color:#fff}
+#list-products .p-addcard{
+    padding: 3px 8px 4px;
+    background: #7D2DB1;
+    color:#fff;
+    border: 1px solid #7D2DB1;
+    box-shadow: 0 3px 4px rgba(255, 255, 255, 0.2) inset, 0 -3px 4px rgba(0, 0, 0, 0.1) inset;
+}
 #list-products li:hover{cursor: pointer; background: #f2f2f2}
-#list-products li:hover .p-addcard{background: #095071; color: #fff}
+#list-products li:hover .p-addcard{background: #9244C5}

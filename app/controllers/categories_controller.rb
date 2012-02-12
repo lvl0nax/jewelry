@@ -40,6 +40,9 @@ class CategoriesController <  InheritedResources::Base #ApplicationController #
 
  # POST /categories
  # POST /categories.json
+def show
+  @title = resource.title
+end
  def test
    @categories = Category.all
    respond_to do |format|

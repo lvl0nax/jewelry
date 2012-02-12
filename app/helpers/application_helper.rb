@@ -20,5 +20,9 @@ module ApplicationHelper
     @allPr
   end
 
+  def title
+    return @title ? @title + " | Bujua" : "Bujua"
+  end
+
 
 end

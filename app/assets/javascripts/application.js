@@ -79,28 +79,15 @@ var card = (function(){
             "margin-right" : -wiLogin
         }).fadeIn(200);
 
-        t.card.click(function(){
-            var tO = $(this);
-            if(tO.hasClass("empty")) return false;
-            if(tO.hasClass("open")){
-                tO.removeClass("open");
-                $('.links').hide();
-                t.cardWrap.stop().slideUp(300, function(){
-                    t.card.stop().animate({
-                        "min-width": 100}, 300, function(){
-                    });
-                });
+        t.card.click(function(event){
+            if(t.card.hasClass("empty")) return false;
+            if(!t.card.hasClass("open")){
+                t.showCard();
             } else {
-                tO.addClass("open");
-                tO.stop().animate({
-                    "min-width": 350
-                }, 300, function(){
-                    t.cardWrap.stop().slideDown(300, function(){
-                        $('.links').show();
-                    });
-                });
+                event.stopPropagation();
             }
         });
+
         if(cookieCard == null || (cookieCard != null && cookieCard.length < 3)){
             t.cardObj = {};
             ck("card", JSON.stringify(t.cardObj),{path : "/"});
@@ -115,6 +102,32 @@ var card = (function(){
             t.addToCard($(this));
         })
 
+    };
+
+    t.showCard = function(){
+        t.card.addClass("open");
+        t.card.stop().animate({
+            "min-width": 350
+        }, 300, function(){
+            t.cardWrap.stop().slideDown(300, function(){
+                $('.links').show();
+            });
+        });
+
+        $("body").unbind("click");
+        t.card.mouseout(function(){
+            $("body").bind("click", t.hideCard);
+        })
+    };
+
+    t.hideCard = function(tO){
+        t.card.removeClass("open");
+        $('.links').hide();
+        t.cardWrap.stop().slideUp(300, function(){
+            t.card.stop().animate({
+                "min-width": 100}, 300, function(){
+            });
+        });
     };
 
     t.addToCard = function(el){

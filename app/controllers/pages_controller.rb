@@ -1,4 +1,8 @@
 class PagesController < InheritedResources::Base #ApplicationController
+
+  def show
+    @title = resource.title
+  end
 #  # GET /pages
 #  # GET /pages.json
 #  def index

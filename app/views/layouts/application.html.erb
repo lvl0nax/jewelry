@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>AppTest</title>
-  
+  <title><%= title%></title>
+  <%= csrf_meta_tags %>
+
+  <%= stylesheet_link_tag "application" %>
+
   <%= javascript_include_tag "jquery" %>
   <%= javascript_include_tag "application" %>
 
-  <%= csrf_meta_tags %>
-  <%= stylesheet_link_tag "application" %>
+  <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon.ico" />
 </head>
 <body>
 <div id = "wrapper">
@@ -24,7 +26,7 @@
   <% end %>
   <div class="header shadow">
     <div class="header-content">
-      <div class="logo">Бижютерия</div>
+      <div class="logo">Bujua</div>
       <div class="login">
         <% if current_user %>
           <span><%= current_user.email %></span><!--
@@ -61,7 +63,7 @@
         <% if(!@hide_banner) %>
         <div class="shadow main-box brs-5">
           <div class="banner brs-5">
-            <%= image_tag "66.jpg",  :alt => "banner" %>
+            <%= image_tag "banner.jpg",  :alt => "banner" %>
           </div>
         </div>
         <% end %>
