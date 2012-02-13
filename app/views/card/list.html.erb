@@ -1,7 +1,33 @@
-<% if(!@cards) %>
-    <% @card.each do |c| %>
-        <%= c.phone%><br><br>
+<% if(@cards) %>
+
+    <table class="list-products-card">
+      <tr class="tr-top">
+        <td>ФИО</td>
+        <td>Телефон</td>
+        <td>Пользователь</td>
+        <td class="td-last">Корзина</td>
+      </tr>
+    <% @cards.each do |c| %>
+      <tr>
+        <td><%= c.fio%></td>
+        <td><%= c.phone%></td>
+        <td>
+          <% if(c.user_id) %>
+            <%= User.find_by_id(c.user_id).email %></td>
+          <% end %>
+        <td class="td-last">
+          <% card_total_price = 0 %>
+          <% JSON.parse(c.cardjson).each do |pc| %>
+
+            <div><%= pc[1]["name"] + " (id = " + pc[0].to_s + ") " + pc[1]["count"].to_s%></div>
+            <% card_total_price += pc[1]["count"].to_i * pc[1]["price"].to_f %>
+          <% end %>
+          <div>Итог: <%= card_total_price%></div>
+        </td>
+      </tr>
     <% end%>
+
+    </table>
 <% else %>
     <h1>К сожалению, заказов ещё не поступило.</h1>
 <% end %>

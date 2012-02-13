@@ -1,5 +1,5 @@
 <h1 class="title-main-box">Оформление заказа</h1>
-<% if(@card) %>
+<% if(!@card.blank?) %>
     <table class="list-products-card">
       <tr class="tr-top">
         <td>Наименование товара</td>

@@ -56,7 +56,15 @@
           <li> <%= link_to cat.title, cat %> </li>
         <% end %>
       </ul>
-
+      <% if current_user %>
+          <br><br>
+          для админов:
+          <ul class="categories">
+            <li><%= link_to 'Добавить страницу', new_page_path %></li>
+            <li><%= link_to 'Добавить категорию', new_category_path %></li>
+            <li><a href="/card/list">Список заказов</a></li>
+          </ul>
+      <% end %>
     </div>
 
     <div class="center-part">

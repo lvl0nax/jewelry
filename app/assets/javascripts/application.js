@@ -259,7 +259,6 @@ var check = (function(){
 
     location.href = "card/add_to_card?fio=" + fioO.val() + "&phone=" + mobileNumberO.val();
 
-
   };
 
   t.addOneToCard = function(el, id){

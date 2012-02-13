@@ -4,6 +4,11 @@ class CardController < ApplicationController
     if !cookies[:card].nil?
       @card = JSON.parse(cookies[:card])
     end
+
+    if @card.blank?
+      redirect_to root_url
+    end
+
     @hide_banner = true
     @hide_search = true
     @hide_card = true
@@ -24,6 +29,7 @@ class CardController < ApplicationController
 
     @card.phone = params[:phone]
     @card.fio = params[:fio]
+    @card.status = 1
 
     if @card.save
       respond_to do |format|
@@ -31,7 +37,7 @@ class CardController < ApplicationController
           redirect_to '/card/list'
         }
         format.json { render :json => {
-            :res => "1",
+            :res => "1"
         } }
       end
     end
@@ -40,12 +46,14 @@ class CardController < ApplicationController
 
   def list
 
-    @card = Card.all
+    if !current_user
+      redirect_to root_url
+    end
+
+    @cards = Card.all
 
     @hide_banner = true
     @hide_search = true
-    @hide_card = true
-
 
   end
 
