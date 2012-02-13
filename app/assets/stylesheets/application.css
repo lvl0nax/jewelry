@@ -222,6 +222,7 @@ brs-3-b{
     -moz-radius: 5px;
 }
 .list-products-card{padding: 0 0 10px; margin: 20px 0 0; font-size: 15px; width: 100%}
+.list-products-card.list-products-sm{font-size: 13px}
 .list-products-card td{overflow: hidden; text-align: center; padding:5px 5px}
 .list-products-card tr td:first-child{text-align: left}
 .list-products-card .tr-bottom td{border-top: 1px solid #ccc}
