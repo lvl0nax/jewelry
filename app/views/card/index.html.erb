@@ -50,86 +50,9 @@
     </div>
 
     <div class="btn-check">
-      <a class="buttn" href="javascript: void(0)" style="font-size:15px" onclick="check.getNextStep()">Оформить</a>
+      <a class="buttn" href="javascript:void(0)" style="font-size:15px" onclick="check.getNextStep()">Оформить</a>
     </div>
 <% end %>
-
 <script type="text/javascript">
-  var check = (function(){
-      var t = {};
-
-      t.table = $('.list-products-card');
-
-      t.getNextStep = function(){
-        var fioO = $("#fio"),
-            mobileNumberO = $("#mobile-number"),
-            cardJson = JSON.stringify(card.cardObj);
-
-        if(fioO.val().length == 0){
-            alert("Введите Ваше ФИО");
-            fioO.focus();
-            return false;
-        } else if(mobileNumberO.val().length == 0){
-            alert("Введите Ваш мобильный телефон");
-            mobileNumberO.focus();
-            return false;
-        }
-
-        $.post("/card/add_to_card", {ajax:true, fio: fioO.val(), phone: mobileNumberO.val()}, function(resp){
-            console.log(resp)
-            if(resp.res == 1){
-                location.href = "/card/list";
-            }
-        }, "json")
-
-      };
-
-      t.addOneToCard = function(el, id){
-
-          card.plusOne(id);
-
-          t.writeFromCard();
-      };
-
-      t.minusOneFromCard = function(el, id){
-
-          card.minusOne(id);
-
-          t.writeFromCard();
-      };
-
-      t.writeFromCard = function(){
-
-        t.table.html("");
-        t.tableInner = "<tr class='tr-top'><td>Наименование товара</td><td>Количество</td><td>Цена</td><td class='td-last'>Сумма</td></tr>";
-
-        for(i in card.cardObj){
-            t.tableInner += "<tr>"+
-                        "<td>" + card.cardObj[i].name + "</td>"+
-                        "<td>"+
-                            "<a onclick='check.minusOneFromCard($(this), " + i + ")' href='javascript: void(0)'><b>-</b></a>"+
-                            " <span class='count'>" + card.cardObj[i].count + "</span>"+
-                            " <a onclick='check.addOneToCard($(this), " + i + ")' href='javascript: void(0)'><b>+</b></a>"+
-                        "</td>"+
-                        "<td>" + card.cardObj[i].price + "</td>"+
-                        "<td class='td-last'>" +(card.cardObj[i].count * card.cardObj[i].price ).toFixed(2) + "</td>"+
-                    "</tr>"
-        }
-        t.tableInner += "<tr class='tr-bottom'><td class='td-last' colspan='4'>Итог: " + card.cardTotalPrice + "</td></tr>"
-
-
-        t.table.html(t.tableInner);
-
-        if(services.sizeOfObj(card.cardObj) == null) {
-            t.table.html("Корзина пуста, <a href='/'>выберите товар</a> и возвращайтесь!")
-        }
-
-      };
-
-      t.init = function(){
-        t.writeFromCard();
-      };
-      $(t.init);
-      return t;
-  }())
+  check.init();
 </script>
