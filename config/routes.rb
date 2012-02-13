@@ -13,7 +13,8 @@ AppTest::Application.routes.draw do
   resources :pages
 
   resources :products
-  resources :card
+
+  resources :card  
 
   post 'card/add_to_card'
 
