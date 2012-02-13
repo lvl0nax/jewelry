@@ -38,23 +38,14 @@ class CategoriesController <  InheritedResources::Base #ApplicationController #
 #    @category = Category.find(params[:id])
 #  end
 
- # POST /categories
- # POST /categories.json
 def show
   @title = resource.title
 end
- def test
-   @categories = Category.all
-   respond_to do |format|
-       format.json { render :json => {
-       	:resp => @categories,
-       	:text => "Alarm"
-       }}
-   end
- end
+
 def create
   create!{ root_url }
 end
+
 #  # PUT /categories/1
 #  # PUT /categories/1.json
 #  def update

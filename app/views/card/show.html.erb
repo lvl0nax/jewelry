@@ -1,6 +1,7 @@
 <% if @cards%>
+    <%= @cards.count%>
     <% @cards.each do |c| %>
-        <%= c.cardjson%><br><br>
+        <%= c.user_id%><br><br>
     <% end %>
 <% else %>
     Список пуст

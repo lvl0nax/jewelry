@@ -27,7 +27,9 @@ class CardController < ApplicationController
 
     if @card.save
       respond_to do |format|
-        format.html
+        format.html {
+          redirect_to '/card/list'
+        }
         format.json { render :json => {
             :res => "1",
         } }
@@ -36,8 +38,15 @@ class CardController < ApplicationController
 
   end
 
-  def show
-    @cards = Card.all
+  def list
+
+    @card = Card.all
+
+    @hide_banner = true
+    @hide_search = true
+    @hide_card = true
+
+
   end
 
 end
