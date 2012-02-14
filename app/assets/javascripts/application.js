@@ -293,9 +293,9 @@ var check = (function(){
 
 
     t.table.html(t.tableInner);
-    console.log(card.cardObj);
     if(services.sizeOfObj(card.cardObj) == null) {
-        t.table.html("Корзина пуста, <a href='/'>выберите товар</a> и возвращайтесь!")
+        t.table.html("Корзина пуста, <a href='/'>выберите товар</a> и возвращайтесь!");
+        $(".form, .btn-check").remove();
     }
 
   };

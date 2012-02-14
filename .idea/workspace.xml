@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ac9fa9f2-f506-4d78-9c9c-8b2e9d5f2893" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/application.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/application.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/card/index.html.erb" afterPath="$PROJECT_DIR$/app/views/card/index.html.erb" />
     </list>
     <ignored path="app_test.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -100,19 +98,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html.erb" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="index.html.erb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/card/index.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="56" column="6" selection-start="2021" selection-end="2021" vertical-scroll-proportion="0.82579565">
+            <state line="56" column="6" selection-start="2021" selection-end="2021" vertical-scroll-proportion="-18.961538">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="application.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="application.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/assets/javascripts/application.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="63" column="0" selection-start="1679" selection-end="1679" vertical-scroll-proportion="0.0">
+            <state line="297" column="28" selection-start="8548" selection-end="8548" vertical-scroll-proportion="0.4882943">
               <folding />
             </state>
           </provider>
@@ -146,8 +144,8 @@
         <option value="$PROJECT_DIR$/app/views/card/list.html.erb" />
         <option value="$PROJECT_DIR$/app/assets/javascripts/rails.js" />
         <option value="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
-        <option value="$PROJECT_DIR$/app/assets/javascripts/application.js" />
         <option value="$PROJECT_DIR$/app/views/card/index.html.erb" />
+        <option value="$PROJECT_DIR$/app/assets/javascripts/application.js" />
       </list>
     </option>
   </component>
@@ -542,16 +540,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/application.js">
+    <entry file="file://$PROJECT_DIR$/app/views/card/index.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="0" selection-start="1679" selection-end="1679" vertical-scroll-proportion="0.0">
+        <state line="56" column="6" selection-start="2021" selection-end="2021" vertical-scroll-proportion="-18.961538">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/card/index.html.erb">
+    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/application.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="56" column="6" selection-start="2021" selection-end="2021" vertical-scroll-proportion="0.82579565">
+        <state line="297" column="28" selection-start="8548" selection-end="8548" vertical-scroll-proportion="0.4882943">
           <folding />
         </state>
       </provider>
