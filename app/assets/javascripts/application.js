@@ -305,6 +305,5 @@ var check = (function(){
 
     t.writeFromCard();
   };
-  $(t.init);
   return t;
 }())
