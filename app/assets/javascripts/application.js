@@ -241,8 +241,6 @@ var card = (function(){
 var check = (function(){
   var t = {};
 
-  t.table = $('.list-products-card');
-
   t.getNextStep = function(){
     var fioO = $("#fio"),
         mobileNumberO = $("#mobile-number");
@@ -279,7 +277,6 @@ var check = (function(){
 
     t.table.html("");
     t.tableInner = "<tr class='tr-top'><td>Наименование товара</td><td>Количество</td><td>Цена</td><td class='td-last'>Сумма</td></tr>";
-
     for(i in card.cardObj){
         t.tableInner += "<tr>"+
                     "<td>" + card.cardObj[i].name + "</td>"+
@@ -304,6 +301,8 @@ var check = (function(){
   };
 
   t.init = function(){
+    t.table = $('.list-products-card');
+
     t.writeFromCard();
   };
   $(t.init);
