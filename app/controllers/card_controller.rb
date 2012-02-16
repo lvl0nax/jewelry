@@ -29,7 +29,7 @@ class CardController < ApplicationController
 
     @card.phone = params[:phone]
     @card.fio = params[:fio]
-    @card.status = 1
+    @card.status = 0
 
     if @card.save
       respond_to do |format|
@@ -54,6 +54,22 @@ class CardController < ApplicationController
 
     @hide_banner = true
     @hide_search = true
+
+  end
+
+  def change_status
+
+    if (!current_user)
+      render :json => { :res => "0" }
+      return false
+    end
+
+    @card = Card.find_by_id(params[:id])
+    @card.status = params[:st]
+
+    if @card.save
+        render :json => { :res => "1" }
+    end
 
   end
 
