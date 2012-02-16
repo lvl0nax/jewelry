@@ -1,5 +1,7 @@
 AppTest::Application.routes.draw do
 
+  resources :infos
+
   #for twitter authentfication
   match '/auth/:provider/callback' => 'authentications#create'
   resources :authentications

@@ -4,7 +4,6 @@ class CreateProducts < ActiveRecord::Migration
       t.string :title
       t.float :price
       t.integer :count
-      t.integer :discount
       t.string :brand
       t.integer :category_id
 
