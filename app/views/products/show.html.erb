@@ -14,14 +14,36 @@
   <%= @product.count %>
 </p>
 
-<p>
-  <b>Скидка:</b>
-  <%= @product.discount %>
-</p>
 
 <p>
   <b>Brand:</b>
   <%= @product.brand %>
 </p>
 
+<% unless @product.desc.blank?%>
+  <% logger.debug "  ===============================test=====================1  "%>
+  <% logger.debug @product.desc%>
+  <% logger.debug "  ===============================test=====================  "%>
+
+    <p>описание:</p>
+    <p>
+      <%= @product.desc %>
+    </p>
+<% end %>
+
+<% unless @product.discount.blank?%>
+  <% logger.debug "  ===============================test=====================2  "%>
+  <% logger.debug @product.discount%>
+  <% logger.debug "  ===============================test=====================  "%>
+    <p>скидка:</p>
+    <p>
+      <%= @product.discount %>
+    </p>
+<% end %>
+
 <%= link_to 'Редактировать продукт', edit_category_product_path(@product) %>
+<% unless (@product.info.blank?)%>
+  <%= link_to 'Редактировать дополнительную информацию', edit_info_path(@product.info)%>
+<% else %>
+  <%= link_to 'Редактировать дополнительную информацию', new_info_path(:product_id => @product.id)%>
+<% end %>

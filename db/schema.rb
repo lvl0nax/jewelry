@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120212163430) do
+ActiveRecord::Schema.define(:version => 20120215182439) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -36,6 +36,14 @@ ActiveRecord::Schema.define(:version => 20120212163430) do
     t.datetime "updated_at"
   end
 
+  create_table "infos", :force => true do |t|
+    t.string   "product_article"
+    t.text     "content"
+    t.float    "price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "pages", :force => true do |t|
     t.string   "title"
     t.text     "description"
@@ -47,7 +55,6 @@ ActiveRecord::Schema.define(:version => 20120212163430) do
     t.string   "article"
     t.float    "price"
     t.integer  "count"
-    t.integer  "discount"
     t.string   "brand"
     t.integer  "category_id"
     t.datetime "created_at"

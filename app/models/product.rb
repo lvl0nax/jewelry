@@ -1,3 +1,34 @@
 class Product < ActiveRecord::Base
   belongs_to :category
+
+  def title
+    category.title + " " + self.brand
+  end
+
+  def desc
+    if Info.find_by_product_article(self.article).blank?
+
+      return nil
+    else
+      Info.find_by_product_article(self.article).content
+    end
+  end
+
+  def discount
+
+    #TODO: Price with discount should be printed on site
+
+    if Info.find_by_product_article(self.article).blank?
+      return nil
+    else
+      t = Info.find_by_product_article(self.article).discount
+      total_price = self.price * (100 - t) / 100
+    end
+  end
+
+  def info
+    #Description.find_by_product_article(self.article)
+    Info.where(:product_article => self.article).first
+    #Description.first("product_article = '#{self.article}'")
+  end
 end
