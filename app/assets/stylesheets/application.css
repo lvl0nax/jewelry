@@ -289,7 +289,8 @@ brs-3-b{
     color: #5EE024;
 }
 .form h4{padding: 0 0 15px}
-.form-raw{padding: 0 0 10px}
+.form-raw{padding: 0 0 10px; position:relative}
+.form-raw .helper{position: absolute; left: 385px; top: 0; line-height:23px; color: #999}
 .form-raw .f-label{width: 150px; float: left; padding: 0 10px 0 0; line-height: 23px;}
 .form-raw input{
     width: 200px;

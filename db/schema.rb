@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(:version => 20120215182439) do
   create_table "infos", :force => true do |t|
     t.string   "product_article"
     t.text     "content"
-    t.float    "price"
+    t.float    "discount"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(:version => 20120215182439) do
     t.string   "article"
     t.float    "price"
     t.integer  "count"
+    t.integer  "discount"
     t.string   "brand"
     t.integer  "category_id"
     t.datetime "created_at"
