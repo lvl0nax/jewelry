@@ -225,10 +225,12 @@ brs-3-b{
 .list-products-card.list-products-sm{font-size: 13px}
 .list-products-card td{overflow: hidden; text-align: center; padding:5px 5px}
 .list-products-card tr td:first-child{text-align: left}
+.list-products-card .ticket-inwork{background: #F8FED5}
+.list-products-card .ticket-reject{background: #FB8F8F}
+.list-products-card .ticket-done{background: #81FB6D}
 .list-products-card .tr-bottom td{border-top: 1px solid #ccc}
 .list-products-card .tr-top td{border-bottom: 1px solid #ccc}
 .list-products-card .td-last{text-align: right!important}
-.list-products-card tr:hover{background: #f2f2f2}
 .list-products-card .tr-top:hover, .list-products-card .tr-bottom:hover{background: #fff}
 
 #list-products{margin: 0 0 0 -20px}
@@ -287,7 +289,8 @@ brs-3-b{
     color: #5EE024;
 }
 .form h4{padding: 0 0 15px}
-.form-raw{padding: 0 0 10px}
+.form-raw{padding: 0 0 10px; position:relative}
+.form-raw .helper{position: absolute; left: 385px; top: 0; line-height:23px; color: #999}
 .form-raw .f-label{width: 150px; float: left; padding: 0 10px 0 0; line-height: 23px;}
 .form-raw input{
     width: 200px;

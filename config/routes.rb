@@ -23,6 +23,7 @@ AppTest::Application.routes.draw do
   resources :card do
     collection do
       get 'add_to_card'
+      post 'change_status'
       get 'list'
     end
   end

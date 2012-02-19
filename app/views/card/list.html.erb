@@ -4,16 +4,31 @@
         <td>ФИО</td>
         <td>Телефон</td>
         <td>Пользователь</td>
+        <td>Состояние</td>
         <td class="td-last">Корзина</td>
       </tr>
-        <% @cards.each do |c| %>
-          <tr>
+        <% @cards.reverse_each do |c| %>
+          <% if(c.status.to_i == 0) %>
+          <tr class="ticket-inwork">
+          <% elsif(c.status.to_i == 1) %>
+          <tr class="ticket-done">
+          <% elsif(c.status.to_i == 2) %>
+          <tr class="ticket-reject">
+          <% end %>
             <td><%= c.fio%></td>
             <td><%= c.phone%></td>
             <td>
               <% if(c.user_id) %>
-                <%= User.find_by_id(c.user_id).email %></td>
+                <%= User.find_by_id(c.user_id).email %>
               <% end %>
+            </td>
+            <td>
+              <select onchange="change_status(<%= c.id%>, $(this))">
+                <% Card::STATUS.each_index do |key|%>
+                    <option value="<%= key %>" <%= c.status.to_i == key ? ("selected='selected'") : ""%>><%= Card::STATUS[key.to_i]%></option>
+                <% end %>
+              </select>
+            </td>
             <td class="td-last">
               <%
                  card_total_price = 0
@@ -38,5 +53,13 @@
 <script type="text/javascript">
   showAllCard = function(el){
       el.hide().parent().find(".h").show();
+  }
+  change_status = function(id, el){
+      status = el.val();
+      $.post('/card/change_status',{ajax: 1, id: id, st: status}, function(resp){
+        if(resp.res == 1){
+            location.reload();
+        }
+      });
   }
 </script>

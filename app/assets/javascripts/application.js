@@ -253,6 +253,10 @@ var check = (function(){
         alert("Введите Ваш мобильный телефон");
         mobileNumberO.focus();
         return false;
+    } else if(! /\+\d\s\d{3}\s\d{3}\s\d{4}/.test(mobileNumberO.val()) || mobileNumberO.val().length > 15){
+        alert("Проверьте правильность введённого номера");
+        mobileNumberO.focus();
+        return false;
     }
 
     location.href = "card/add_to_card?fio=" + fioO.val() + "&phone=" + mobileNumberO.val();
