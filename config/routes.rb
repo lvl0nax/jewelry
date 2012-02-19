@@ -9,10 +9,15 @@ AppTest::Application.routes.draw do
   devise_for :users, :controller => {:registrations => 'registrations'}
 
   resources :categories do
-    resources :products
+    resources :products 
   end
 
-  resources :pages
+  resources :pages do
+
+    get 'import_excell', :on => :collection
+  end
+
+  get 'import_excel', :to => "application#import_excel"
 
   resources :products
   resources :card do

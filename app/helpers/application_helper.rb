@@ -24,5 +24,6 @@ module ApplicationHelper
     return @title ? @title + " | Bujua" : "Bujua"
   end
 
+  
 
 end

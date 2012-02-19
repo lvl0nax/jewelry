@@ -3,6 +3,7 @@ class CreateProducts < ActiveRecord::Migration
     create_table :products do |t|
       t.string :title
       t.float :price
+      # TODO: delete count
       t.integer :count
       t.string :brand
       t.integer :category_id
