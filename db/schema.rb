@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120215182439) do
+ActiveRecord::Schema.define(:version => 20120219180456) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(:version => 20120215182439) do
   create_table "cards", :force => true do |t|
     t.string   "fio"
     t.string   "phone"
-    t.string   "cardjson"
+    t.text     "cardjson"
     t.string   "status"
     t.integer  "user_id"
     t.datetime "created_at"
@@ -55,7 +55,6 @@ ActiveRecord::Schema.define(:version => 20120215182439) do
     t.string   "article"
     t.float    "price"
     t.integer  "count"
-    t.integer  "discount"
     t.string   "brand"
     t.integer  "category_id"
     t.datetime "created_at"

@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
 
       #     check that category there is in DB
       i = toCat.index("('#{type}')")
-      if i.nil?    check that we do not add category yet
+      if i.nil?  
         cat_id = toCat.length     
         toCat.push("('#{type}')")
       else  
