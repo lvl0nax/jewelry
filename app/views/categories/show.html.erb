@@ -6,13 +6,14 @@
 <% if(@category.products) %>
     <ul id="list-products">
         <% @category.products.each do |p|%>
-           <li class="brs-3" data-id="<%= p.id%>" data-name="<%= p.article%>" data-price="<%= p.price%>">
+           <li class="brs2-3" data-id="<%= p.id%>" data-name="<%= p.article%>" data-price="<%= p.price%>">
              <span class="p-title">
                <span class="p-price"><%= p.price.round(2)%></span>
-               <%= p.article%>
+
+               <%= link_to p.article, category_product_path(@category, p) %>
              </span>
              <span class="d-b ta-r">
-                <span class="p-addcard brs-3">Добавить в корзину</span>
+                <span class="p-addcard brs-3" data-id="<%= p.id%>" data-name="<%= p.article%>" data-price="<%= p.price%>">Добавить в корзину</span>
              </span>
            </li>
         <% end %>

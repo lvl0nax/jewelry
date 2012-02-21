@@ -1,3 +1,5 @@
+require 'RMagick'
+
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
@@ -35,6 +37,23 @@ class ApplicationController < ActionController::Base
     sql.execute("TRUNCATE categories ")
     sql.execute("INSERT INTO `categories` (`title`) VALUES " + toCat.join(','))
     sql.execute("INSERT INTO `products` (`article`, `price`, `brand`, `category_id`) VALUES " + objs.join(','))
+
+    respond_to do |format|
+      format.html { redirect_to categories_url }
+      format.json { head :ok }
+    end
+  end
+
+  def image_convert
+    # clown = Magick::ImageList.new("clown.jpg")
+    # clown = clown.quantize(256, Magick::GRAYColorspace)
+    # clown.write('monochrome.jpg')
+
+
+    clown = Magick::Image.read("#{Rails.root}/pictures/original/clown.jpg").first
+    #clown.crop_resized!(75, 75, Magick::CenterGravity)
+    clown.scale(0.3)
+    clown.write("#{Rails.root}/pictures/thumb/clown2.jpg")
 
     respond_to do |format|
       format.html { redirect_to categories_url }
