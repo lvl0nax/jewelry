@@ -8,7 +8,7 @@
   <%= javascript_include_tag "jquery" %>
   <%= javascript_include_tag "rails" %>
   <%= javascript_include_tag "application" %>
-
+  <%= tinymce_javascript_tag "pages"%>
   <%= csrf_meta_tags %>
 
 </head>
@@ -27,7 +27,9 @@
   </div>
   <div class="header shadow">
     <div class="header-content">
-      <div class="logo">Bujua</div>
+      <div class="logo">
+        <%= image_tag "logo.jpg" %>
+      </div>
       <div class="login">
         <% if current_user %>
           <span><%= current_user.email %></span><!--
@@ -47,26 +49,29 @@
   
   <div class="container nclear">
     <div class="left-part shadow main-box brs-5">
-      <h3>Категории</h3>
+      <div class="category_name"><h3>Категории</h3></div>
 
       <ul class="categories">
         <% if(allcategories.count == 0) %>
             <li><%= link_to 'Добавить категорию', new_category_path %></li>
         <% end %>
         <% allcategories.each do |cat| %>
-          <li> <%= link_to cat.title, cat %> </li>
+          <li> <%= link_to cat.name, cat %> </li>
         <% end %>
       </ul>
-      <% if current_user %>
-          <br><br>
-          для админов:
-          <ul class="categories">
-            <li><%= link_to 'Добавить страницу', new_page_path %></li>
-            <li><%= link_to 'Добавить категорию', new_category_path %></li>
-            <li><a href="/card/list">Список заказов</a></li>
-            <li><%= link_to 'импорт из Excel', import_excel_path %></li>
-            <li><%= link_to 'конвертировать изображение', image_convert_path %></li>
-          </ul>
+      <%if current_user %>
+        <% if current_user.isAdmin? %>
+            <br><br>
+            для админов:
+            <ul class="categories">
+              <li><%= link_to 'Добавить страницу', new_page_path %></li>
+              <li><%= link_to 'Добавить категорию', new_category_path %></li>
+              <li><a href="/card/list">Список заказов</a></li>
+              <li><%= link_to 'импорт из Excel', import_excel_path %></li>
+              <li><%= link_to 'конвертировать изображение', image_convert_path %></li>
+              <li><%= link_to 'advanced search', new_search_path %></li>
+            </ul>
+        <% end %>
       <% end %>
     </div>
 
@@ -87,8 +92,12 @@
         <div class="content shadow main-box brs-5">
           <%= yield %>
         </div>
+        
+        <%=  yield :main_page %>
     </div>
   </div>
+
+  
   
   <div class="footer shadow">
     <div class="footer-content">

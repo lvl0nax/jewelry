@@ -1,5 +1,5 @@
 *{margin: 0; padding: 0; outline: none}
-@font-face {
+/*@font-face {
     font-family: 'ParisianC';
     src: url('../font/ParisianC.eot');
     src: url('../font/ParisianC.eot?#iefix') format('embedded-opentype'),
@@ -8,13 +8,22 @@
          url('../font/ParisianC.svg#ParisianC') format('svg');
     font-weight: normal;
     font-style: normal;
-}
+}*/
 body, html{height: 100%;}
-body{font:13px/1.321 trebuchet MS;}
+body{font:13px/1.321 Arial;}
 
 ul, li{list-style:none}
-h1{font-size:21px; padding: 0 0 10px}
-h2{font-size:19px; padding: 0 0 8px}
+h1{
+  border-bottom: 1px solid #4A4A4A;
+    font-size: 21px;
+    margin: 0 0 10px;
+}
+h2{
+  border-bottom: 1px solid #A4A4A4;
+    font-size: 16px;
+    margin: 0 0 8px;
+    padding: 0 0 5px;
+}
 h3{font-size:17px; padding: 0 0 6px}
 h4{font-size:15px; padding: 0 0 5px}
 h1.title-main-box{
@@ -27,8 +36,8 @@ h1.title-main-box{
     -moz-border-radius: 5px 5px 0 0;
     -webkit-border-radius: 5px 5px 0 0;
 }
-a{text-decoration:none;color: #7D2DB1;}
-a:hover{color: #AF9BF9;}
+a{text-decoration:none;color:#8a8a8a ;}
+a:hover{color: #4a4a4a;}
 
 /* forms */
 .field{padding: 0 0 10px}
@@ -62,14 +71,20 @@ a:hover{color: #AF9BF9;}
 .header{background-color: #fff;height: 100px; position: relative; z-index: 2}
 .header-content{width: 1000px;margin: 0 auto;position: relative; height: 100px;}
 
-.left-part{float: left;background: #fff;width: 200px;position: relative;}
-.center-part{position: relative;margin: 0 0 0 260px;}
+.left-part{float: left;background: #fff;width: 192px;position: relative;}
+.center-part{position: relative;margin: 0 0 0 215px;}
 
 .login{float: right; padding: 10px 0}
 
 .logo{
-    font: 45px/45px "ParisianC";
-    position: absolute;top: 30px;left: 0;
+    
+    position: absolute;
+    top: 40px;
+    left: 10px;
+}
+.logo img{
+  width:200px;
+  height: 50px;
 }
 
 .top-menu{position: absolute;top: 70px;right: 0;font-size: 19px;}
@@ -111,7 +126,7 @@ a:hover{color: #AF9BF9;}
     font-size: 21px
 }
 
-.main-box{padding:10px 20px;margin: 0 0 20px; background: #fff}
+.main-box{padding:5px; margin: 0 0 10px; background: #fff}
 .container{width: 1000px;margin: 0 auto;padding: 30px 0 120px;}
 
 .footer{background-color: #fff;height: 70px;width: 100%;position: absolute;bottom: 0;}
@@ -125,11 +140,27 @@ a:hover{color: #AF9BF9;}
 }
 
 /* styles in views*/
-.categories{padding: 5px 0 5px 10px;list-style-type: none;}
-.categories li{text-decoration:none;font-size: 13px;padding: 5px 0;}
+.category_name
+{
+  border-bottom: 1px solid #CECAC2;
+  padding-left: 10px;
+}
+.category_name h3{padding:0;}
+.categories{
+  padding: 5px 0 5px 10px;
+  list-style-type: none;
+  font-family: Arial,Verdana,Tahoma,sans-serif; 
+  color:#4A4A4A !important;
+}
+.categories li{
+  text-decoration:none;
+  font-size: 95% ;
+  padding: 2px 0;
+}
 
-.banner{position: relative;overflow: hidden; margin: -10px -20px}
+.banner{position: relative;overflow: hidden; margin: -10px -5px; padding: 0;}
 .banner img{width: 100%;}
+.ban_space{padding-top: 10px}
 
 .authentications {margin-bottom: 30px;}
 .authentication {
@@ -176,6 +207,7 @@ a:hover{color: #AF9BF9;}
 
 .ta-c{text-align: center}
 .ta-r{text-align: right}
+
 
 .d-b{display: block}
 .d-ib{
@@ -238,22 +270,42 @@ brs-3-b{
     display: inline-block;
     display: *inline;
     *zoom: 1;
-    padding:10px;
+    padding:10px 0;
     border: 1px dashed #f2f2f2;
-    width: 200px;
+    width: 150px;
     margin: 0 0 0 20px;
+    color: #8a8a8a;
 }
-#list-products .p-title{display: block; padding: 0 0 9px; border-bottom: 1px solid #ccc; margin: 0 0 9px}
+#list-products .p-title{display: block; padding: 0 0 9px; border-bottom: 1px solid #ccc; margin: 0 0 9px; text-align: center;}
+.p-title img{
+  height: 140px;
+  /*padding-left:5px;*/
+  
+}
+.p-title img:hover{
+  outline: 1px solid #8a8a8a;
+}
 #list-products .p-price{float: right}
 #list-products .p-addcard{
-    padding: 3px 8px 4px;
-    background: #7D2DB1;
+    /*padding: 3px 8px 4px;
+    /*background-image: url(/assets/images/cart.jpg);
+    /*background-repeat: no-repeat;
+    /*background: #7D2DB1;
     color:#fff;
     border: 1px solid #7D2DB1;
-    box-shadow: 0 3px 4px rgba(255, 255, 255, 0.2) inset, 0 -3px 4px rgba(0, 0, 0, 0.1) inset;
+    box-shadow: 0 3px 4px rgba(255, 255, 255, 0.2) inset, 0 -3px 4px rgba(0, 0, 0, 0.1) inset;*/
 }
-#list-products li:hover{cursor: pointer; background: #f2f2f2}
-#list-products li:hover .p-addcard{background: #9244C5}
+#list-products li:hover{ 
+  /*background: #f2f2f2*/
+  color: #4A4A4A;
+  /*border: 1px solid #f2f2f2;*/
+}
+#list-products li:hover .p-addcard{
+  cursor: pointer;
+}
+ul.p-name li{
+  padding:0;
+}
 
 .buttn{
     display: inline-block;
@@ -366,3 +418,5 @@ brs-3-b{
 }
 
 /* Код увеличителя закончен */
+
+.search{display: none;}

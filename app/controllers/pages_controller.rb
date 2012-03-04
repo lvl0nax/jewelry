@@ -1,7 +1,26 @@
 class PagesController < InheritedResources::Base #ApplicationController
+  before_filter :admin_require, :except => [ :show ]
+
+  include TinymceFm::Filemanager
+
+  image_accept_mime_types ['image/jpeg', 'image/gif', 'image/png']
+
+  # limit image file size to 2MB
+  image_file_size_limit 2.megabytes
+  #thumbs created into '_small_' subdir
+  thumbs_subdir 'small'
 
   def show
     @title = resource.title
+  end
+
+  def index
+    if Page.all.blank?
+      redirect_to new_page_path
+    else
+      @page = Page.first 
+      render "show"
+    end
   end
 #  # GET /pages
 #  # GET /pages.json

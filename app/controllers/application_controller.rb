@@ -1,6 +1,8 @@
 require 'RMagick'
 
 class ApplicationController < ActionController::Base
+  helper_method :all
+  helper_method :logged_in?
   protect_from_forgery
 
   def import_excel
@@ -58,6 +60,34 @@ class ApplicationController < ActionController::Base
     respond_to do |format|
       format.html { redirect_to categories_url }
       format.json { head :ok }
+    end
+  end
+
+
+
+  private
+
+  def admin_require
+    unless is_admin?
+      deny_access 
+    end  
+#    unless logged_in? 
+#      flash[:error] = t('users.must_login') 
+#      redirect_to login_url # halts request cycle  
+#    end
+  end  
+  
+  def deny_access
+    flash[:error] = "you have no accessible right/ access denied." 
+    redirect_to pages_path #root_url
+  end
+  
+
+  def is_admin?
+    if current_user
+      !!current_user.isAdmin?
+    else 
+      return false
     end
   end
 end

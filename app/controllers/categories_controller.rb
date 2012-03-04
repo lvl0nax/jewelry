@@ -1,5 +1,5 @@
 class CategoriesController <  InheritedResources::Base #ApplicationController #
-  
+  before_filter :admin_require, :except => [ :index, :show ]#:only => [:new, :create, :edit, :update, :destroy]
 #  # GET /categories
 #  # GET /categories.json
  # def index

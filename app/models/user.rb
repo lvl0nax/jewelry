@@ -17,5 +17,13 @@ class User < ActiveRecord::Base
     (authentications.empty? || !password.blank?) && super
   end
 
+  def isAdmin?
+    if self === User.first
+      return true
+    else
+      return false
+    end
+  end
+
 
 end

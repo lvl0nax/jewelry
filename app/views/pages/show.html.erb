@@ -1,9 +1,21 @@
 <p id="notice"><%= notice %></p>
-<h1>
-  <%= @page.title %>
-</h1>
-<div class="page-content">
-  <%= raw @page.description %>
-</div>
+<% if @page.isMain?%>
+  <% content_for :main_page do %>
+    <div class="main_description">
+      <%= raw @page.description %>
+    </div>
+  <% end %>
+<% else%>
+  <h1>
+    <%= @page.title %>
+  </h1>
+  <div class="page-content">
+    <%= raw @page.description %>
+  </div>
+<% end %>
 
-<%= link_to 'Редактировать', edit_page_path(@page) %>
+<%if current_user %>
+  <% if current_user.isAdmin? %>
+    <%= link_to 'Редактировать', edit_page_path(@page) %>
+  <%end%>
+<%end%>

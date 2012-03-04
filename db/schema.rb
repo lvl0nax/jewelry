@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120219180456) do
+ActiveRecord::Schema.define(:version => 20120221203514) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -57,6 +57,14 @@ ActiveRecord::Schema.define(:version => 20120219180456) do
     t.integer  "count"
     t.string   "brand"
     t.integer  "category_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "searches", :force => true do |t|
+    t.integer  "category_id"
+    t.decimal  "min_price",   :precision => 10, :scale => 0
+    t.decimal  "mas_price",   :precision => 10, :scale => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

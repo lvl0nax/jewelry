@@ -3,11 +3,15 @@
 <ul class="list-items">
   <% @categories.each do |category| %>
   <li>
-    <div class="admin-links">
-    <%= link_to category.title, category %>
-    <%= link_to 'Редактировать', edit_category_path(category) %>
-    <%= link_to 'Удалить', category, :confirm => 'Are you sure?', :method => :delete %>
-    </div>
+    <%if current_user %>
+      <% if current_user.isAdmin? %>
+        <div class="admin-links">
+          <%= link_to category.title, category %>
+          <%= link_to 'Редактировать', edit_category_path(category) %>
+          <%= link_to 'Удалить', category, :confirm => 'Are you sure?', :method => :delete %>
+        </div>
+      <% end %>
+    <% end %>
   </li>
   <% end %>
 </ul>

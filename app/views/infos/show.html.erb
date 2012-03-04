@@ -1,11 +1,6 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Product article:</b>
-  <%= @info.product_article %>
-</p>
-
-<p>
   <b>Content:</b>
   <%= @info.content %>
 </p>
@@ -15,6 +10,9 @@
   <%= @info.discount %>
 </p>
 
-
-<%= link_to 'Edit', edit_info_path(@info) %> |
-<%= link_to 'Back', infos_path %>
+<%if current_user %>
+  <% if current_user.isAdmin? %>
+    <%= link_to 'Edit', edit_info_path(@info) %> |
+    <%= link_to 'Back', infos_path %>
+  <% end %>
+<% end %>

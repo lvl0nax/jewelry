@@ -1,5 +1,5 @@
 class InfosController < InheritedResources::Base
-
+  before_filter :admin_require, :except => [ :show ]
   def new
     @info = Info.new
     @product = Product.find(params[:product_id])
