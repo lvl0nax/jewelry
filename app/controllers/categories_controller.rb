@@ -40,6 +40,7 @@ class CategoriesController <  InheritedResources::Base #ApplicationController #
 
 def show
   @title = resource.title
+  @products = @category.products.page(params[:page]).per_page(16)
 end
 
 def create

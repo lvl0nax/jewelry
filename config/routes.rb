@@ -20,6 +20,7 @@ AppTest::Application.routes.draw do
 
   get 'import_excel', :to => "application#import_excel"
   get 'image_convert', :to => "application#image_convert"
+  get 'clear_images', :to => "application#clear_images"
 
   resources :products
   resources :card do

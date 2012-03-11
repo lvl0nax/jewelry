@@ -9,6 +9,7 @@
   <%= javascript_include_tag "rails" %>
   <%= javascript_include_tag "application" %>
   <%= tinymce_javascript_tag "pages"%>
+  <%= yield :js %>
   <%= csrf_meta_tags %>
 
 </head>
@@ -31,6 +32,10 @@
         <%= image_tag "logo.jpg" %>
       </div>
       <div class="login">
+        <a href="/auth/vkontakte" class="auth_provider">
+          <%= image_tag "vk.jpg", :size => "16x16", :alt => "vk" %></a>
+        <a href="/auth/twitter" class="auth_provider">
+          <%= image_tag "twitter.jpg", :size => "16x16", :alt => "Twitter" %></a>
         <% if current_user %>
           <span><%= current_user.email %></span><!--
           --><%= link_to "Выйти", destroy_user_session_path, :method => :delete %>
@@ -69,6 +74,7 @@
               <li><a href="/card/list">Список заказов</a></li>
               <li><%= link_to 'импорт из Excel', import_excel_path %></li>
               <li><%= link_to 'конвертировать изображение', image_convert_path %></li>
+              <li><%= link_to 'Удалить изображения', clear_images_path %></li>
               <li><%= link_to 'advanced search', new_search_path %></li>
             </ul>
         <% end %>
@@ -92,7 +98,7 @@
         <div class="content shadow main-box brs-5">
           <%= yield %>
         </div>
-        
+
         <%=  yield :main_page %>
     </div>
   </div>

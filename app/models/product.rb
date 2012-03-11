@@ -1,6 +1,7 @@
 class Product < ActiveRecord::Base
   belongs_to :category
 
+
   def title
     category.title + " " + self.brand
   end

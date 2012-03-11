@@ -3,6 +3,7 @@ require 'RMagick'
 class ApplicationController < ActionController::Base
   helper_method :all
   helper_method :logged_in?
+  helper_method :rand_products
   protect_from_forgery
 
   def import_excel
@@ -17,8 +18,15 @@ class ApplicationController < ActionController::Base
     sql.execute("TRUNCATE products ")
     tbl = Excel.new("qwerty.xls") #should be original name in root directory for the site
     tbl.default_sheet = tbl.sheets.first
+    
+    #TODO: customize to our product
+    #10.upto(tbl.last_row) do |line|
+    #  article = tbl.cell(line, 'A')
+    #  type = tbl.cell(line, 'B')
+    #  price = tbl.cell(line.'D')
+    #  brand = tbl.cell(line,'E')
+
     2.upto(tbl.last_row) do |line|
-     #TODO: customize to our product
       article = tbl.cell(line, 'A')
       price = tbl.cell(line, 'B')
       type = tbl.cell(line, 'D')
@@ -62,6 +70,41 @@ class ApplicationController < ActionController::Base
       format.json { head :ok }
     end
   end
+  def clear_images
+    # all products
+    iNameS = Product.find_by_sql("SELECT article FROM products")
+    iNameS.collect! {|image| image.article + ".jpg"}
+    
+    logger.debug "/////inames/////////////////////////////////////////"
+    logger.debug iNameS
+
+    # all images
+    mask = File.join("**","bujua", "*.jpg")
+    iNameF = Dir.glob(mask)
+    iNameF.collect! {|name| File.basename(name)}
+    
+    logger.debug "/////inamef/////////////////////////////////////////"
+    logger.debug iNameF
+
+
+    iName = iNameF - iNameS
+    
+    logger.debug "/////////////////////////////////////////////iName/"
+    logger.debug iName
+
+    iName.each do |i| 
+      mask = File.join("**","bujua", i)
+      iNameS = Dir.glob(mask)
+      temp = File.delete(iNameS.first)
+      logger.debug "//////////////////////////////////////////////"
+      logger.debug temp
+    end
+    respond_to do |format|
+      format.html { redirect_to root_url }
+      format.json { head :ok }
+    end
+  end
+
 
 
 
@@ -89,5 +132,9 @@ class ApplicationController < ActionController::Base
     else 
       return false
     end
+  end
+
+  def rand_products
+    Product.all.shuffle.first(5)
   end
 end

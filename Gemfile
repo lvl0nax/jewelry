@@ -65,3 +65,4 @@ gem 'rmagick'
 
 gem "mocha", :group => :test
 gem 'tinymce_fm', :git=>"git://github.com/galdomedia/tinymce_fm.git"
+gem 'will_paginate'

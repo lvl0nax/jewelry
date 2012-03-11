@@ -1,31 +1,17 @@
+<% content_for :js do %>
+  <%= javascript_include_tag "pagination" %>
+<% end %>
+
 <% @title = @category.title %>
-<h2>
+
+<h2 class="underline">
   <%= @category.title %>
 </h2>
 
-<% if(@category.products) %>
+<% if(@products) %>
     <ul id="list-products">
-        <% @category.products.each do |p|%>
-          <li class="brs2-3" data-id="<%= p.id%>" data-name="<%= p.article%>" data-price="<%= p.price%>">
-            <span class="p-title">
-              <a href="<%= category_product_path(@category, p)%>">
-                <%= image_tag "#{p.article}.jpg"%>
-              </a>
-             <!-- <%= link_to p.article, category_product_path(@category, p) %> -->
-            </span>
-            <span class="d-b ">
-              
-              <span class="p-addcard fl-r" data-id="<%= p.id%>" data-name="<%= p.article%>" data-price="<%= p.price%>">
-                <%= image_tag "cart.jpg",{:width => 30} %>
-              </span>
-                <%= p.article %></br>
-                <%= p.brand %></br>
-                <%= p.price.round(2)%></br> 
-             
-            </span>
-          </li>
-
-        <% end %>
+        
+        <%= render @products%>
     </ul>
 <% end %>
 <%if current_user %>
@@ -38,3 +24,5 @@
     </div>
   <% end %>
 <% end %>
+
+<%= will_paginate @products%>

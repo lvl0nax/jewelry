@@ -1,4 +1,5 @@
 class CardController < ApplicationController
+  before_filter :admin_require, :except => [ :list, :index, :add_to_card ]
 
   def index
     if !cookies[:card].nil?
@@ -45,12 +46,22 @@ class CardController < ApplicationController
   end
 
   def list
+    if !!params[:format]
+      u = User.find(params[:format])
+    end
 
     if !current_user
       redirect_to root_url
     end
-
-    @cards = Card.all
+    if current_user.isAdmin?
+      if !!u
+        @cards = Card.where(:user_id => u.id)
+      else
+        @cards = Card.all
+      end
+    else
+      @cards = Card.where(:user_id => current_user.id)
+    end
 
     @hide_banner = true
     @hide_search = true

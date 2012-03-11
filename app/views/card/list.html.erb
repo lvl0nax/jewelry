@@ -1,4 +1,34 @@
+
+
+
 <% if(@cards) %>
+              <%if current_user %>
+                <% if current_user.isAdmin? %>
+                  <!--<select >
+                    <% User.all.each do |key|%>
+                        <option value="<%= key %>"><%= User.find(key).email%></option>
+                    <% end %>
+                  </select> -->
+
+                  <dl class="dropdown">
+                    <dt><a href="#"><span>Выберите пользователя</span></a></dt>
+                    <dd>
+                      <ul>
+                        <li>
+                          <%= link_to "Все пользователи", list_card_index_path %>
+                        </li>
+                        <% User.all.each do |u| %>
+                          <li>
+                            <%= link_to "#{u.email}", list_card_index_path(u.id) %>
+                          </li>
+                        <% end %>
+                      </ul>
+                    </dd>
+                  </dl>
+
+                <% end %>
+              <% end %>
+
     <table class="list-products-card list-products-sm">
       <tr class="tr-top">
         <td>ФИО</td>
@@ -23,11 +53,19 @@
               <% end %>
             </td>
             <td>
-              <select onchange="change_status(<%= c.id%>, $(this))">
-                <% Card::STATUS.each_index do |key|%>
-                    <option value="<%= key %>" <%= c.status.to_i == key ? ("selected='selected'") : ""%>><%= Card::STATUS[key.to_i]%></option>
+              <%if current_user %>
+                <% if current_user.isAdmin? %>
+                  <select onchange="change_status(<%= c.id%>, $(this))">
+                    <% Card::STATUS.each_index do |key|%>
+                        <option value="<%= key %>" <%= c.status.to_i == key ? ("selected='selected'") : ""%>><%= Card::STATUS[key.to_i]%></option>
+                    <% end %>
+                  </select>
+                <% else %>
+                  <%= Card::STATUS[c.status.to_i]%>
                 <% end %>
-              </select>
+              <% end %>
+
+            
             </td>
             <td class="td-last">
               <%
@@ -62,4 +100,17 @@
         }
       });
   }
+  $(".dropdown dt a").click(function() {
+    $(".dropdown dd ul").toggle();
+  });
+  $(".dropdown dd ul li a").click(function() {
+    var text = $(this).html();
+    $(".dropdown dt a span").html(text);
+    $(".dropdown dd ul").hide();
+  });
+  $(document).bind('click', function(e) {
+    var $clicked = $(e.target);
+    if (! $clicked.parents().hasClass("dropdown"))
+        $(".dropdown dd ul").hide();
+});
 </script>

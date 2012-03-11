@@ -12,18 +12,18 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :product_article %><br />
+    <%= f.label :product_article, "Артикул редактируемого продукта" %><br />
     <%= f.text_field :product_article %>
   </div>
   <div class="field">
-    <%= f.label :content %><br />
+    <%= f.label :content, "Описание продукта" %><br />
     <%= f.text_area :content %>
   </div>
   <div class="field">
-    <%= f.label :discount %><br />
+    <%= f.label :discount, "Скидка (%)" %><br />
     <%= f.text_field :discount %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Сохранить"%>
   </div>
 <% end %>

@@ -1,5 +1,6 @@
 class PagesController < InheritedResources::Base #ApplicationController
-  before_filter :admin_require, :except => [ :show ]
+  before_filter :admin_require, :except => [ :show, :index ]
+  before_filter :rand_products
 
   include TinymceFm::Filemanager
 

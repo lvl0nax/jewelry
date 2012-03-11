@@ -14,12 +14,12 @@ body{font:13px/1.321 Arial;}
 
 ul, li{list-style:none}
 h1{
-  border-bottom: 1px solid #4A4A4A;
+  
     font-size: 21px;
     margin: 0 0 10px;
 }
 h2{
-  border-bottom: 1px solid #A4A4A4;
+
     font-size: 16px;
     margin: 0 0 8px;
     padding: 0 0 5px;
@@ -31,14 +31,14 @@ h1.title-main-box{
     color: #fff;
     font-size:17px;
     padding: 7px 20px;
-    margin: -10px -20px 0;
+    margin: -6px -5px 0;
     border-radius: 5px 5px 0 0;
     -moz-border-radius: 5px 5px 0 0;
     -webkit-border-radius: 5px 5px 0 0;
 }
 a{text-decoration:none;color:#8a8a8a ;}
 a:hover{color: #4a4a4a;}
-
+.underline {  border-bottom: 1px solid #CECAC2;}
 /* forms */
 .field{padding: 0 0 10px}
 .field label{padding: 0 0 5px;display: inline-block;*display: inline;*zoom: 1}
@@ -127,7 +127,7 @@ a:hover{color: #4a4a4a;}
 }
 
 .main-box{padding:5px; margin: 0 0 10px; background: #fff}
-.container{width: 1000px;margin: 0 auto;padding: 30px 0 120px;}
+.container{width: 1000px;margin: 0 auto;padding: 30px 0 90px;}
 
 .footer{background-color: #fff;height: 70px;width: 100%;position: absolute;bottom: 0;}
 .footer-content{
@@ -158,7 +158,7 @@ a:hover{color: #4a4a4a;}
   padding: 2px 0;
 }
 
-.banner{position: relative;overflow: hidden; margin: -10px -5px; padding: 0;}
+.banner{position: relative;overflow: hidden; margin: -6px -5px -9px; padding: 0;}
 .banner img{width: 100%;}
 .ban_space{padding-top: 10px}
 
@@ -191,7 +191,7 @@ a:hover{color: #4a4a4a;}
 .authentication .provider {font-weight: bold;}
 .authentication .uid {color: #666;font-size: 11px;}
 .auth_provider img {display: block;}
-.auth_provider {float: left;text-decoration: none;margin-right: 20px;text-align: center;margin-bottom: 10px;}
+.auth_provider {float: left;text-decoration: none;text-align: center;margin-bottom: 10px;}
 
 .admin-links{padding: 20px 0 0}
 .admin-links a, .login a, .login span{border-right: 1px dotted #ccc; padding: 0 10px}
@@ -265,20 +265,20 @@ brs-3-b{
 .list-products-card .td-last{text-align: right!important}
 .list-products-card .tr-top:hover, .list-products-card .tr-bottom:hover{background: #fff}
 
-#list-products{margin: 0 0 0 -20px}
+#list-products{margin: 0 0 0 -20px; text-align:center;}
 #list-products li{
     display: inline-block;
     display: *inline;
     *zoom: 1;
     padding:10px 0;
     border: 1px dashed #f2f2f2;
-    width: 150px;
+    width: 130px;
     margin: 0 0 0 20px;
     color: #8a8a8a;
 }
 #list-products .p-title{display: block; padding: 0 0 9px; border-bottom: 1px solid #ccc; margin: 0 0 9px; text-align: center;}
 .p-title img{
-  height: 140px;
+  height: 130px;
   /*padding-left:5px;*/
   
 }
@@ -301,6 +301,9 @@ brs-3-b{
   /*border: 1px solid #f2f2f2;*/
 }
 #list-products li:hover .p-addcard{
+  cursor: pointer;
+}
+.p-addcard:hover{
   cursor: pointer;
 }
 ul.p-name li{
@@ -382,6 +385,7 @@ ul.p-name li{
 .ienlarger span img {
   border: 1px solid #FFFFFF; /* Добавляем рамку вокруг изображения */
   margin-bottom: 8px; /* /Сдвигаем текст вниз от изображения */
+  height: 450px;
 }
 
 .ienlarger a span {  /* Для большого изображения и названия */
@@ -405,7 +409,7 @@ ul.p-name li{
 
 .ienlarger a:hover span { 
   display:block;
-  top: -150px; /* Большое изображение выскакивает вверх на 50px от миниатюры */
+  top: -150px; /* Большое изображение выскакивает вверх на -150px от миниатюры */
   left: 90px; /* Большое изображение выскакивает влево на 90px от миниатюры */
   z-index: 100;
   
@@ -413,10 +417,56 @@ ul.p-name li{
 }
 
 .resize_thumb {
-  width: 150px; /* Вводим нужный размер миниатюры здесь */
-  height : auto;
+  width: auto; /* Вводим нужный размер миниатюры здесь */
+  height : 280px;
 }
 
 /* Код увеличителя закончен */
 
 .search{display: none;}
+
+/* General dropdown styles */       
+.dropdown dd, .dropdown dt, .dropdown ul { margin:0px; padding:0px; }
+.dropdown dd { position:relative; }
+/* DT styles for sliding doors */
+.dropdown dt a {background:#FBF9F6 ;
+    display:block; padding-right:20px; border:1px solid #8a8a8a; width:160px;}
+.dropdown dt a span {cursor:pointer; display:block; padding:5px;}
+/* UL styles */
+.dropdown dd ul { background:#FBF9F6 ; display:none;
+    list-style:none; padding:5px 0px; position:absolute; 
+    left:0px; top:2px; width:auto; min-width:170px;}
+.dropdown span.value { display:none;}
+.dropdown dd ul li a { padding:5px; display:block;}
+
+.product{
+  padding: 5px;
+
+}
+
+.prdesc{
+  height: 280px;
+  color: #555;
+}
+
+.pr_line{
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.l-through{
+  text-decoration: line-through;
+  font-weight: bold;
+}
+
+.discount{
+  color: red;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: blink;
+}
+
+.descr{
+  color: #555;
+  padding: 15px 5px 5px 5px;
+}

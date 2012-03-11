@@ -1,3 +1,5 @@
+
+
 var services = (function(){
 
     var t={};
@@ -62,7 +64,7 @@ var card = (function(){
         var cookieCard = ck("card");
 
         params = $.extend({
-            el:  $("#list-products span.p-addcard"), //$("#list-products li"),
+            el:  $(" span.p-addcard"), //$("#list-products li"),
             card: $(".card"),
             cardCheck: $("#card-chekout"),
             cardWrap: $("#card-wrapper")
@@ -312,3 +314,5 @@ var check = (function(){
   return t;
 
 }());
+
+
