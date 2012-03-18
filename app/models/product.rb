@@ -15,6 +15,12 @@ class Product < ActiveRecord::Base
     end
   end
 
+  def image_exist?
+    msk = File.join("**","bujua", "#{self.article}.jpg")
+    nameF = Dir.glob(msk)
+    nameF.empty? ? true : false
+  end
+
   def discount
 
     #TODO: Price with discount should be printed on site

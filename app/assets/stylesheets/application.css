@@ -265,7 +265,7 @@ brs-3-b{
 .list-products-card .td-last{text-align: right!important}
 .list-products-card .tr-top:hover, .list-products-card .tr-bottom:hover{background: #fff}
 
-#list-products{margin: 0 0 0 -20px; text-align:center;}
+#list-products{margin: 0 0 0 -20px; padding-left: 17px;}
 #list-products li{
     display: inline-block;
     display: *inline;
@@ -287,6 +287,9 @@ brs-3-b{
 }
 #list-products .p-price{float: right}
 #list-products .p-addcard{
+  opacity: 0.5;
+  -moz-opacity: 0.5;
+  filter:alpha(opacity=50);
     /*padding: 3px 8px 4px;
     /*background-image: url(/assets/images/cart.jpg);
     /*background-repeat: no-repeat;
@@ -299,12 +302,22 @@ brs-3-b{
   /*background: #f2f2f2*/
   color: #4A4A4A;
   /*border: 1px solid #f2f2f2;*/
+  
 }
 #list-products li:hover .p-addcard{
   cursor: pointer;
+  
 }
-.p-addcard:hover{
-  cursor: pointer;
+
+#list-products span:hover {
+  opacity: 1 !important ;
+  -moz-opacity: 1 !important;
+  filter:alpha(opacity=100) !important;
+  
+}
+.p-addcard img:hover{
+  cursor: pointer; 
+
 }
 ul.p-name li{
   padding:0;

@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   helper_method :all
   helper_method :logged_in?
   helper_method :rand_products
+  helper_method :is_admin?
   protect_from_forgery
 
   def import_excel
@@ -70,6 +71,8 @@ class ApplicationController < ActionController::Base
       format.json { head :ok }
     end
   end
+
+
   def clear_images
     # all products
     iNameS = Product.find_by_sql("SELECT article FROM products")
