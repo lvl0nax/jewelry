@@ -3,14 +3,18 @@
 
   <div class="ienlarger">
     <a href="#nogo">
-      <!--<img src="http://img691.imageshack.us/img691/7360/89815502.jpg" alt="thumb" class="resize_thumb" />-->
-      <%= image_tag("bujua/#{@product.article}.jpg", :class => 'resize_thumb' )%><br />
-      <span>
-        <!--<img src="/assets/bujua/" alt="large" /><br />-->
-        <%= image_tag "bujua/#{@product.article}.jpg"%><br />
-        <%= "#{@product.article}"%>
-      </span>
 
+      <% if !!@product.image_exist? %>
+        <!--<img src="http://img691.imageshack.us/img691/7360/89815502.jpg" alt="thumb" class="resize_thumb" />-->
+        <%= image_tag("bujua/#{@product.image_exist?}", :class => 'resize_thumb' )%><br />
+        <span>
+          <!--<img src="/assets/bujua/" alt="large" /><br />-->
+          <%= image_tag "bujua/#{@product.image_exist?}"%><br />
+          <%= "#{@product.article}"%>
+        </span>
+      <%else%>
+        <%= image_tag ("bujua/no.gif", :alt => "test1",:class => 'resize_thumb')%>
+      <%end%>
     </a>
   </div>
 
@@ -36,6 +40,10 @@
     <p class="pr_line">
       <b> Цена: <%= @product.price.round(2) %> р. </b>
     </p>
+    </br>
+  <span class="p-addcard " data-id="<%= @product.id%>" data-name="<%= @product.article%>" data-price="<%= @product.price%>">
+      <%= image_tag "cart.jpg",{:width => 30} %>
+  </span>
   <% else %>
     <p class="descr l-through">
       Цена: <%= @product.price.round(2) %> р.
@@ -44,11 +52,12 @@
       <p>Cкидка: <%= @product.discount.round(2) %> р.</p>
     
     </div>
-  <% end %>
-  </br>
+    </br>
   <span class="p-addcard " data-id="<%= @product.id%>" data-name="<%= @product.article%>" data-price="<%= @product.discount%>">
       <%= image_tag "cart.jpg",{:width => 30} %>
   </span>
+  <% end %>
+  
 
 
 </div>

@@ -57,9 +57,6 @@
       <div class="category_name"><h3>Категории</h3></div>
 
       <ul class="categories">
-        <% if(allcategories.count == 0) %>
-            <li><%= link_to 'Добавить категорию', new_category_path %></li>
-        <% end %>
         <% allcategories.each do |cat| %>
           <li> <%= link_to cat.name, cat %> </li>
         <% end %>

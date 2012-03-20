@@ -8,46 +8,53 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   def import_excel
+   test_thread = Thread.new do
+                  #for CATEGORY model
+                  toCat = []
+                  objs = []
+                  
+                  catAr = Category.all
+                  catAr.each {|c| toCat.push("('#{c.title}')")}
+                  sql = ActiveRecord::Base.connection()
+                  sql.execute("TRUNCATE products ")
+                  tbl = Excel.new("qwerty.xls") #should be original name in root directory for the site
+                  tbl.default_sheet = tbl.sheets.first
+                  
+                  #TODO: customize to our product
+                  #10.upto(tbl.last_row) do |line|
+                  #  article = tbl.cell(line, 'A')
+                  #  type = tbl.cell(line, 'B')
+                  #  price = tbl.cell(line.'D')
+                  #  brand = tbl.cell(line,'E')
+                  j = 0
+                  2.upto(tbl.last_row) do |line|
+                    j=j+1
+              logger.debug j
+                    article = tbl.cell(line, 'A')
+                    next if article.blank?
+                    price = tbl.cell(line, 'F')
+                    type = tbl.cell(line, 'B')
+                    brand = tbl.cell(line, 'D')
+                    descr = tbl.cell(line, 'C')
+              logger.debug "-------- #{article} - #{type} - #{price}"
+                    #     check that category there is in DB
+                    i = toCat.index("('#{type}')")
+                    if i.nil?  
+                      cat_id = toCat.length     
+                      toCat.push("('#{type}')")
+                    else  
+                      cat_id = i + 1
+                    end
+                    objs.push("('#{article}', '#{price}', '#{brand}','#{cat_id}')")
+                  end
 
-    #for CATEGORY model
-    toCat = []
-    objs = []
-    
-    catAr = Category.all
-    catAr.each {|c| toCat.push("('#{c.title}')")}
-    sql = ActiveRecord::Base.connection()
-    sql.execute("TRUNCATE products ")
-    tbl = Excel.new("qwerty.xls") #should be original name in root directory for the site
-    tbl.default_sheet = tbl.sheets.first
-    
-    #TODO: customize to our product
-    #10.upto(tbl.last_row) do |line|
-    #  article = tbl.cell(line, 'A')
-    #  type = tbl.cell(line, 'B')
-    #  price = tbl.cell(line.'D')
-    #  brand = tbl.cell(line,'E')
-
-    2.upto(tbl.last_row) do |line|
-      article = tbl.cell(line, 'A')
-      price = tbl.cell(line, 'B')
-      type = tbl.cell(line, 'D')
-      brand = tbl.cell(line, 'C')
-
-      #     check that category there is in DB
-      i = toCat.index("('#{type}')")
-      if i.nil?  
-        cat_id = toCat.length     
-        toCat.push("('#{type}')")
-      else  
-        cat_id = i + 1
-      end
-      objs.push("('#{article}', '#{price}', '#{brand}','#{cat_id}')")
+                  #fill DB
+                  sql.execute("TRUNCATE categories ")
+                  sql.execute("INSERT INTO `categories` (`title`) VALUES " + toCat.join(','))
+                  sql.execute("INSERT INTO `products` (`article`, `price`, `brand`, `category_id`) VALUES " + objs.join(','))
+                  
     end
 
-    #fill DB
-    sql.execute("TRUNCATE categories ")
-    sql.execute("INSERT INTO `categories` (`title`) VALUES " + toCat.join(','))
-    sql.execute("INSERT INTO `products` (`article`, `price`, `brand`, `category_id`) VALUES " + objs.join(','))
 
     respond_to do |format|
       format.html { redirect_to categories_url }

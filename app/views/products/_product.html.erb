@@ -1,22 +1,28 @@
-<% if ((is_admin?)||(!product.image_exist?)) %>
+
 
   <li class="brs2-3" data-id="<%= product.id%>" data-name="<%= product.article%>" data-price="<%= product.price%>">
     <span class="p-title">
       <a href="<%= category_product_path(product.category, product)%>">
-        <%= image_tag "bujua/#{product.article}.jpg", :alt => "test"%>
+
+        <% if !!product.image_exist? %>
+          <%= image_tag "bujua/#{product.image_exist?}", :alt => "test"%>
+          <%logger.debug "-------------- #{product.image_exist?}"%>
+        <%else%>
+          <%= image_tag "bujua/no.gif", :alt => "test1"%>
+
+        <%end%>
       </a>
 
     </span>
     <span class="d-b ">
+      <span class="pr_art"><%= product.article %></span></br>
       
       <span class="p-addcard fl-r" data-id="<%= product.id%>" data-name="<%= product.article%>" data-price="<%= product.price%>">
         <%= image_tag "cart.jpg",{:width => 30, :class => "test"} %>
       </span>
-        <%= product.article %></br>
-        <%= product.brand %></br>
-        <%= product.price.round(2)%></br> 
+      <%= product.brand %></br>
+      <%= product.price.round(2)%> р.</br> 
      
     </span>
   </li>
 
-<%end%>

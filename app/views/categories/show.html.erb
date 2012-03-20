@@ -1,5 +1,7 @@
-<% content_for :js do %>
-  <%= javascript_include_tag "pagination" %>
+<%if !is_admin?%>
+  <% content_for :js do %>
+    <%= javascript_include_tag "pagination" %>
+  <% end %>
 <% end %>
 
 <% @title = @category.title %>

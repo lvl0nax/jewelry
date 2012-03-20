@@ -3,6 +3,7 @@ db/*.sqlite3
 log/*.log
 tmp/**/*
 .idea/
+assets/images/bujua/*.*
 config/database.yml
 public/uploads/
 .bundle

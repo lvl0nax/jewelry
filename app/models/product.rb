@@ -16,9 +16,10 @@ class Product < ActiveRecord::Base
   end
 
   def image_exist?
-    msk = File.join("**","bujua", "#{self.article}.jpg")
+    msk = File.join("**","bujua", "#{self.article}.*")
     nameF = Dir.glob(msk)
-    nameF.empty? ? true : false
+    File.basename(nameF.first) unless nameF.blank?
+    #nameF.empty? ? true : false
   end
 
   def discount

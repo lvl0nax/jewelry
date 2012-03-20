@@ -50,17 +50,20 @@ class CardController < ApplicationController
       u = User.find(params[:format])
     end
 
-    if !current_user
-      redirect_to root_url
-    end
-    if current_user.isAdmin?
-      if !!u
-        @cards = Card.where(:user_id => u.id)
+    if current_user
+      
+    
+      if current_user.isAdmin?
+        if !!u
+          @cards = Card.where(:user_id => u.id)
+        else
+          @cards = Card.all
+        end
       else
-        @cards = Card.all
+        @cards = Card.where(:user_id => current_user.id)
       end
     else
-      @cards = Card.where(:user_id => current_user.id)
+      redirect_to root_url
     end
 
     @hide_banner = true

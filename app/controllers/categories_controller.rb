@@ -1,5 +1,5 @@
 class CategoriesController <  InheritedResources::Base #ApplicationController #
-  before_filter :admin_require, :except => [ :index, :show ]#:only => [:new, :create, :edit, :update, :destroy]
+  before_filter :admin_require, :except => [ :show ]#:only => [:new, :create, :edit, :update, :destroy]
 #  # GET /categories
 #  # GET /categories.json
  # def index
@@ -40,7 +40,9 @@ class CategoriesController <  InheritedResources::Base #ApplicationController #
 
 def show
   @title = resource.title
-  @products = @category.products.page(params[:page]).per_page(16)
+  #products = []
+  #@category.products.each {|p|   products.push(p) if !p.image_exist? }
+  @products = @category.products.page(params[:page]).per_page(20)
 end
 
 def create
