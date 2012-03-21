@@ -268,7 +268,7 @@ brs-3-b{
 #list-products{margin: 0 0 0 -20px; padding-left: 17px;}
 #list-products li{
     display: inline-block;
-    display: *inline;
+    *display: inline;
     *zoom: 1;
     padding:10px 0;
     border: 1px dashed #f2f2f2;
