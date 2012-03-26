@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   helper_method :all
   helper_method :logged_in?
   helper_method :rand_products
+  helper_method :all_photo
   helper_method :is_admin?
   protect_from_forgery
 
@@ -29,14 +30,13 @@ class ApplicationController < ActionController::Base
                   j = 0
                   2.upto(tbl.last_row) do |line|
                     j=j+1
-              logger.debug j
+
                     article = tbl.cell(line, 'A')
                     next if article.blank?
                     price = tbl.cell(line, 'F')
                     type = tbl.cell(line, 'B')
                     brand = tbl.cell(line, 'D')
                     descr = tbl.cell(line, 'C')
-              logger.debug "-------- #{article} - #{type} - #{price}"
                     #     check that category there is in DB
                     i = toCat.index("('#{type}')")
                     if i.nil?  
@@ -83,31 +83,37 @@ class ApplicationController < ActionController::Base
   def clear_images
     # all products
     iNameS = Product.find_by_sql("SELECT article FROM products")
-    iNameS.collect! {|image| image.article + ".jpg"}
+    iNameS.collect! {|image| image.article }
     
     logger.debug "/////inames/////////////////////////////////////////"
-    logger.debug iNameS
+    logger.debug iNameS.first
 
     # all images
-    mask = File.join("**","bujua", "*.jpg")
-    iNameF = Dir.glob(mask)
-    iNameF.collect! {|name| File.basename(name)}
+    #mask = File.join("**","bujua", "*.jpg")
+    #iNameF = Dir.glob(mask)
+    #iNameF.collect! {|name| File.basename(name)}
+    iNameF = all_photo_name
     
     logger.debug "/////inamef/////////////////////////////////////////"
-    logger.debug iNameF
+    logger.debug iNameF.first
 
-
+    iName = []
     iName = iNameF - iNameS
     
     logger.debug "/////////////////////////////////////////////iName/"
-    logger.debug iName
-
-    iName.each do |i| 
-      mask = File.join("**","bujua", i)
-      iNameS = Dir.glob(mask)
-      temp = File.delete(iNameS.first)
-      logger.debug "//////////////////////////////////////////////"
-      logger.debug temp
+    logger.debug iName.first
+    if iName.blank?
+      logger.debug "all photo deleted"
+    else
+      logger.debug "deleting started"
+      iName.each do |i| 
+        logger.debug "==================== #{i}"
+        mask = File.join("**","bujua", "#{i}.*")
+        iNameS = Dir.glob(mask)
+        temp = File.delete(iNameS.first)
+        #logger.debug "//////////////////////////////////////////////"
+        #logger.debug temp
+      end
     end
     respond_to do |format|
       format.html { redirect_to root_url }
@@ -124,10 +130,10 @@ class ApplicationController < ActionController::Base
     unless is_admin?
       deny_access 
     end  
-#    unless logged_in? 
-#      flash[:error] = t('users.must_login') 
-#      redirect_to login_url # halts request cycle  
-#    end
+      #    unless logged_in? 
+      #      flash[:error] = t('users.must_login') 
+      #      redirect_to login_url # halts request cycle  
+      #    end
   end  
   
   def deny_access
@@ -145,6 +151,36 @@ class ApplicationController < ActionController::Base
   end
 
   def rand_products
-    Product.all.shuffle.first(5)
+    ims = all_photo_name
+    
+    ims.shuffle!
+    # k=0
+    # j=0
+    tmp = ims.first(5)
+    # prs = 
+    Product.where(:article => tmp)
+    # prs = []
+    # while k<5
+    #   logger.debug "----------------------#{j}----------------"
+    #   tmp = Product.find_by_article(ims[j])
+    #   j = j+1
+    #   if !!tmp
+    #     k = k + 1
+    #     prs.push(tmp)
+    #   end
+    # end
+    # prs
+
+  end
+
+
+  def all_photo_name
+    mask = File.join("**", "bujua", "*.jpg" )
+    ims = Dir.glob(mask)
+    mask = File.join("**", "bujua", "*.JPG" )
+    imNameL = Dir.glob(mask)
+    ims = ims + imNameL #list of all images
+    ims.collect!{|im| File.basename(im, ".jpg")}
+    ims.collect!{|im| File.basename(im, ".JPG")}
   end
 end

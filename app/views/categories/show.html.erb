@@ -12,8 +12,11 @@
 
 <% if(@products) %>
     <ul id="list-products">
-        
+      <% if !!@products %> 
         <%= render @products%>
+      <%else%>
+        <%= Продукты из данной категории отсутствуют в продаже.%>
+      <%end%>
     </ul>
 <% end %>
 <%if current_user %>
