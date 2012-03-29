@@ -4,13 +4,9 @@
     <span class="p-title">
       <a href="<%= category_product_path(product.category, product)%>">
 
-        <% if !!product.image_exist? %>
-          <%= image_tag "bujua/#{product.image_exist?}", :alt => "test"%>
-          <%logger.debug "-------------- #{product.image_exist?}"%>
-        <%else%>
-          <%= image_tag "bujua/no.gif", :alt => "test1"%>
 
-        <%end%>
+          <%= image_tag "bujua/#{product.image_exist?}", :alt => "test"%>
+
       </a>
 
     </span>

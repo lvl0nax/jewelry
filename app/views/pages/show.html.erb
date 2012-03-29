@@ -5,36 +5,12 @@
       <%= raw @page.description %>
     </div>
   <% end %>
-  <% if(rand_products) %>
+
     <ul id="list-products">
         
         <%= render rand_products%>
     </ul>
-<% end %>
 
-  <!--<ul id="list-products">
-        <% rand_products.each do |p|%>
-          <li class="brs2-3" data-id="<%= p.id%>" data-name="<%= p.article%>" data-price="<%= p.price%>">
-            <span class="p-title">
-              <a href="<%= category_product_path(p.category_id, p)%>">
-                <%= image_tag "#{p.article}.jpg"%>
-              </a>
-             
-            </span>
-            <span class="d-b ">
-              
-              <span class="p-addcard fl-r" data-id="<%= p.id%>" data-name="<%= p.article%>" data-price="<%= p.price%>">
-                <%= image_tag "cart.jpg",{:width => 30} %>
-              </span>
-                <%= p.article %></br>
-                <%= p.brand %></br>
-                <%= p.price.round(2)%></br> 
-             
-            </span>
-          </li>
-
-        <% end %>
-    </ul>-->
 
 
 <% else%>

@@ -18,11 +18,7 @@ class User < ActiveRecord::Base
   end
 
   def isAdmin?
-    if self === User.first
-      return true
-    else
-      return false
-    end
+     self === User.first ? true : false
   end
 
 

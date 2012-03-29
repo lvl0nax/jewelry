@@ -1,4 +1,4 @@
-require 'RMagick'
+#require 'RMagick'
 
 class ApplicationController < ActionController::Base
   helper_method :all
@@ -153,23 +153,13 @@ class ApplicationController < ActionController::Base
   def rand_products
     ims = all_photo_name
     
-    ims.shuffle!
-    # k=0
-    # j=0
-    tmp = ims.first(5)
-    # prs = 
+    #ims.shuffle!
+
+    #tmp = ims.first(5)
+    tmp = [ims[rand(ims.length-1)],ims[rand(ims.length-1)],ims[rand(ims.length-1)],ims[rand(ims.length-1)],ims[rand(ims.length-1)]]
+
     Product.where(:article => tmp)
-    # prs = []
-    # while k<5
-    #   logger.debug "----------------------#{j}----------------"
-    #   tmp = Product.find_by_article(ims[j])
-    #   j = j+1
-    #   if !!tmp
-    #     k = k + 1
-    #     prs.push(tmp)
-    #   end
-    # end
-    # prs
+
 
   end
 
@@ -178,9 +168,11 @@ class ApplicationController < ActionController::Base
     mask = File.join("**", "bujua", "*.jpg" )
     ims = Dir.glob(mask)
     mask = File.join("**", "bujua", "*.JPG" )
-    imNameL = Dir.glob(mask)
-    ims = ims + imNameL #list of all images
-    ims.collect!{|im| File.basename(im, ".jpg")}
-    ims.collect!{|im| File.basename(im, ".JPG")}
+    #imNameL = Dir.glob(mask)
+    #ims = ims + imNameL #list of all images
+    ims = ims + Dir.glob(mask)
+    #ims.collect!{|im| File.basename(im, ".jpg")}
+    #ims.collect!{|im| File.basename(im, ".JPG")}
+    ims.collect!{|im| File.basename(im, ".*")}
   end
 end

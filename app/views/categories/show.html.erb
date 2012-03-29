@@ -1,8 +1,3 @@
-<%if !is_admin?%>
-  <% content_for :js do %>
-    <%= javascript_include_tag "pagination" %>
-  <% end %>
-<% end %>
 
 <% @title = @category.title %>
 
@@ -10,13 +5,11 @@
   <%= @category.title %>
 </h2>
 
-<% if(@products) %>
+<% if !!@products %>
     <ul id="list-products">
-      <% if !!@products %> 
+
         <%= render @products%>
-      <%else%>
-        <%= "Продукты из данной категории отсутствуют в продаже." %>
-      <%end%>
+
     </ul>
 <% end %>
 <%if current_user %>
