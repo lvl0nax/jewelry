@@ -1,10 +1,21 @@
 module ApplicationHelper
   def allpages
-    @allPag = Page.all
+     if !!session[:pages]
+       @allPag = session[:pages]
+     else
+       #@allPag = Page.all#.select()
+       @allPag = Page.find_by_sql("SELECT id, title FROM pages")
+       session[:pages] = @allPag
+     end
   end
 
   def allcategories
-    @allCat = Category.all
+    if !!session[:categories]
+      @allCat = session[:categories]
+    else
+      @allCat = Category.all
+      session[:categories] = @allCat
+    end
   end
 
   def fiveproduct
