@@ -1,7 +1,7 @@
 <li class="brs2-3" data-id="<%= product.id%>" data-name="<%= product.article%>" data-price="<%= product.price%>">
   <span class="p-title">
     <a href="<%= category_product_path(@category, product)%>">
-      <%= image_tag "#{product.article}.jpg"%>
+      <%= image_tag "/thumb/#{product.article}.jpg"%>
     </a>
 
   </span>
