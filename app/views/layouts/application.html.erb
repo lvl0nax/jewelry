@@ -45,7 +45,7 @@
       </div>
       <div class="top-menu">
         <% allpages.each do |p| %>
-           <%= link_to p.title, {:controller => "pages", :action => "show", :id => p.id}, {:class => (params[:controller] == "pages" && params[:action] == "show" && params[:id].to_i == p.id) ? "active" : "" }%>
+           <%= link_to p.title, p , {:class => (params[:controller] == "pages" && params[:action] == "show" && params[:id].to_i == p.id) ? "active" : "" }%>
         <% end %>
       </div>
     </div>

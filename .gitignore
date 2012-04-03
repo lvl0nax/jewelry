@@ -3,6 +3,7 @@ db/*.sqlite3
 log/*.log
 tmp/**/*
 .idea/
+app/assets/images/bujua/*.*
 assets/images/bujua/*.*
 config/database.yml
 public/uploads/
@@ -16,4 +17,10 @@ doc/
 *~
 .project
 .DS_Store
+pictures
+app/assets/images/thumb
+assets/images/thumb
+app/assets/images/original/*.*
+assets/images/original/*.*
+
 

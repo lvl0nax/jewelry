@@ -1,4 +1,4 @@
-#require 'RMagick'
+require 'RMagick'
 
 class ApplicationController < ActionController::Base
   helper_method :all
@@ -67,11 +67,27 @@ class ApplicationController < ActionController::Base
     # clown = clown.quantize(256, Magick::GRAYColorspace)
     # clown.write('monochrome.jpg')
 
+    mask = File.join("**", "bujua", "*.jpg" )
+    ims = Dir.glob(mask)
+    mask = File.join("**", "bujua", "*.JPG" )
+    #imNameL = Dir.glob(mask)
+    #ims = ims + imNameL #list of all images
+    ims = ims + Dir.glob(mask)
+    ims.collect!{|im| File.basename(im)}
 
-    clown = Magick::Image.read("#{Rails.root}/pictures/original/clown.jpg").first
+    
+    ims.each{|p|
+      clown = Magick::Image.read("#{Rails.root}/app/assets/images/bujua/#{p}").first
+      tmp = clown.resize_to_fit(130, 130)
+      tmp.write("#{Rails.root}/pictures/thumb/#{p}")
+      tmp = clown.resize_to_fit(600, 800)
+      tmp.write("#{Rails.root}/pictures/medium/#{p}")
+    }
+    #clown = Magick::Image.read("#{Rails.root}/pictures/original/clown.jpg").first
     #clown.crop_resized!(75, 75, Magick::CenterGravity)
-    clown.scale(0.3)
-    clown.write("#{Rails.root}/pictures/thumb/clown2.jpg")
+    #clown.scale(0.3)
+    #clown.resize_to_fit!(130, 130)
+    #clown.write("#{Rails.root}/pictures/thumb/clown2.jpg")
 
     respond_to do |format|
       format.html { redirect_to categories_url }
