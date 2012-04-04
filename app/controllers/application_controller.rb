@@ -66,28 +66,41 @@ class ApplicationController < ActionController::Base
     # clown = Magick::ImageList.new("clown.jpg")
     # clown = clown.quantize(256, Magick::GRAYColorspace)
     # clown.write('monochrome.jpg')
+    #test_thread = Thread.new do
+        test = File.new("test.txt", "w")
+        test.syswrite("Thread started\n")
+        mask = File.join("**", "bujua", "*.jpg" )
+        ims = Dir.glob(mask)
+        mask = File.join("**", "bujua", "*.JPG" )
 
-    mask = File.join("**", "bujua", "*.jpg" )
-    ims = Dir.glob(mask)
-    mask = File.join("**", "bujua", "*.JPG" )
-    #imNameL = Dir.glob(mask)
-    #ims = ims + imNameL #list of all images
-    ims = ims + Dir.glob(mask)
-    ims.collect!{|im| File.basename(im)}
+        #imNameL = Dir.glob(mask)
+        #ims = ims + imNameL #list of all images
+        ims = ims + Dir.glob(mask)
 
-    
-    ims.each{|p|
-      clown = Magick::Image.read("#{Rails.root}/app/assets/images/bujua/#{p}").first
-      tmp = clown.resize_to_fit(130, 130)
-      tmp.write("#{Rails.root}/pictures/thumb/#{p}")
-      tmp = clown.resize_to_fit(600, 800)
-      tmp.write("#{Rails.root}/pictures/medium/#{p}")
-    }
-    #clown = Magick::Image.read("#{Rails.root}/pictures/original/clown.jpg").first
-    #clown.crop_resized!(75, 75, Magick::CenterGravity)
-    #clown.scale(0.3)
-    #clown.resize_to_fit!(130, 130)
-    #clown.write("#{Rails.root}/pictures/thumb/clown2.jpg")
+        test.syswrite("Search ended\n")
+        ims.collect!{|im| File.basename(im)}
+
+        test.syswrite("start creating pictures\n")
+        ims.each{|p|
+          test.syswrite("#{ims.join(',')}")
+          clown = Magick::Image.read("#{Rails.root}/app/assets/images/bujua/#{p}").first
+          test.syswrite("read image \n")
+          test.syswrite("#{Time.now} \n")
+          tmp = clown.resize_to_fit(130, 130)
+          test.syswrite("resize image \n")
+          tmp.write("#{Rails.root}/app/assets/images/thumb/#{p.split(".").first}.jpg")
+          test.syswrite("sace to thumb \n")
+          tmp = clown.resize_to_fit(600, 800)
+          test.syswrite("resize to medium \n")
+          tmp.write("#{Rails.root}/app/assets/images/medium/#{p.split(".").first}.jpg")
+          test.syswrite("save to medium \n")
+        }
+        #clown = Magick::Image.read("#{Rails.root}/pictures/original/clown.jpg").first
+        #clown.crop_resized!(75, 75, Magick::CenterGravity)
+        #clown.scale(0.3)
+        #clown.resize_to_fit!(130, 130)
+        #clown.write("#{Rails.root}/pictures/thumb/clown2.jpg")
+   # end
 
     respond_to do |format|
       format.html { redirect_to categories_url }
@@ -181,14 +194,14 @@ class ApplicationController < ActionController::Base
 
 
   def all_photo_name
-    mask = File.join("**", "bujua", "*.jpg" )
+    mask = File.join("**", "thumb", "*.jpg" )
     ims = Dir.glob(mask)
-    mask = File.join("**", "bujua", "*.JPG" )
-    #imNameL = Dir.glob(mask)
-    #ims = ims + imNameL #list of all images
-    ims = ims + Dir.glob(mask)
-    #ims.collect!{|im| File.basename(im, ".jpg")}
-    #ims.collect!{|im| File.basename(im, ".JPG")}
+    #mask = File.join("**", "bujua", "*.JPG" )
+      #imNameL = Dir.glob(mask)
+      #ims = ims + imNameL #list of all images
+    #ims = ims + Dir.glob(mask)
+      #ims.collect!{|im| File.basename(im, ".jpg")}
+      #ims.collect!{|im| File.basename(im, ".JPG")}
     ims.collect!{|im| File.basename(im, ".*")}
   end
 end

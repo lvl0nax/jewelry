@@ -25,3 +25,11 @@ assets/images/original/*.*
 
 app/assets/images/medium/*.*
 assets/images/medium/*.*
+
+public/assets/images/thumb
+assets/images/thumb
+public/assets/images/original/*.*
+assets/images/original/*.*
+
+public/assets/images/medium/*.*
+assets/images/medium/*.*

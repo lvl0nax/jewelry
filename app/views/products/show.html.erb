@@ -6,10 +6,10 @@
 
       <% if !!@product.image_exist? %>
         <!--<img src="http://img691.imageshack.us/img691/7360/89815502.jpg" alt="thumb" class="resize_thumb" />-->
-        <%= image_tag("bujua/#{@product.image_exist?}", :class => 'resize_thumb' )%><br />
+        <%= image_tag("medium/#{@product.article}.jpg", :class => 'resize_thumb' )%><br />
         <span>
           <!--<img src="/assets/bujua/" alt="large" /><br />-->
-          <%= image_tag "bujua/#{@product.image_exist?}"%><br />
+          <%= image_tag "medium/#{@product.article}.jpg"%><br />
           <%= "#{@product.article}"%>
         </span>
       <%else%>
