@@ -1,3 +1,9 @@
+<% content_for :meta do %>
+    <title><%= title%></title>
+    <meta name="description" content="<%= @category.mdesc %>; charset=utf-8" />
+    <meta name="keywords" content="<%= @category.mkeywords%>; charset=utf-8" />
+<% end %>
+
 
 <% @title = @category.title %>
 

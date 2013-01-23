@@ -1,3 +1,9 @@
+<% content_for :meta do %>
+    <title><%= title%></title>
+    <meta name="description" content="<%= @page.mdesc %>; charset=utf-8" />
+    <meta name="keywords" content="<%= @page.mkeywords%>; charset=utf-8" />
+<% end %>
+
 <p id="notice"><%= notice %></p>
 <% if @page.isMain?%>
   <% content_for :main_page do %>

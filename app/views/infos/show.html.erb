@@ -12,7 +12,7 @@
 
 <%if current_user %>
   <% if current_user.isAdmin? %>
-    <%= link_to 'Edit', edit_info_path(@info) %> |
+    <%= link_to 'Редактировать', edit_info_path(@info) %> |
     <%= link_to 'Back', infos_path %>
   <% end %>
 <% end %>

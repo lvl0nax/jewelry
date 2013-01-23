@@ -111,7 +111,7 @@ a:hover{color: #4a4a4a;}
 .card a:hover{color: #E164F9}
 
 .card.empty{background: #fff;background: rgba(255,255,255,.8); color: #000}
-.card.empty, .card.open{cursor: default}
+.card.empty, .card.open{cursor: default;}
 
 #card-wrapper{display: none; border-top: 1px dashed #ccc; margin: 5px 0 0; padding: 0 0 7px; border-bottom: 1px dashed #ccc}
 #card-wrapper .nclear{padding:7px 0 0}
@@ -123,10 +123,10 @@ a:hover{color: #4a4a4a;}
     padding: 0 3px 2px;
     line-height: 16px;
     vertical-align: top;
-    font-size: 21px
+    font-size: 21px;
 }
 
-.main-box{padding:5px; margin: 0 0 10px; background: #fff}
+.main-box{padding:5px; margin: 0 0 10px; background: #fff; overflow: hidden;}
 .container{width: 1000px;margin: 0 auto;padding: 30px 0 90px;}
 
 .footer{background-color: #fff;height: 70px;width: 100%;position: absolute;bottom: 0;}
@@ -158,7 +158,7 @@ a:hover{color: #4a4a4a;}
   padding: 2px 0;
 }
 
-.banner{position: relative;overflow: hidden; margin: -6px -5px -9px; padding: 0;}
+.banner{position: relative; overflow: hidden; margin: -6px -5px -9px; padding: 0;}
 .banner img{width: 100%;}
 .ban_space{padding-top: 10px}
 
@@ -379,6 +379,17 @@ ul.p-name li{
     border: 1px solid #7D2DB1;
    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15) inset, 0 0 3px #7D2DB1;
 }
+
+.form-raw #comment{
+  width:200px;
+  height: 200px;
+  padding: 2px 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15) inset;
+}
 .btn-check{padding:10px 0 20px}
 
 /* Код увеличителя начинается здесь */
@@ -444,7 +455,7 @@ ul.p-name li{
 
 /* Код увеличителя закончен */
 
-.search{display: none;}
+.search{ overflow: visible;}
 
 /* General dropdown styles */       
 .dropdown dd, .dropdown dt, .dropdown ul { margin:0px; padding:0px; }
@@ -491,3 +502,23 @@ ul.p-name li{
   color: #555;
   padding: 15px 5px 5px 5px;
 }
+
+
+/*banners */
+#gallery{/*position: relative; */zoom: 1; height: 285px; width: 785px; }
+/*#gallery:hover .gallery-nav{display: block}
+.gallery-nav{width: 30px; height: 40px; cursor: pointer; position: absolute; top: 50%; background-image: url(img/arr.png); display: none; z-index: 2; margin-top: -20px}
+.gallery-nav-prev{right: 0; background-position: -30px 0}
+.gallery-nav-next{left: 0; background-position: 0 0}
+.gallery-nav-prev:hover{background-position: -30px 40px!important;}
+.gallery-nav-next:hover{background-position: 0 40px!important;}*/
+.gallery-item{
+  height: 285px; width: 785px;
+  position: absolute; left: 0; top: 0;
+  /*height: 255px; width: 920px;*/
+  z-index: 2;
+  background-position: center center;
+  background-repeat: no-repeat;
+  /*display: none;*/
+}
+/*.gallery-item:first-child{ display: block}*/

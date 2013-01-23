@@ -1,4 +1,7 @@
+# -*- encoding : utf-8 -*-
+# coding: utf-8
 module ApplicationHelper
+
   def allpages
      if !!session[:pages]
        @allPag = session[:pages]
@@ -13,7 +16,7 @@ module ApplicationHelper
     if !!session[:categories]
       @allCat = session[:categories]
     else
-      @allCat = Category.all
+      @allCat = Category.select("id, title")
       session[:categories] = @allCat
     end
   end
@@ -32,9 +35,20 @@ module ApplicationHelper
   end
 
   def title
-    return @title ? @title + " | Bujua" : "Bujua"
+    return @title ? @title + " | Bujua" : "Bujua - чешская бижутерия"
   end
 
-  
+  def allbrands
+    if !!session[:brands]
+      return session[:brands]
+    else
+      brands = Product.select(:brand)
+      unless brands.blank?
+        brands.collect! {|b| b.brand}
+        brands.uniq!
+        session[:brands] = brands 
+      end
+    end
+  end
 
 end

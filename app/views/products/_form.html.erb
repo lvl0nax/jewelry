@@ -11,6 +11,21 @@
     </div>
   <% end %>
 
+
+  <div class="field">
+    <%= f.label :mtitle %><br />
+    <%= f.text_field :mtitle %>
+  </div>
+  <div class="field">
+    <%= f.label :mdesc %><br />
+    <%= f.text_field :mdesc %>
+  </div>
+  <div class="field">
+    <%= f.label :mkeywords %><br />
+    <%= f.text_field :mkeywords %>
+  </div>
+
+  
   <div class="field">
     <%= f.label :article %><br />
     <%= f.text_field :article %>
@@ -30,6 +45,6 @@
   </div>
   
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Сохранить" %>
   </div>
 <% end %>

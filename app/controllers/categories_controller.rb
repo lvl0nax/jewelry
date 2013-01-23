@@ -3,7 +3,11 @@ class CategoriesController <  InheritedResources::Base #ApplicationController #
 
 
 def show
-  @title = resource.title
+  if !!resource.mtitle
+    @title = resource.mtitle
+  else  
+    @title = resource.title
+  end
   tmp = all_photo_name
   @products = Product.where(:article => tmp, :category_id => @category.id).page(params[:page]).per_page(20)
 

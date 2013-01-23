@@ -1,5 +1,5 @@
 class CardController < ApplicationController
-  before_filter :admin_require, :except => [ :list, :index, :add_to_card ]
+  before_filter :admin_require, :except => [ :list, :index, :add_to_card, :show_card ]
 
   def index
     if !cookies[:card].nil?
@@ -11,7 +11,7 @@ class CardController < ApplicationController
     end
 
     @hide_banner = true
-    @hide_search = true
+
     @hide_card = true
   end
 
@@ -31,6 +31,11 @@ class CardController < ApplicationController
     @card.phone = params[:phone]
     @card.fio = params[:fio]
     @card.status = 0
+    @card.email = params[:email]
+    @card.city = params[:city]
+    @card.address = params[:address]
+    @card.has_courier = params[:has_courier]
+    @card.comment = params[:comment]
 
     if @card.save
       respond_to do |format|
@@ -85,6 +90,11 @@ class CardController < ApplicationController
         render :json => { :res => "1" }
     end
 
+  end
+
+  def show_card
+    @card = Card.find(params[:id])
+    render :layout => false
   end
 
 end

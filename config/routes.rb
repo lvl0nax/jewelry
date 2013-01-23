@@ -4,14 +4,23 @@ AppTest::Application.routes.draw do
   mount TinymceFm::Engine => "/tinymce_fm"
 
   #for twitter authentfication
+  match "/delayed_job" => DelayedJobWeb, :anchor => false
   match '/auth/:provider/callback' => 'authentications#create'
+  match '/user/test' => 'users#test'
   resources :authentications
 
-  devise_for :users, :controller => {:registrations => 'registrations'}
+  devise_for :users, :controller => {:registrations => 'registrations'}, :path_prefix => 'd'
+  match '/user/:id' => 'users#show'
+  resources :users
 
+  post 'search' => "products#search"
+  get 'test_search' => "products#search", :as => "test_search"
   resources :categories do
     resources :products 
   end
+  match 'test' => 'searches#test'
+  get '/searches/test' => 'searches#test'
+
   resources :searches
   resources :pages do
 
@@ -28,6 +37,7 @@ AppTest::Application.routes.draw do
       get 'add_to_card'
       post 'change_status'
       get 'list'
+      get 'show_card'
     end
   end
   # The priority is based upon order of creation:
@@ -85,5 +95,5 @@ AppTest::Application.routes.draw do
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
-  # match ':controller(/:action(/:id(.:format)))'
+   match ':controller(/:action(/:id(.:format)))'
 end

@@ -1,0 +1,63 @@
+<p>
+Номер заказа:
+<%= @card.id %>
+</p>
+<p>
+Покупатель:  
+<%= @card.fio %>
+</p>
+<p>
+Телефон:
+<%= @card.phone %>
+</p>
+<p>
+Заказ:
+            
+              <%
+                 card_total_price = 0
+                 card_count = 0
+              %>
+              <% JSON.parse(@card.cardjson).each do |pc| %>
+                  <% card_count += 1 %>
+                <div class="<%= card_count > 2 ? 'h' : ''%>"><%= pc[1]["name"] + " (id = " + pc[0].to_s + ") " + pc[1]["count"].to_s%></div>
+                <% card_total_price += pc[1]["count"].to_i * pc[1]["price"].to_f %>
+              <% end %>
+              <% if(card_count > 2) %>
+                  <a href="javascript: void(0)" onclick="showAllCard($(this))"><b>...</b></a>
+              <% end %>
+              <div>Итог: <%= card_total_price%></div>
+</p>
+<p>
+Статус заказа:
+<%= Card::STATUS[@card.status.to_i]%>
+</p>
+<p>
+Заказчик: 
+  <% if(@card.user_id) %>
+    <%= User.find_by_id(@card.user_id).email %>
+  <% end %>
+</p>
+<p>
+Дата заказа:
+<%= @card.created_at %>
+</p>
+<p>
+Контактный E-mail:
+<%= @card.email %>
+</p>
+<p>
+Город:
+<%= @card.city %>
+</p>
+<p>
+Адрес:
+<%= @card.address %>
+</p>
+<p>
+Необходимость курьера:
+<%= @card.has_courier ? "да" : "нет" %>
+</p>
+<p>
+Комментарий:
+<%= @card.comment %>
+</p>

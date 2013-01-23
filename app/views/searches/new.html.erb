@@ -1,13 +1,9 @@
 <h1>Advanced search</h1>
 
-<%= form_for @search do |f| %>
+<%= form_for @search, :method => 'get', :id => "products_search" do |f| %>
   <div class="field">
-    <%= f.label :category_id %><br />
-    <!--<%= f.collection_select :category_id, Category.order(:title), :id, :title, {:include_blank => true} %>
-    <%= f.collection_select :category_id, Category.order(:title), :id, :title, {:include_blank => true, :multiple => true, :size => 3} %> -->
-    <%= f.select (:category_id, options_for_select(Category.all.collect{|x| [x.title,x.id]}), { },{ :multiple => true, :size => 3 })%>
-    
-
+    <%= f.label :category_id %><br />   
+    <%= f.select :category_id, Category.all.collect{|x| [x.title,x.id]},{},:size=>5,:multiple=>true,  :class=>"chzn-select", :style=>"width: 350px;" %>
   </div>
   <div class="field">
     <%= f.label :min_price, "price range" %>

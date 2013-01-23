@@ -1,8 +1,7 @@
-<%if !is_admin?%>
+
   <% content_for :js do %>
     <%= tinymce_javascript_tag "pages"%>
   <% end %>
-<% end %>
 
 <%= form_for(@page) do |f| %>
   <% if @page.errors.any? %>
@@ -17,6 +16,20 @@
     </div>
   <% end %>
 
+
+  <div class="field">
+    <%= f.label :mtitle %><br />
+    <%= f.text_field :mtitle %>
+  </div>
+  <div class="field">
+    <%= f.label :mdesc %><br />
+    <%= f.text_field :mdesc %>
+  </div>
+  <div class="field">
+    <%= f.label :mkeywords %><br />
+    <%= f.text_field :mkeywords %>
+  </div>
+  
   <div class="field">
     <%= f.label :title %><br />
     <%= f.text_field :title %>
@@ -27,6 +40,6 @@
   </div>
   <div class="actions">
     <%= f.submit %>
-    <%= link_to 'to pages', pages_path %>
+    <%= link_to 'К списку страниц', pages_path %>
   </div>
 <% end %>

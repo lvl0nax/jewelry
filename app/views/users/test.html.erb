@@ -1,0 +1,27 @@
+<div class="user_view">
+  <p>
+    Личный кабинет пользователя.
+  </p>
+  <p>
+    Электронная почта:
+    <%= @user.email%>
+  </p>
+  <p>
+    Дата регистрации:
+    <%= @user.created_at%>
+  </p>
+  <%if !!@user.last_sign_in_at %>
+    <p>
+      Дата последнего входа:
+      <%= @user.last_sign_in_at%>
+    </p>
+    <p>
+      IP-адрес с которого последний раз был осуществлен вход на сайт:
+      <%= @user.last_sign_in_ip%>
+    </p>
+  <% end %>
+
+  <%= link_to "Мои заказы", list_card_index_path(@user.id) %>
+
+
+</div>

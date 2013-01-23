@@ -2,17 +2,21 @@ class PagesController < InheritedResources::Base #ApplicationController
   before_filter :admin_require, :except => [ :show, :index ]
   before_filter :rand_products, :only => [:show]
 
-  include TinymceFm::Filemanager
+  # include TinymceFm::Filemanager
 
-  image_accept_mime_types ['image/jpeg', 'image/gif', 'image/png']
+  # image_accept_mime_types ['image/jpeg', 'image/gif', 'image/png']
 
-  # limit image file size to 2MB
-  image_file_size_limit 2.megabytes
-  #thumbs created into '_small_' subdir
-  thumbs_subdir 'small'
+  # # limit image file size to 2MB
+  # image_file_size_limit 2.megabytes
+  # #thumbs created into '_small_' subdir
+  # thumbs_subdir 'small'
 
   def show
-    @title = resource.title
+    if !!resource.mtitle
+      @title = resource.mtitle
+    else  
+      @title = resource.title
+    end
   end
 
   def index

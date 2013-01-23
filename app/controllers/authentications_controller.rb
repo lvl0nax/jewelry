@@ -5,13 +5,15 @@ class AuthenticationsController < ApplicationController
   end
 
   def create
-   
+   logger.debug "000000000000000000000000000000000000000000000"
     # if current_user == nil
     #   #raise current_user.inspect
     #   logger.debug "qqqqqqqqqqqqqqqqq"
     #   logger.debug current_user
     # end
     omniauth = request.env["omniauth.auth"]
+    logger.debug "#{omniauth}"
+    logger.debug "**********************************************"
     authentication = Authentication.find_by_provider_and_uid(omniauth['provider'], omniauth['uid'])
     if authentication
       logger.debug "111111111111111111111111111111111111111111111111111111111"

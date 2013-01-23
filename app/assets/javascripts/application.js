@@ -1,4 +1,111 @@
+$(function() {
+  $('.new_search > a').click(function(){
+  var str = "";
+  var t ="";
+  var min = "";
+  var max = "";
+  var cat = "";
 
+  if (parseInt(t = $("#search_min_price").val()) > 0) {
+      str += "min:"+t+";";
+      min = t;
+  }
+  if (parseInt(t = $("#search_mas_price").val()) > 0) {
+      str += "max:"+t+";";
+      max = t;
+  }
+  t="";
+  var temp = $(".search-choice > a");
+  if (temp[0]){
+      temp.each(function(){
+          if (t != ""){ t+=",";}
+          t += (parseInt($(this).attr('rel'))+1);
+      });
+      str += "categories:" + t + ";";
+      cat = t;
+  }
+
+  $("#for_test").load("/searches/test", {max: max, min: min, cat: cat});
+  $(".main_description").hide();
+  $('.search_hide').hide();
+  /*console.log(max);*/
+  })
+});
+
+
+$(function() {
+    var str = "";
+    var t ="";
+    if (parseInt(t = $("#search_min_price").val()) > 0) {
+        str += "min:"+t+";";
+    }
+    if (parseInt(t = $("#search_mas_price").val()) > 0) {
+        str += "max:"+t+";";
+    }
+    t="";
+    var temp = $(".search-choice > a");
+    if (temp[0]){
+        temp.each(function(){
+            if (t != ""){ t+=",";}
+            t += (parseInt($(this).attr('rel'))+1);
+        });
+        str += "categories:" + t + ";";
+    }
+
+
+
+    $(".edit_search a").live("click", function(event) {
+        event.preventDefault(); // prevent the click from linking anywhere
+
+      $.ajax({
+            url:'/searches/test',
+            //data; str,
+            type: 'get',
+            success:function(data){
+                $('#for_test').html("tset");
+            }
+        });
+ 
+
+    });
+});
+
+test_click = function(){
+  var str = "";
+  var t ="";
+  var min = "";
+  var max = "";
+  var cat = "";
+
+  if (parseInt(t = $("#search_min_price").val()) > 0) {
+      str += "min:"+t+";";
+      min = t;
+  }
+  if (parseInt(t = $("#search_mas_price").val()) > 0) {
+      str += "max:"+t+";";
+      max = t;
+  }
+  t="";
+  var temp = $(".search-choice > a");
+  if (temp[0]){
+      temp.each(function(){
+          if (t != ""){ t+=",";}
+          t += (parseInt($(this).attr('rel'))+1);
+      });
+      str += "categories:" + t + ";";
+      cat = t;
+  }
+
+  $.post('/products/search', 
+          {ajax: 1, max: max, min: min, cat: cat},
+          function(){
+            if (resp.res == 123){
+              $("#search_min_price").val("test");
+            }
+            //TODO - make render of all products  
+          }
+    )
+}
 
 var services = (function(){
 
@@ -245,8 +352,18 @@ var check = (function(){
 
   t.getNextStep = function(){
     var fioO = $("#fio"),
-        mobileNumberO = $("#mobile-number");
+        mobileNumberO = $("#mobile-number"),
+        email0 = $("#email"),
+        city0 = $("#city"),
+        address0 = $("#address"),
+        has_courier0 = $("#has_courier"),
+        comment0 = $("#comment");
 
+        console.log(has_courier0.val())
+        console.log($("#has_courier"))
+        if (has_courier0.checked){
+            console.log("1")
+        }
     if(fioO.val().length == 0){
         alert("Введите Ваше ФИО");
         fioO.focus();
@@ -255,13 +372,16 @@ var check = (function(){
         alert("Введите Ваш мобильный телефон");
         mobileNumberO.focus();
         return false;
-    } else if(! /\+\d\s\d{3}\s\d{3}\s\d{4}/.test(mobileNumberO.val()) || mobileNumberO.val().length > 15){
+    } else if( mobileNumberO.val().length > 15){
         alert("Проверьте правильность введённого номера");
         mobileNumberO.focus();
         return false;
+        /*! /\+\d\s\d{3}\s\d{3}\s\d{4}/.test(mobileNumberO.val()) ||*/
     }
 
-    location.href = "card/add_to_card?fio=" + fioO.val() + "&phone=" + mobileNumberO.val();
+    location.href = "card/add_to_card?fio=" + fioO.val() + "&phone=" + mobileNumberO.val() + 
+    "&email=" + email0.val() + "&city=" + city0.val() + "&address=" + address0.val() +
+    "&has_courier=" + has_courier0.is(':checked') + "&comment=" + comment0.val();
 
   };
 
@@ -314,5 +434,60 @@ var check = (function(){
   return t;
 
 }());
+/*
 
+var gl = (function(){
+            var t = {},
+                glI = $("img.gallery-item"),
+                length = glI.length,
+                outTime = 4000,
+                fadeTime = 1500,
+                numOn = 0,
+                timeout = null,
+                dur = 1; // 1- вперёд, 0- назад
 
+            t.init = function(){
+
+                dur = 1;
+                numOn = 0;
+                timeout = setTimeout(function(){
+                    t.show(1)
+                }, outTime)
+
+            };
+
+            t.show = function(num){
+                if(num > (length - 1) && dur == 1){
+                    num = 0
+                } else if( num < 0 && dur == 2) {
+                    num = length - 1;
+                }
+
+                $(glI[numOn]).fadeOut(fadeTime);
+                $(glI[num]).fadeIn(fadeTime);
+
+                numOn = num;
+
+                clearTimeout(timeout);
+                if(dur == 1){
+                    timeout = setTimeout(function(){t.show(numOn + 1);}, outTime)
+                } else {
+                    timeout = setTimeout(function(){t.show(numOn - 1);}, outTime)
+                }
+            };
+
+            t.showNext = function(){
+                dur = 1;
+                t.show(numOn + 1);
+            };
+
+            t.showPrev = function(){
+                dur = 2;
+                t.show(numOn - 1)
+            };
+
+            $(t.init);
+
+            return t;
+        }());
+*/
