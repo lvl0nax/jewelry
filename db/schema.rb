@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -16,8 +17,8 @@ ActiveRecord::Schema.define(:version => 20120419192243) do
     t.integer  "user_id"
     t.string   "provider"
     t.string   "uid"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "cards", :force => true do |t|
@@ -26,8 +27,8 @@ ActiveRecord::Schema.define(:version => 20120419192243) do
     t.text     "cardjson"
     t.string   "status"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
     t.string   "email"
     t.string   "city"
     t.string   "address"
@@ -37,8 +38,8 @@ ActiveRecord::Schema.define(:version => 20120419192243) do
 
   create_table "categories", :force => true do |t|
     t.string   "title"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.text     "mtitle"
     t.text     "mdesc"
     t.text     "mkeywords"
@@ -54,8 +55,8 @@ ActiveRecord::Schema.define(:version => 20120419192243) do
     t.datetime "failed_at"
     t.string   "locked_by"
     t.string   "queue"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
@@ -64,15 +65,15 @@ ActiveRecord::Schema.define(:version => 20120419192243) do
     t.string   "product_article"
     t.text     "content"
     t.float    "discount"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "pages", :force => true do |t|
     t.string   "title"
     t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.text     "mtitle"
     t.text     "mdesc"
     t.text     "mkeywords"
@@ -84,19 +85,19 @@ ActiveRecord::Schema.define(:version => 20120419192243) do
     t.integer  "count"
     t.string   "brand"
     t.integer  "category_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.text     "mtitle"
     t.text     "mdesc"
     t.text     "mkeywords"
   end
 
   create_table "searches", :force => true do |t|
-    t.string   "category_id", :limit => 11
-    t.decimal  "min_price",                 :precision => 10, :scale => 0
-    t.decimal  "mas_price",                 :precision => 10, :scale => 0
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer  "category_id"
+    t.decimal  "min_price",   :precision => 10, :scale => 0
+    t.decimal  "mas_price",   :precision => 10, :scale => 0
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
   end
 
   create_table "users", :force => true do |t|
@@ -110,8 +111,8 @@ ActiveRecord::Schema.define(:version => 20120419192243) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                            :null => false
+    t.datetime "updated_at",                                            :null => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

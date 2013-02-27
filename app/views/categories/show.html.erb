@@ -1,30 +1,24 @@
 <% content_for :meta do %>
-    <title><%= title%></title>
-    <meta name="description" content="<%= @category.mdesc %>; charset=utf-8" />
-    <meta name="keywords" content="<%= @category.mkeywords%>; charset=utf-8" />
+  <title><%= title%></title>
+  <meta name="description" content="<%= @category.mdesc %>; charset=utf-8" />
+  <meta name="keywords" content="<%= @category.mkeywords%>; charset=utf-8" />
 <% end %>
-
 
 <% @title = @category.title %>
 
 <h2 class="underline">
   <%= @category.title %>
 </h2>
-
 <% if !!@products %>
-    <ul id="list-products">
-
-        <%= render @products%>
-
-    </ul>
+  <ul id="list-products">
+    <%= render @products%>
+  </ul>
 <% end %>
 <%if current_user %>
   <% if current_user.isAdmin? %>
     <div class="admin-links">
-
       <%= link_to 'Редактировать категорию', edit_category_path(@category) %>
       <%= link_to 'Добавить продукт в категорию', new_category_product_path(@category) %>
-
     </div>
   <% end %>
 <% end %>

@@ -1,28 +1,19 @@
-
-
-  <li class="brs2-3" data-id="<%= product.id%>" data-name="<%= product.article%>" data-price="<%= product.price%>">
-    <span class="p-title">
-      <a href="<%= category_product_path(product.category, product)%>">
-
-
-          <%= image_tag "thumb/#{product.article}.jpg", :alt => "test"%>
-
-      </a>
-
+<li class="brs2-3" data-id="<%= product.id%>" data-name="<%= product.article%>" data-price="<%= product.price%>">
+  <span class="p-title">
+    <a href="<%= category_product_path(product.category, product)%>">
+      <%= image_tag "/thumb/#{product.article}.jpg", :alt => "test"%>
+    </a>
+  </span>
+  <span class="d-b ">
+    <span class="pr_art"><%= product.article %></span></br>
+    <span class="p-addcard fl-r" data-id="<%= product.id%>" data-name="<%= product.article%>" data-price="<%= product.price%>">
+      <%= image_tag "cart.jpg",{:width => 30, :class => "test"} %>
     </span>
-    <span class="d-b ">
-      <span class="pr_art"><%= product.article %></span></br>
-      
-      <span class="p-addcard fl-r" data-id="<%= product.id%>" data-name="<%= product.article%>" data-price="<%= product.price%>">
-        <%= image_tag "cart.jpg",{:width => 30, :class => "test"} %>
-      </span>
-      <%= product.brand %></br>
-      <%= product.price.round(2)%> р.</br> 
-    
-    </span>
+    <%= product.brand %></br>
+    <%= product.price.round(2)%> р.</br>
+  </span>
+  <script type="text/javascript" src="//yandex.st/share/share.js" charset="utf-8"></script>
+  <div class="yashare-auto-init" data-yashareL10n="ru" data-yashareType="none" data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki,moimir"></div>
 
-    <script type="text/javascript" src="//yandex.st/share/share.js" charset="utf-8"></script>
-    <div class="yashare-auto-init" data-yashareL10n="ru" data-yashareType="none" data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki,moimir"></div> 
-
-  </li>
+</li>
 

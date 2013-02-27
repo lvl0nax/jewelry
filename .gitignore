@@ -1,14 +1,18 @@
-.bundle
-db/*.sqlite3
-log/*.log
-tmp/**/*
-.idea/
+# Ignore bundler config
+/.bundle
+
+# Ignore all logfiles and tempfiles.
+/log/*.log
+/tmp
+
 app/assets/images/bujua/*.*
 assets/images/bujua/*.*
 config/database.yml
 public/uploads/
+public/thumb/
+public/medium/
+public/original/
 .bundle
-db/*.sqlite3*
 log/*.log
 *.log
 /tmp/

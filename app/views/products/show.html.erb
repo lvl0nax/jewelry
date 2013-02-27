@@ -21,12 +21,12 @@
 <p id="notice"><%= notice %></p>
 
   <div class="ienlarger">
-    <a href="../../../assets/medium/<%=@product.article%>.jpg" rel="facebox">
+    <a href="/medium/<%=@product.article%>.jpg" rel="facebox">
 
       <% if !!@product.image_exist? %>
         <!--<img src="http://img691.imageshack.us/img691/7360/89815502.jpg" alt="thumb" class="resize_thumb" />-->
-        <%= image_tag("medium/#{@product.article}.jpg", :class => 'resize_thumb' )%><br />
-        
+        <%= image_tag("/thumb/#{@product.article}.jpg", :class => 'resize_thumb' )%><br />
+
       <%end%>
     </a>
   </div>
@@ -63,7 +63,7 @@
     </p>
     <div class ="discount">
       <p>Cкидка: <%= @product.discount.round(2) %> р.</p>
-    
+
     </div>
     </br>
     <span class="p-addcard " data-id="<%= @product.id%>" data-name="<%= @product.article%>" data-price="<%= @product.discount%>">
@@ -72,9 +72,9 @@
   <% end %>
 
   <script type="text/javascript" src="//yandex.st/share/share.js" charset="utf-8"></script>
-  <div class="yashare-auto-init" data-yashareL10n="ru" data-yashareType="none" data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki,moimir"></div> 
+  <div class="yashare-auto-init" data-yashareL10n="ru" data-yashareType="none" data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki,moimir"></div>
 
-  
+
 
 
 </div>
