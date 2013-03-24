@@ -9,14 +9,14 @@ AppTest::Application.routes.draw do
   match '/user/test' => 'users#test'
   resources :authentications
 
-  devise_for :users, :controller => {:registrations => 'registrations'}, :path_prefix => 'd'
+  devise_for :users, :path_prefix => 'd'
   match '/user/:id' => 'users#show'
   resources :users
 
   post 'search' => "products#search"
   get 'test_search' => "products#search", :as => "test_search"
   resources :categories do
-    resources :products 
+    resources :products
   end
   match 'test' => 'searches#test'
   get '/searches/test' => 'searches#test'

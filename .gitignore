@@ -12,6 +12,8 @@ public/uploads/
 public/thumb/
 public/medium/
 public/original/
+public/big/
+public/small/
 .bundle
 log/*.log
 *.log
@@ -37,3 +39,4 @@ assets/images/original/*.*
 
 public/assets/images/medium/*.*
 assets/images/medium/*.*
+db/schema.rb
