@@ -616,3 +616,22 @@ var gallery = new function(){
         gy.show(gy.ids[gy.current]);
     };
 };
+
+function search(){
+  var price = $('input[name = "price"]').val() || null;
+  var type = $('input[name = "type"]').val() || null;
+  var creator = $('input[name = "creator"]').val() || null;
+
+  $.ajax({
+    type: "GET",
+    url: "/search",
+    data: ({category: type, price: price, brand: creator}), /*, id: review_id*/
+    success: function(data){
+      /*alert(data);*/
+      $('#yield-right-side').html(data);
+    },
+    error: function(data){
+      alert("something wrong")
+    },
+    datatype: "json"});
+}

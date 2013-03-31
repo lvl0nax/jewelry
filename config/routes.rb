@@ -13,8 +13,9 @@ AppTest::Application.routes.draw do
   match '/user/:id' => 'users#show'
   resources :users
 
-  post 'search' => "products#search"
-  get 'test_search' => "products#search", :as => "test_search"
+  # post 'search' => "products#search"
+  get 'search' => "products#search"
+  # get 'test_search' => "products#search", :as => "test_search"
   resources :categories do
     resources :products
   end

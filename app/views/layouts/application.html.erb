@@ -66,7 +66,89 @@
       <span class="category-delimetr">&omicron;</span>
     </div>
     <div id="content" class="nclear">
-      <%= yield %>
+      <% if (controller.controller_name == 'pages' && controller.action_name == 'index') %>
+        <%= yield %>
+      <% else %>
+        <div class="right-side" id='yield-right-side'>
+          <%= yield %>
+        </div>
+
+        <div class="left-side">
+          <div class="nclear">
+            <i class="icon-parametrs"></i>
+            <div class="title-params">
+                ПОИСК ПО ПАРАМЕТРАМ:
+                <span id="show-results" onclick="search();"><span>Показать</span> &rarr;</span>
+            </div>
+          </div>
+          <div class="params-container">
+            <div class="params-title">Тип</div>
+            <div class="form-select-wrap params-select" id="select-type"></div>
+            <script type="text/javascript">
+              var selectorType = new fsSelect({
+                  element: "#select-type",
+                  name: "type",
+                  placeholder: "Выберите тип",
+                  readonly: true,
+                  array: [
+                      <% Category.all.each do|c|%>
+                        <% if Category.last == c %>
+                          <%= raw "[#{c.id}, '#{c.name}', 0, 0]"%>
+                        <% else %>
+                          <%= raw "[#{c.id}, '#{c.name}', 0, 0],"%>
+                        <% end %>
+                      <% end %>
+                  ]
+              })
+            </script>
+            <div class="params-title">Цена</div>
+            <div class="form-select-wrap params-select" id="select-price"></div>
+            <script type="text/javascript">
+              var selectorPrice = new fsSelect({
+                  element: "#select-price",
+                  name: "price",
+                  placeholder: "Выберите цену",
+                  readonly: true,
+                  array: [
+                      [1, 'до 1000', 0, 0],
+                      [2, '1000-3000', 0, 0],
+                      [3, 'более 3000', 0, 0]
+                  ]
+              })
+            </script>
+            <div class="params-title">Производитель</div>
+            <div class="form-select-wrap params-select" id="select-creator"></div>
+            <script type="text/javascript">
+              var selectorCreator = new fsSelect({
+                  element: "#select-creator",
+                  name: "creator",
+                  placeholder: "Выберите производителя",
+                  readonly: true,
+                  array: [
+                      [1, 'JABLONEX', 0, 0],
+                      [2, 'PRECIOSA', 0, 0],
+                      [3, 'ALCOZER', 0, 0]
+                  ]
+              })
+            </script>
+          </div>
+          <div class="watched-title"><i class="icon-eye"></i>Вы уже посмотрели (26):</div>
+          <div class="watched-wrap">
+            <a href="/" class="watched-item tr-01">
+              <img src="static/i/pics/mini.png">
+            </a>
+            <a href="/" class="watched-item tr-01"><img src="static/i/pics/mini.png"></a>
+            <a href="/" class="watched-item tr-01"><img src="static/i/pics/mini.png"></a>
+            <a href="/" class="watched-item tr-01"><img src="static/i/pics/mini.png"></a>
+            <a href="/" class="watched-item tr-01"><img src="static/i/pics/mini.png"></a>
+            <a href="/" class="watched-item tr-01"><img src="static/i/pics/mini.png"></a>
+            <a href="/" class="watched-item tr-01"><img src="static/i/pics/mini.png"></a>
+            <a href="/" class="watched-item tr-01"><img src="static/i/pics/mini.png"></a>
+            <a href="/" class="watched-item tr-01"><img src="static/i/pics/mini.png"></a>
+          </div>
+        </div>
+      <% end %>
+
     </div>
   </div>
   <div id="footer">

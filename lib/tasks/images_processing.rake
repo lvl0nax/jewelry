@@ -15,41 +15,50 @@ def convert_image
   # test.syswrite("start creating pictures\n")
   puts("start creating pictures\n")
   ims.each{|p|
+
     i = i + 1
     puts "#{i} iteration"
     #test.syswrite("#{ims.join(',')}") # - all name of images
     fname = p.split(".").first
-    clown = Magick::Image.read("#{Rails.root}/app/assets/images/bujua/#{p}").first
-    clown.write("#{Rails.root}/public/original/#{fname}.jpg")
-    # test.syswrite("#{Time.now} - read image \n") # - time action
-    puts("#{Time.now} - read image \n") # - time action
-    tmp = clown.resize_to_fit(317, 284)
-    # test.syswrite("resize image \n")
-    puts("resize image \n")
-    tmp.write("#{Rails.root}/public/medium/#{fname}.jpg")
-    # test.syswrite("sace to medium \n")
-    puts("save to medium \n")
+    if File.exists?("#{Rails.root}/public/original/#{fname}.jpg")
+      begin
+        Product.find_by_article(fname).update_attributes(img: true)
+        puts "Product updated"
+      rescue
+        puts "==================================> Product didnot found"
+      end
+      clown = Magick::Image.read("#{Rails.root}/app/assets/images/bujua/#{p}").first
+      clown.write("#{Rails.root}/public/original/#{fname}.jpg")
+      # test.syswrite("#{Time.now} - read image \n") # - time action
+      puts("#{Time.now} - read image \n") # - time action
+      tmp = clown.resize_to_fit(317, 284)
+      # test.syswrite("resize image \n")
+      puts("resize image \n")
+      tmp.write("#{Rails.root}/public/medium/#{fname}.jpg")
+      # test.syswrite("sace to medium \n")
+      puts("save to medium \n")
 
-    tmp = clown.resize_to_fit(146, 131)
-    # test.syswrite("resize image \n")
-    puts("resize image \n")
-    tmp.write("#{Rails.root}/public/small/#{fname}.jpg")
-    # test.syswrite("sace to small \n")
-    puts("save to small \n")
+      tmp = clown.resize_to_fit(146, 131)
+      # test.syswrite("resize image \n")
+      puts("resize image \n")
+      tmp.write("#{Rails.root}/public/small/#{fname}.jpg")
+      # test.syswrite("sace to small \n")
+      puts("save to small \n")
 
-    tmp = clown.resize_to_fit(75, 68)
-    # test.syswrite("resize image \n")
-    puts("resize image \n")
-    tmp.write("#{Rails.root}/public/thumb/#{fname}.jpg")
-    # test.syswrite("sace to thumb \n")
-    puts("save to thumb \n")
+      tmp = clown.resize_to_fit(75, 68)
+      # test.syswrite("resize image \n")
+      puts("resize image \n")
+      tmp.write("#{Rails.root}/public/thumb/#{fname}.jpg")
+      # test.syswrite("sace to thumb \n")
+      puts("save to thumb \n")
 
-    tmp = clown.resize_to_fit(576, 369)
-    puts("resize to big \n")
-    # test.syswrite("resize to big \n")
-    tmp.write("#{Rails.root}/public/big/#{fname}.jpg")
-    # test.syswrite("save to big \n")
-    puts("save to big \n")
+      tmp = clown.resize_to_fit(576, 369)
+      puts("resize to big \n")
+      # test.syswrite("resize to big \n")
+      tmp.write("#{Rails.root}/public/big/#{fname}.jpg")
+      # test.syswrite("save to big \n")
+      puts("save to big \n")
+    end
     File.delete("#{Rails.root}/app/assets/images/bujua/#{p}")
   }
 end

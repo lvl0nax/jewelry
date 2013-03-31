@@ -26,6 +26,9 @@ class PagesController < InheritedResources::Base #ApplicationController
     #   @page = Page.first
     #   render "show"
     # end
+    # respond_to do |format|
+    #   format.html {render layout: 'application_new.html.erb'}
+    # end
   end
 
   def import_excel

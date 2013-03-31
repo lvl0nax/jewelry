@@ -1,7 +1,7 @@
 require 'RMagick'
-
+# -*- encoding : utf-8 -*-
 class ApplicationController < ActionController::Base
-  # -*- encoding : utf-8 -*-
+
   before_filter :search_init
   helper_method :all
   helper_method :logged_in?
@@ -15,14 +15,14 @@ class ApplicationController < ActionController::Base
    #                #for CATEGORY model
    #                toCat = []
    #                objs = []
-                  
+
    #                catAr = Category.all
    #                catAr.each {|c| toCat.push("('#{c.title}')")}
    #                sql = ActiveRecord::Base.connection()
    #                sql.execute("TRUNCATE products ")
    #                tbl = Excel.new("qwerty.xls") #should be original name in root directory for the site
    #                tbl.default_sheet = tbl.sheets.first
-                  
+
    #                #TODO: customize to our product
    #                #10.upto(tbl.last_row) do |line|
    #                #  article = tbl.cell(line, 'A')
@@ -41,10 +41,10 @@ class ApplicationController < ActionController::Base
    #                  descr = tbl.cell(line, 'C')
    #                  #     check that category there is in DB
    #                  i = toCat.index("('#{type}')")
-   #                  if i.nil?  
-   #                    cat_id = toCat.length     
+   #                  if i.nil?
+   #                    cat_id = toCat.length
    #                    toCat.push("('#{type}')")
-   #                  else  
+   #                  else
    #                    cat_id = i + 1
    #                  end
    #                  objs.push("('#{article}', '#{price}', '#{brand}','#{cat_id}')")
@@ -54,7 +54,7 @@ class ApplicationController < ActionController::Base
    #                sql.execute("TRUNCATE categories ")
    #                sql.execute("INSERT INTO `categories` (`title`) VALUES " + toCat.join(','))
    #                sql.execute("INSERT INTO `products` (`article`, `price`, `brand`, `category_id`) VALUES " + objs.join(','))
-                  
+
    #  end
     Product.delay.import_from_excel
 
@@ -116,7 +116,7 @@ class ApplicationController < ActionController::Base
     # all products
     iNameS = Product.find_by_sql("SELECT article FROM products")
     iNameS.collect! {|image| image.article }
-    
+
     logger.debug "/////inames/////////////////////////////////////////"
     logger.debug iNameS.first
 
@@ -125,20 +125,20 @@ class ApplicationController < ActionController::Base
     #iNameF = Dir.glob(mask)
     #iNameF.collect! {|name| File.basename(name)}
     iNameF = all_photo_name
-    
+
     logger.debug "/////inamef/////////////////////////////////////////"
     logger.debug iNameF.first
 
     iName = []
     iName = iNameF - iNameS
-    
+
     logger.debug "/////////////////////////////////////////////iName/"
     logger.debug iName.first
     if iName.blank?
       logger.debug "all photo deleted"
     else
       logger.debug "deleting started"
-      iName.each do |i| 
+      iName.each do |i|
         logger.debug "==================== #{i}"
         mask = File.join("**","bujua", "#{i}.*")
         iNameS = Dir.glob(mask)
@@ -160,31 +160,31 @@ class ApplicationController < ActionController::Base
 
   def admin_require
     unless is_admin?
-      deny_access 
-    end  
-      #    unless logged_in? 
-      #      flash[:error] = t('users.must_login') 
-      #      redirect_to login_url # halts request cycle  
+      deny_access
+    end
+      #    unless logged_in?
+      #      flash[:error] = t('users.must_login')
+      #      redirect_to login_url # halts request cycle
       #    end
-  end  
-  
+  end
+
   def deny_access
-    flash[:error] = "you have no accessible right/ access denied." 
+    flash[:error] = "you have no accessible right/ access denied."
     redirect_to pages_path #root_url
   end
-  
+
 
   def is_admin?
     if current_user
       !!current_user.isAdmin?
-    else 
+    else
       return false
     end
   end
 
   def rand_products
     ims = all_photo_name
-    
+
     #ims.shuffle!
 
     #tmp = ims.first(5)
