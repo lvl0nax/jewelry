@@ -8,6 +8,12 @@ class ProductsController < InheritedResources::Base
     else
       @title = "#{resource.category.title} " + "#{resource.brand}"
     end
+    tmp = all_photo_name
+    prs = Product.where(:article => tmp, :category_id => resource.category_id).sample(10)
+    @prs1 = prs[0]
+    @prs2 = prs[1..4]
+    @prs3 = prs[5..8]
+    @prs4 = prs[9]
   end
 
   def search

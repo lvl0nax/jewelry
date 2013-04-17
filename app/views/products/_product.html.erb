@@ -1,7 +1,7 @@
 
 
 <div class="product-list-item product-item-mini">
-  <a href="/" class="product-item-img">
+  <a href="/categories/<%=product.category_id%>/products/<%= product.id %>" class="product-item-img">
     <%= image_tag "/small/#{product.try(:article)}.jpg" %>
   </a>
   <div class="product-list-info">
@@ -19,6 +19,7 @@
     <span class="btn">Оформить заказ</span>
     <span class="on-sclad">
       <i class="icon-ok"></i>
+      В наличии
     </span>
   </div>
 </div>

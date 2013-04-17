@@ -7,8 +7,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />
     <title>Main page</title>
     <%= stylesheet_link_tag "style" %>
+    <%= stylesheet_link_tag "prettyPhoto" %>
+
     <%= javascript_include_tag "jq1_9.js" %>
     <%= javascript_include_tag "script.js" %>
+    <%= javascript_include_tag "jquery.prettyPhoto.js" %>
     <!--<link rel="stylesheet" href="static/module/fancybox/jquery.fancybox-1.3.4.css" >-->
     <!--<script type="text/javascript" src="static/module/fancybox/jquery.fancybox-1.3.4.pack.js"></script>-->
 </head>
@@ -232,5 +235,6 @@
     </div>
   </div>
 </div>
+<%= yield :js %>
 </body>
 </html>
