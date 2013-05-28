@@ -24,7 +24,7 @@ gem "nifty-generators", :group => :development
 gem "bcrypt-ruby", :require => "bcrypt"
 gem "mocha", :group => :test
 
-gem 'devise' 
+gem 'devise'
 gem 'cancan'
 
 gem 'omniauth'
@@ -34,14 +34,14 @@ gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 
 ##########################################################################################################
-#sudo apt-get install libxslt-dev libxml2-dev 
+#sudo apt-get install libxslt-dev libxml2-dev
 # библиотеки для дальнейшей корректной установки  нижеуказанных гемов.
 gem 'nokogiri'
 gem 'roo'
 ##########################################################################################################
 
 ##########################################################################################################
-# sudo apt-get install imagemagick libmagickcore-dev libmagickwand-dev 
+# sudo apt-get install imagemagick libmagickcore-dev libmagickwand-dev
 gem 'rmagick'
 ##########################################################################################################
 

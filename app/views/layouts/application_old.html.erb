@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <%= yield :meta %>
+  <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon.ico" />
+
+  <%= stylesheet_link_tag "application" %>
+  <%= stylesheet_link_tag "chosen" %>
+
+  <%= csrf_meta_tags %>
+
+</head>
+<body>
+<div id = "wrapper">
+  <div class="<%= @hide_card ? 'h' : ''%>">
+      <div class="card empty">
+          <span class="card-title">Ваша корзина:</span>
+          <span id="card-chekout">пуста</span>
+          <div id="card-wrapper"></div>
+          <div class="links">
+            <a class="fl-r" href="javascript: void(0)" onclick="card.emptyCard()">Очистить корзину</a>
+            <a href="/card">Оформить заказ</a>
+          </div>
+      </div>
+  </div>
+  <div class="header shadow">
+    <div class="header-content">
+      <div class="logo">
+        <%= image_tag "logo.jpg" %>
+      </div>
+      <div class="login">
+        <a href="/auth/vkontakte" class="auth_provider">
+          <%= image_tag "vk.jpg", :size => "16x16", :alt => "vk" %></a>
+        <a href="/auth/twitter" class="auth_provider">
+          <%= image_tag "twitter.jpg", :size => "16x16", :alt => "Twitter" %></a>
+        <% if current_user %>
+          <span><%= link_to current_user.email, user_test_path %></span><!--
+          --><%= link_to "Выйти", destroy_user_session_path, :method => :delete %>
+        <%else %>
+          <%= link_to "Войти", new_user_session_path %><!--
+          --><%= link_to "Регистрация", new_user_registration_path %>
+        <% end %>
+      </div>
+      <div class="top-menu">
+        <% allpages.each do |p| %>
+           <%= link_to p.title.force_encoding('UTF-8'), p , {:class => (params[:controller] == "pages" && params[:action] == "show" && params[:id].to_i == p.id) ? "active" : "" }%>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="container nclear">
+    <div class="left-part shadow main-box brs-5">
+      <div class="category_name"><h3>Категории</h3></div>
+
+      <ul class="categories">
+        <% allcategories.each do |cat| %>
+          <li> <%= link_to cat.name, cat %> </li>
+        <% end %>
+      </ul>
+      <%if current_user %>
+        <% if current_user.isAdmin? %>
+            <br><br>
+            для админов:
+            <ul class="categories">
+              <li><%= link_to 'Добавить страницу', new_page_path %></li>
+              <li><%= link_to 'Добавить категорию', new_category_path %></li>
+              <li><a href="/card/list">Список заказов</a></li>
+              <li><%= link_to 'импорт из Excel', import_excel_path %></li>
+              <li><%= link_to 'конвертировать изображение', image_convert_path %></li>
+              <li><%= link_to 'Удалить изображения', clear_images_path %></li>
+              <li><%= link_to 'advanced search', new_search_path %></li>
+              <li><a href="/card/list" target="_blank" onClick="popupWin = window.open(this.href, 'contacts', 'location,width=400,height=300,top=0'); popupWin.focus(); return false;">Наши координаты</a></li>
+            </ul>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="center-part">
+        <% if(!@hide_banner) %>
+        <div class="shadow main-box brs-5">
+          <div class="banner brs-5" id="gallery">
+            <%= image_tag "banners/banner.jpg",  :alt => "banner", :class => "gallery-item" %>
+            <!--
+            <%= image_tag "banners/banner2.jpg",  :alt => "banner2", :class => "gallery-item" %>
+            <%= image_tag "banners/banner3.jpg",  :alt => "banner3", :class => "gallery-item" %>
+            -->
+
+            <!--
+            <div class="gallery-item" style="background-image: url('banner3.jpg')"></div>
+            <div class="gallery-item" style="background-image: url('banner.jpg')"></div>
+            <div class="gallery-item" style="background-image: url('banner2.jpg')"></div>
+            -->
+
+          </div>
+        </div>
+        <% end %>
+
+        <div class="search shadow main-box brs-5">
+          Быстрый поиск
+          <%= form_for Search.new, :method => 'get', :id => "products_search", :remote => true do |f| %>
+            <div class="field">
+              <%= f.label :category_id %><br />
+              <%= f.select :category_id, Category.all.collect{|x| [x.title,x.id]},{},:size=>5,:multiple=>true,  :class=>"chzn-select", :style=>"width: 350px;" %>
+            </div>
+            <div class="field">
+              <%= f.label :min_price, "price range" %>
+              <%= f.text_field :min_price, :size => 10 %>
+
+              <%= f.label :mas_price, "to" %>
+              <%= f.text_field :mas_price, :size => 10 %>
+            </div>
+            <div class="actions"><%= f.submit "search"%></div>
+            <%= link_to "test", "#search_results" %>
+          <% end %>
+        </div>
+
+
+        <div class="content shadow main-box brs-5">
+          <a name="search_results"></a>
+          <div id='for_test'>
+          </div>
+          <div class="search_hide">
+            <%= yield %>
+          </div>
+        </div>
+
+        <%=  yield :main_page %>
+    </div>
+  </div>
+
+
+
+  <div class="footer shadow">
+    <div class="footer-content">
+
+    </div>
+  </div>
+</div>
+</body>
+  <%= javascript_include_tag "jquery" %>
+  <!--[if lte IE 7]>
+    <%= javascript_include_tag "json2" %>
+    <![endif]-->
+  <%= javascript_include_tag "rails" %>
+  <%= javascript_include_tag "application" %>
+  <%= yield :js %>
+<script type="text/javascript">
+        var gl = (function(){
+            var t = {},
+                glI = $(".gallery-item"),
+                length = glI.length,
+                outTime = 4000,
+                fadeTime = 1500,
+                numOn = 0,
+                timeout = null,
+                dur = 1; // 1- вперёд, 0- назад
+
+            t.init = function(){
+
+                dur = 1;
+                numOn = 0;
+                timeout = setTimeout(function(){
+                    t.show(1)
+                }, outTime)
+
+            };
+
+            t.show = function(num){
+                if(num > (length - 1) && dur == 1){
+                    num = 0
+                } else if( num < 0 && dur == 2) {
+                    num = length - 1;
+                }
+
+                $(glI[numOn]).fadeOut(fadeTime);
+                $(glI[num]).fadeIn(fadeTime);
+
+                numOn = num;
+
+                clearTimeout(timeout);
+                if(dur == 1){
+                    timeout = setTimeout(function(){t.show(numOn + 1);}, outTime)
+                } else {
+                    timeout = setTimeout(function(){t.show(numOn - 1);}, outTime)
+                }
+            };
+
+            t.showNext = function(){
+                dur = 1;
+                t.show(numOn + 1);
+            };
+
+            t.showPrev = function(){
+                dur = 2;
+                t.show(numOn - 1)
+            };
+
+            $(t.init);
+
+            return t;
+        }())
+    </script>
+    <%= javascript_include_tag "chosen.jquery.js" %>
+
+        <script type="text/javascript">
+          $(".chzn-select").chosen();
+          $(".chzn-select-deselect").chosen({allow_single_deselect:true});
+        </script>
+</html>

@@ -6,14 +6,6 @@
 
 <% @title = @category.title %>
 
-<h2 class="underline">
-  <%= @category.title %>
-</h2>
-<% if !!@products %>
-  <ul id="list-products">
-    <%= render @products%>
-  </ul>
-<% end %>
 <%if current_user %>
   <% if current_user.isAdmin? %>
     <div class="admin-links">
@@ -21,6 +13,14 @@
       <%= link_to 'Добавить продукт в категорию', new_category_product_path(@category) %>
     </div>
   <% end %>
+<% end %>
+<h2 class="underline">
+  <%= @category.title %>
+</h2>
+<% if !!@products %>
+  <ul id="list-products">
+    <%= render @products%>
+  </ul>
 <% end %>
 
 <%= will_paginate @products%>

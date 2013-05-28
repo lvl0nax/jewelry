@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru">
+<head>
+    <%= yield :meta %>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />
+    <title>Main page</title>
+    <%= stylesheet_link_tag "style" %>
+    <%= javascript_include_tag "jq1_9.js" %>
+    <%= javascript_include_tag "script.js" %>
+    <!--<link rel="stylesheet" href="static/module/fancybox/jquery.fancybox-1.3.4.css" >-->
+    <!--<script type="text/javascript" src="static/module/fancybox/jquery.fancybox-1.3.4.pack.js"></script>-->
+</head>
+<body>
+<div id="container">
+  <div id="content-wrapper">
+    <div id="header" class="nclear">
+      <div class="top-line"></div>
+      <div class="right-side">
+        <div class="right-side-top nclear">
+          <a class="icon-search" href="/search.html" title='Поиск'></a>
+          <a href="/" id='logo' title="Bujua.ru">
+            <%= image_tag 'logo.png', alt: 'Bujua.ru' %>
+          </a>
+        </div>
+        <span class="telephone"><i class="icon-phone"></i>+7 (911) 709 61-61</span>
+        <span class="basket-title" onclick="basket.open()"><i class="icon-basket"></i><span class="basket-title-inner">Ваша корзина</span></span>
+      </div>
+      <div class="left-side">
+        <div class="nav-panel nclear">
+          <% Page.all.each do |p| %>
+             <%= link_to p.title, p , { class: 'nav-panel-item' }%>
+          <% end %>
+          <a class="nav-panel-item" href="/">Страница 1</a>
+          <a class="nav-panel-item" href="/">Страница 2</a>
+          <!--
+            <div class="nav-panel-item has-drop-menu" href="/">
+              <i class="drop-icon"></i>Èíäèâèäóàëüíûé ïîäáîð
+              <div class="nav-drop-down">
+                <a href="/" class="drop-down-item">&bull; <span>Äîñòàâêà</span></a>
+                <a href="/" class="drop-down-item">&bull; <span>Äîñòàâêà</span></a>
+                <a href="/" class="drop-down-item">&bull; <span>Äîñòàâêà</span></a>
+                <a href="/" class="drop-down-item">&bull; <span>Äîñòàâêà</span></a>
+              </div>
+            </div>
+          -->
+        </div>
+        <div class="user-nav">
+          <i class="icon-user"></i>
+          <% if current_user %>
+            <%= link_to current_user.email, user_test_path, class: 'user-nav-item' %>
+            <%= link_to 'Выйти', destroy_user_session_path, :method => :delete, class: 'user-nav-item'%>
+          <%else %>
+            <%= link_to "Войти", new_user_session_path, class: 'user-nav-item' %>
+            <%= link_to "Регистрация", new_user_registration_path, class: 'user-nav-item' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="menu-categories">
+      <% Category.all.each do |cat| %>
+        <span class="category-delimetr">&omicron;</span>
+        <%= link_to cat.name, cat, class: 'category-item' %>
+      <% end %>
+      <span class="category-delimetr">&omicron;</span>
+    </div>
+    <div id="content" class="nclear">
+      <%= yield %>
+    </div>
+  </div>
+  <div id="footer">
+      <div id="socials"></div>
+      &copy; 2013. Bujua.ru
+  </div>
+</div>
+<div id="node-heap">
+  <div id="basket">
+    <div class="basket-title">
+        <i class="icon-basket"></i>Âñåãî òîâàðîâ â êîðçèíå:
+    </div>
+    <div class="basket-list" id="scrollbar-wrap">
+        <div id="scrollbar-wrap-inner" class="basket-list-inner">
+          <div id="scrollbar-content">
+            <div class="basket-item">
+              <a class="basket-item-img" href="/"><img src="static/i/pics/mini.png"></a>
+              <div class="basket-item-content">
+                <span class="basket-item-delete">X <span>óäàëèòü</span></span>
+                <div><a class="basket-item-title" href="/">Lilac and amazonite bracelet</a></div>
+                <div class="basket-item-price">5 640 Ð.-</div>
+              </div>
+            </div>
+            <div class="basket-item">
+              <a class="basket-item-img" href="/"><img src="static/i/pics/mini.png"></a>
+              <div class="basket-item-content">
+                <span class="basket-item-delete">X <span>óäàëèòü</span></span>
+                <div><a class="basket-item-title" href="/">Lilac and amazonite bracelet</a></div>
+                <div class="basket-item-price">5 640 Ð.-</div>
+              </div>
+            </div>
+            <div class="basket-item">
+              <a class="basket-item-img" href="/"><img src="static/i/pics/mini.png"></a>
+              <div class="basket-item-content">
+                <span class="basket-item-delete">X <span>óäàëèòü</span></span>
+                <div><a class="basket-item-title" href="/">Lilac and amazonite bracelet</a></div>
+                <div class="basket-item-price">5 640 Ð.-</div>
+              </div>
+            </div>
+            <div class="basket-item">
+              <a class="basket-item-img" href="/"><img src="static/i/pics/mini.png"></a>
+              <div class="basket-item-content">
+                <span class="basket-item-delete">X <span>óäàëèòü</span></span>
+                <div><a class="basket-item-title" href="/">Lilac and amazonite bracelet</a></div>
+                <div class="basket-item-price">5 640 Ð.-</div>
+              </div>
+            </div>
+            <div class="basket-item">
+              <a class="basket-item-img" href="/"><img src="static/i/pics/mini.png"></a>
+              <div class="basket-item-content">
+                <span class="basket-item-delete">X <span>óäàëèòü</span></span>
+                <div><a class="basket-item-title" href="/">Lilac and amazonite bracelet</a></div>
+                <div class="basket-item-price">5 640 Ð.-</div>
+              </div>
+            </div>
+            <div class="basket-item">
+              <a class="basket-item-img" href="/"><img src="static/i/pics/mini.png"></a>
+              <div class="basket-item-content">
+                <span class="basket-item-delete">X <span>óäàëèòü</span></span>
+                <div><a class="basket-item-title" href="/">Lilac and amazonite bracelet</a></div>
+                <div class="basket-item-price">5 640 Ð.-</div>
+              </div>
+            </div>
+            <div class="basket-item">
+              <a class="basket-item-img" href="/"><img src="static/i/pics/mini.png"></a>
+              <div class="basket-item-content">
+                <span class="basket-item-delete">X <span>óäàëèòü</span></span>
+                <div><a class="basket-item-title" href="/">Lilac and amazonite bracelet</a></div>
+                <div class="basket-item-price">5 640 Ð.-</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <script type="text/javascript">
+        var basketScroller =  new Scrollbar('scrollbar-wrap', {});
+      </script>
+    </div>
+    <div class="basket-total">
+      <a class="btn fl-r" href="/">îôîðìèòü çàêàç</a>
+      Èòîãî: <span id="total">17 280 Ð.-</span>
+    </div>
+  </div>
+</div>
+</body>
+</html>

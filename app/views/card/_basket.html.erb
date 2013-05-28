@@ -1,0 +1,24 @@
+<div id="basket">
+  <div class="basket-title">
+    <i class="icon-basket"></i>Ваши товары:
+  </div>
+  <div class="basket-list" id="scrollbar-wrap">
+    <div id="scrollbar-wrap-inner" class="basket-list-inner">
+      <div id="scrollbar-content">
+        <% if session[:cart_items].blank? %>
+            Ваша корзина пуста.
+        <% else %>
+            <%= render partial: 'card/cart_item', collection: @cart_items %>
+        <% end %>
+      </div>
+    </div>
+    <script type="text/javascript">
+        var basketScroller =  new Scrollbar('scrollbar-wrap', {});
+    </script>
+  </div>
+  <div class="basket-total">
+    <%= link_to 'ОФОРМИТЬ ЗАКАЗ', new_card_path, class: 'btn fl-r'%>
+    Итого: <span id="total"><%= @price || 0 %> р.</span>
+  </div>
+
+</div>

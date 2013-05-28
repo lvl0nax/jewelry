@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
 
+  has_many :cards
+
   def apply_omniauth(omniauth)
     self.email = omniauth['info']['nickname'] + "@mail.com" if email.blank?
     authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'])

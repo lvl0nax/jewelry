@@ -9,14 +9,15 @@ AppTest::Application.routes.draw do
   match '/user/test' => 'users#test'
   resources :authentications
 
-  devise_for :users, :controller => {:registrations => 'registrations'}, :path_prefix => 'd'
+  devise_for :users, :path_prefix => 'd'
   match '/user/:id' => 'users#show'
   resources :users
 
-  post 'search' => "products#search"
-  get 'test_search' => "products#search", :as => "test_search"
+  # post 'search' => "products#search"
+  get 'search' => "products#search"
+  # get 'test_search' => "products#search", :as => "test_search"
   resources :categories do
-    resources :products 
+    resources :products
   end
   match 'test' => 'searches#test'
   get '/searches/test' => 'searches#test'
@@ -31,14 +32,19 @@ AppTest::Application.routes.draw do
   get 'image_convert', :to => "application#image_convert"
   get 'clear_images', :to => "application#clear_images"
 
+  post '/card' => 'card#create'
+
   resources :products
   resources :card do
     collection do
       get 'add_to_card'
+      get 'add_to_cart'
+      get 'remove_from_cart'
       post 'change_status'
       get 'list'
       get 'show_card'
     end
+
   end
   # The priority is based upon order of creation:
   # first created -> highest priority.
