@@ -1,0 +1,14 @@
+<div class="basket-item">
+  <a class="basket-item-img" href="/categories/<%=cart_item.category_id%>/products/<%= cart_item.id %>">
+    <%= image_tag "/thumb/#{cart_item.try(:article)}.jpg" %>
+  </a>
+  <div class="basket-item-content">
+    <span class="basket-item-delete" onclick="remove_from_cart(<%=cart_item.id %>);">
+      X <span>Удалить</span>
+    </span>
+    <div><a class="basket-item-title" href="/categories/<%=cart_item.category_id%>/products/<%= cart_item.id %>">
+      <%= cart_item.category.name %>
+    </a></div>
+    <div class="basket-item-price"><%= cart_item.price %></div>
+  </div>
+</div>

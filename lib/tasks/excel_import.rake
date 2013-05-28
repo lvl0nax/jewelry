@@ -30,7 +30,7 @@ def import_from_excel
     else
       cat_id = i + 1
     end
-    objs.push("('#{article}', '#{price}', '#{brand}','#{cat_id}')")
+    objs.push("('#{article}', '#{price.to_i.abs}', '#{brand}','#{cat_id}')")
   end
 
   #fill DB

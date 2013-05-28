@@ -1,0 +1,52 @@
+<h2> Оформаление заказа. </h2>
+
+<% @cart_items.each do |cart_item| %>
+    <a href="/categories/<%=cart_item.category_id%>/products/<%= cart_item.id %>">
+      <%= image_tag "/small/#{cart_item.try(:article)}.jpg" %>
+    </a>
+    <div class="basket-item-content">
+      <div><a class="basket-item-title" href="/categories/<%=cart_item.category_id%>/products/<%= cart_item.id %>">
+        <%= cart_item.category.name %>
+      </a></div>
+      <div class="basket-item-price"><%= cart_item.price %></div>
+    </div>
+<% end %>
+
+
+<%= form_for @card, :url => card_path do |f| %>
+
+    <div class="field">
+      <%= f.label :fio, 'ФИО' %><br />
+      <%= f.text_field :fio %>
+    </div>
+    <div class="field">
+      <%= f.label :phone, 'Телефон' %><br />
+      <%= f.text_field :phone %>
+    </div>
+    <div class="field">
+      <%= f.label :email %><br />
+      <%= f.text_field :email %>
+    </div>
+
+    <div class="field">
+      <%= f.label :city, 'Город' %><br />
+      <%= f.text_field :city %>
+    </div>
+    <div class="field">
+      <%= f.label :address, 'Адрес' %><br />
+      <%= f.text_field :address %>
+    </div>
+    <div class="field">
+      <%= f.label :has_courier, 'Доставка курьером' %><br />
+      <%= f.check_box :has_courier %>
+    </div>
+
+    <div class="field">
+      <%= f.label :comment, 'Комментарий покупателя' %><br />
+      <%= f.text_field :comment, size: '60x12' %>
+    </div>
+    <br />
+    <div class="actions">
+      <%= f.submit "Сохранить" %>
+    </div>
+<% end %>

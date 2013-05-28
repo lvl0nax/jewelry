@@ -14,18 +14,21 @@ class PagesController < InheritedResources::Base #ApplicationController
   def show
     if !!resource.mtitle
       @title = resource.mtitle
-    else  
+    else
       @title = resource.title
     end
   end
 
   def index
-    if Page.all.blank?
-      redirect_to new_page_path
-    else
-      @page = Page.first 
-      render "show"
-    end
+    # if Page.all.blank?
+    #   redirect_to new_page_path
+    # else
+    #   @page = Page.first
+    #   render "show"
+    # end
+    # respond_to do |format|
+    #   format.html {render layout: 'application_new.html.erb'}
+    # end
   end
 
   def import_excel

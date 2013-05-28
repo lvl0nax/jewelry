@@ -1,211 +1,167 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru">
 <head>
-  
   <%= yield :meta %>
-  <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon.ico" />
+  <meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />
+  <title>Main page</title>
+  <%= stylesheet_link_tag 'style' %>
+  <%= stylesheet_link_tag 'prettyPhoto' %>
 
-  <%= stylesheet_link_tag "application" %>
-  <%= stylesheet_link_tag "chosen" %>
-
-  <%= csrf_meta_tags %>
-
+  <%= javascript_include_tag 'jq1_9.js' %>
+  <%= javascript_include_tag 'script.js' %>
+  <%= javascript_include_tag 'jquery.prettyPhoto.js' %>
+  <!--<link rel="stylesheet" href="static/module/fancybox/jquery.fancybox-1.3.4.css" >-->
+  <!--<script type="text/javascript" src="static/module/fancybox/jquery.fancybox-1.3.4.pack.js"></script>-->
 </head>
 <body>
-<div id = "wrapper">
-  <div class="<%= @hide_card ? 'h' : ''%>">
-      <div class="card empty">
-          <span class="card-title">Ваша корзина:</span>
-          <span id="card-chekout">пуста</span>
-          <div id="card-wrapper"></div>
-          <div class="links">
-            <a class="fl-r" href="javascript: void(0)" onclick="card.emptyCard()">Очистить корзину</a>
-            <a href="/card">Оформить заказ</a>
-          </div>
-      </div>
-  </div>
-  <div class="header shadow">
-    <div class="header-content">
-      <div class="logo">
-        <%= image_tag "logo.jpg" %>
-      </div>
-      <div class="login">
-        <a href="/auth/vkontakte" class="auth_provider">
-          <%= image_tag "vk.jpg", :size => "16x16", :alt => "vk" %></a>
-        <a href="/auth/twitter" class="auth_provider">
-          <%= image_tag "twitter.jpg", :size => "16x16", :alt => "Twitter" %></a>
-        <% if current_user %>
-          <span><%= link_to current_user.email, user_test_path %></span><!--
-          --><%= link_to "Выйти", destroy_user_session_path, :method => :delete %>
-        <%else %>
-          <%= link_to "Войти", new_user_session_path %><!--
-          --><%= link_to "Регистрация", new_user_registration_path %>
-        <% end %>
-      </div>
-      <div class="top-menu">
-        <% allpages.each do |p| %>
-           <%= link_to p.title.force_encoding('UTF-8'), p , {:class => (params[:controller] == "pages" && params[:action] == "show" && params[:id].to_i == p.id) ? "active" : "" }%>
-        <% end %>
-      </div>
-    </div>
-  </div>
-  
-  <div class="container nclear">
-    <div class="left-part shadow main-box brs-5">
-      <div class="category_name"><h3>Категории</h3></div>
-
-      <ul class="categories">
-        <% allcategories.each do |cat| %>
-          <li> <%= link_to cat.name, cat %> </li>
-        <% end %>
-      </ul>
-      <%if current_user %>
-        <% if current_user.isAdmin? %>
-            <br><br>
-            для админов:
-            <ul class="categories">
-              <li><%= link_to 'Добавить страницу', new_page_path %></li>
-              <li><%= link_to 'Добавить категорию', new_category_path %></li>
-              <li><a href="/card/list">Список заказов</a></li>
-              <li><%= link_to 'импорт из Excel', import_excel_path %></li>
-              <li><%= link_to 'конвертировать изображение', image_convert_path %></li>
-              <li><%= link_to 'Удалить изображения', clear_images_path %></li>
-              <li><%= link_to 'advanced search', new_search_path %></li>
-              <li><a href="/card/list" target="_blank" onClick="popupWin = window.open(this.href, 'contacts', 'location,width=400,height=300,top=0'); popupWin.focus(); return false;">Наши координаты</a></li>
-            </ul>
-        <% end %>
-      <% end %>
-    </div>
-
-    <div class="center-part">
-        <% if(!@hide_banner) %>
-        <div class="shadow main-box brs-5">
-          <div class="banner brs-5" id="gallery">
-            <%= image_tag "banners/banner.jpg",  :alt => "banner", :class => "gallery-item" %>
-            <!--
-            <%= image_tag "banners/banner2.jpg",  :alt => "banner2", :class => "gallery-item" %>
-            <%= image_tag "banners/banner3.jpg",  :alt => "banner3", :class => "gallery-item" %>
-            -->
-
-            <!--
-            <div class="gallery-item" style="background-image: url('banner3.jpg')"></div>
-            <div class="gallery-item" style="background-image: url('banner.jpg')"></div>
-            <div class="gallery-item" style="background-image: url('banner2.jpg')"></div>
-            -->
-            
-          </div>
+<div id="container">
+  <div id="content-wrapper">
+    <div id="header" class="nclear">
+      <div class="top-line"></div>
+      <div class="right-side">
+        <div class="right-side-top nclear">
+          <a class="icon-search" href="/search.html" title='Поиск'></a>
+          <a href="/" id='logo' title="Bujua.ru">
+            <%= image_tag 'logo.png', alt: 'Bujua.ru' %>
+          </a>
         </div>
-        <% end %>
-
-        <div class="search shadow main-box brs-5">
-          Быстрый поиск
-          <%= form_for Search.new, :method => 'get', :id => "products_search", :remote => true do |f| %>
-            <div class="field">
-              <%= f.label :category_id %><br />   
-              <%= f.select :category_id, Category.all.collect{|x| [x.title,x.id]},{},:size=>5,:multiple=>true,  :class=>"chzn-select", :style=>"width: 350px;" %>
+        <span class="telephone"><i class="icon-phone"></i>+7 (911) 709 61-61</span>
+        <span class="basket-title" onclick="basket.open()"><i class="icon-basket"></i><span class="basket-title-inner">Ваша корзина</span></span>
+      </div>
+      <div class="left-side">
+        <div class="nav-panel nclear">
+          <% Page.all.each do |p| %>
+             <%= link_to p.title, p , { class: 'nav-panel-item' }%>
+          <% end %>
+          <a class="nav-panel-item" href="/">Страница 1</a>
+          <a class="nav-panel-item" href="/">Страница 2</a>
+          <!--
+            <div class="nav-panel-item has-drop-menu" href="/">
+              <i class="drop-icon"></i>Èíäèâèäóàëüíûé ïîäáîð
+              <div class="nav-drop-down">
+                <a href="/" class="drop-down-item">&bull; <span>Äîñòàâêà</span></a>
+                <a href="/" class="drop-down-item">&bull; <span>Äîñòàâêà</span></a>
+                <a href="/" class="drop-down-item">&bull; <span>Äîñòàâêà</span></a>
+                <a href="/" class="drop-down-item">&bull; <span>Äîñòàâêà</span></a>
+              </div>
             </div>
-            <div class="field">
-              <%= f.label :min_price, "price range" %>
-              <%= f.text_field :min_price, :size => 10 %>
-              
-              <%= f.label :mas_price, "to" %>
-              <%= f.text_field :mas_price, :size => 10 %>
-            </div>
-            <div class="actions"><%= f.submit "search"%></div>
-            <%= link_to "test", "#search_results" %>
+          -->
+        </div>
+        <div class="user-nav">
+          <i class="icon-user"></i>
+          <% if current_user %>
+            <%= link_to current_user.email, user_test_path, class: 'user-nav-item' %>
+            <%= link_to 'Выйти', destroy_user_session_path, :method => :delete, class: 'user-nav-item'%>
+          <%else %>
+            <%= link_to "Войти", new_user_session_path, class: 'user-nav-item' %>
+            <%= link_to "Регистрация", new_user_registration_path, class: 'user-nav-item' %>
           <% end %>
         </div>
-
-
-        <div class="content shadow main-box brs-5">
-          <a name="search_results"></a>
-          <div id='for_test'>
-          </div>
-          <div class="search_hide">
-            <%= yield %>
-          </div>
+      </div>
+    </div>
+    <div class="menu-categories">
+      <% Category.all.each do |cat| %>
+        <span class="category-delimetr">&omicron;</span>
+        <%= link_to cat.name, cat, class: 'category-item' %>
+      <% end %>
+      <span class="category-delimetr">&omicron;</span>
+    </div>
+    <div id="content" class="nclear">
+      <% if (controller.controller_name == 'pages' && controller.action_name == 'index') %>
+        <%= yield %>
+      <% else %>
+        <div class="right-side" id='yield-right-side'>
+          <%= yield %>
         </div>
 
-        <%=  yield :main_page %>
+        <div class="left-side">
+          <div class="nclear">
+            <i class="icon-parametrs"></i>
+            <div class="title-params">
+                ПОИСК ПО ПАРАМЕТРАМ:
+                <span id="show-results" onclick="search();"><span>Показать</span> &rarr;</span>
+            </div>
+          </div>
+          <div class="params-container">
+            <div class="params-title">Тип</div>
+            <div class="form-select-wrap params-select" id="select-type"></div>
+            <script type="text/javascript">
+              var selectorType = new fsSelect({
+                  element: "#select-type",
+                  name: "type",
+                  placeholder: "Выберите тип",
+                  readonly: true,
+                  array: [
+                      <% Category.all.each do|c|%>
+                        <% if Category.last == c %>
+                          <%= raw "[#{c.id}, '#{c.name}', 0, 0]"%>
+                        <% else %>
+                          <%= raw "[#{c.id}, '#{c.name}', 0, 0],"%>
+                        <% end %>
+                      <% end %>
+                  ]
+              })
+            </script>
+            <div class="params-title">Цена</div>
+            <div class="form-select-wrap params-select" id="select-price"></div>
+            <script type="text/javascript">
+              var selectorPrice = new fsSelect({
+                  element: "#select-price",
+                  name: "price",
+                  placeholder: "Выберите цену",
+                  readonly: true,
+                  array: [
+                      [1, 'до 1000', 0, 0],
+                      [2, '1000-3000', 0, 0],
+                      [3, 'более 3000', 0, 0]
+                  ]
+              })
+            </script>
+            <div class="params-title">Производитель</div>
+            <div class="form-select-wrap params-select" id="select-creator"></div>
+            <script type="text/javascript">
+              var selectorCreator = new fsSelect({
+                  element: "#select-creator",
+                  name: "creator",
+                  placeholder: "Выберите производителя",
+                  readonly: true,
+                  array: [
+                      [1, 'JABLONEX', 0, 0],
+                      [2, 'PRECIOSA', 0, 0],
+                      [3, 'ALCOZER', 0, 0]
+                  ]
+              })
+            </script>
+          </div>
+          <div class="watched-title"><i class="icon-eye"></i>Вы уже посмотрели (26):</div>
+          <div class="watched-wrap">
+            <a href="/" class="watched-item tr-01">
+              <img src="static/i/pics/mini.png">
+            </a>
+            <a href="/" class="watched-item tr-01"><img src="static/i/pics/mini.png"></a>
+            <a href="/" class="watched-item tr-01"><img src="static/i/pics/mini.png"></a>
+            <a href="/" class="watched-item tr-01"><img src="static/i/pics/mini.png"></a>
+            <a href="/" class="watched-item tr-01"><img src="static/i/pics/mini.png"></a>
+            <a href="/" class="watched-item tr-01"><img src="static/i/pics/mini.png"></a>
+            <a href="/" class="watched-item tr-01"><img src="static/i/pics/mini.png"></a>
+            <a href="/" class="watched-item tr-01"><img src="static/i/pics/mini.png"></a>
+            <a href="/" class="watched-item tr-01"><img src="static/i/pics/mini.png"></a>
+          </div>
+        </div>
+      <% end %>
+
     </div>
   </div>
-
-  
-  
-  <div class="footer shadow">
-    <div class="footer-content">
-
-    </div>
+  <div id="footer">
+      <div id="socials"></div>
+      &copy; 2013. Bujua.ru
   </div>
 </div>
+<div id="node-heap">
+  <%= render partial: 'card/basket' %>
+</div>
+<%= yield :js %>
 </body>
-  <%= javascript_include_tag "jquery" %>
-  <!--[if lte IE 7]>
-    <%= javascript_include_tag "json2" %>
-    <![endif]-->
-  <%= javascript_include_tag "rails" %>
-  <%= javascript_include_tag "application" %>
-  <%= yield :js %>
-<script type="text/javascript">
-        var gl = (function(){
-            var t = {},
-                glI = $(".gallery-item"),
-                length = glI.length,
-                outTime = 4000,
-                fadeTime = 1500,
-                numOn = 0,
-                timeout = null,
-                dur = 1; // 1- вперёд, 0- назад
-
-            t.init = function(){
-
-                dur = 1;
-                numOn = 0;
-                timeout = setTimeout(function(){
-                    t.show(1)
-                }, outTime)
-
-            };
-
-            t.show = function(num){
-                if(num > (length - 1) && dur == 1){
-                    num = 0
-                } else if( num < 0 && dur == 2) {
-                    num = length - 1;
-                }
-
-                $(glI[numOn]).fadeOut(fadeTime);
-                $(glI[num]).fadeIn(fadeTime);
-
-                numOn = num;
-
-                clearTimeout(timeout);
-                if(dur == 1){
-                    timeout = setTimeout(function(){t.show(numOn + 1);}, outTime)
-                } else {
-                    timeout = setTimeout(function(){t.show(numOn - 1);}, outTime)
-                }
-            };
-
-            t.showNext = function(){
-                dur = 1;
-                t.show(numOn + 1);
-            };
-
-            t.showPrev = function(){
-                dur = 2;
-                t.show(numOn - 1)
-            };
-
-            $(t.init);
-
-            return t;
-        }())
-    </script>
-    <%= javascript_include_tag "chosen.jquery.js" %>
-
-        <script type="text/javascript">
-          $(".chzn-select").chosen();
-          $(".chzn-select-deselect").chosen({allow_single_deselect:true});
-        </script>
 </html>

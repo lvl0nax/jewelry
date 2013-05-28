@@ -12,6 +12,8 @@ public/uploads/
 public/thumb/
 public/medium/
 public/original/
+public/big/
+public/small/
 .bundle
 log/*.log
 *.log
@@ -20,6 +22,7 @@ doc/
 *.swp
 *~
 .project
+.rvmrc
 .DS_Store
 pictures
 app/assets/images/thumb
@@ -37,3 +40,4 @@ assets/images/original/*.*
 
 public/assets/images/medium/*.*
 assets/images/medium/*.*
+db/schema.rb

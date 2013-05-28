@@ -1,13 +1,78 @@
-<h1>Listing pages</h1>
 
-<table>
-<% @pages.each do |page| %>
-  <tr>
-    <td><%= page.title %></td>
-    <td><%= raw page.description %></td>
-    <td><%= link_to 'Показать', page %></td>
-    <td><%= link_to 'Изменить', edit_page_path(page) %></td>
-    <td><%= link_to 'Удалить', page, :confirm => 'Вы уверены?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
+<div id="main-gallery" class="nclear">
+  <div id="gallery-big-show">
+
+    <%= image_tag "/medium/3333-4434.jpg", id: 'gallery-big-img-1', class: 'gallery-big-img' %>
+    <%= image_tag "/medium/125G10104.jpg", id: 'gallery-big-img-2', class: 'gallery-big-img' %>
+    <%= image_tag "/medium/3333-4434.jpg", id: 'gallery-big-img-3', class: 'gallery-big-img' %>
+
+  </div>
+  <div class="nclear">
+    <div class="main-gallery-right">
+
+      <div id="gallery-product-info-1" class="gallery-product-info">
+        <div class="side-product-title">Gold bracelet (-20%)</div>
+        <div class="side-product-description">Crochet lace embroidered with Swarovski, glass bead with gilt findings.</div>
+        <span class="btn side-product-pricede-product-btn">Çàêàçàòü</span>
+        <div class="side-product-price"><s>3 600</s> Ð.-</div>
+        <div class="side-product-price"> 2 800 Ð.-</div>
+      </div>
+
+      <div id="gallery-product-info-2" class="gallery-product-info">
+        <div class="side-product-title">Gold bracelet 2 (-20%)</div>
+        <div class="side-product-description">Crochet lace embroidered with Swarovski, glass bead with gilt findings.</div>
+        <span class="btn side-product-btn">Çàêàçàòü</span>
+        <div class="side-product-price"><s>3 600</s> Ð.-</div>
+        <div class="side-product-price"> 2 800 Ð.-</div>
+      </div>
+
+      <div id="gallery-product-info-3" class="gallery-product-info">
+        <div class="side-product-title">Gold bracelet 3 (-20%)</div>
+        <div class="side-product-description">Crochet lace embroidered with Swarovski, glass bead with gilt findings.</div>
+        <span class="btn side-product-btn">Çàêàçàòü</span>
+        <div class="side-product-price"><s>3 600</s> Ð.-</div>
+        <div class="side-product-price"> 2 800 Ð.-</div>
+      </div>
+
+      <div class="shapes">
+        <div class="shape-left" onclick="gallery.prev()"><i class="tr-01"></i></div>
+        <div class="shape-right" onclick="gallery.next()"><i class="tr-01"></i></div>
+      </div>
+    </div>
+  </div>
+  <div class="main-gallery-previews">
+    <div class="gallery-item" onclick="gallery.show(1)" data-id='1'>
+      <a class="gallery-item-img" href="/">
+        <%= image_tag "/small/3333-4434.jpg"%>
+      </a>
+      <a href="/" class="gallery-item-title">Gold bracelet</a>
+    </div>
+    <div class="gallery-item" onclick="gallery.show(2)" data-id='2'>
+      <a class="gallery-item-img" href="/">
+        <%= image_tag "/small/125G10104.jpg" %>
+      </a>
+      <a href="/" class="gallery-item-title">Gold bracelet</a>
+    </div>
+    <div class="gallery-item" onclick="gallery.show(3)" data-id='3'>
+      <a class="gallery-item-img" href="/">
+        <%= image_tag "/small/3333-4434.jpg"%>
+      </a>
+      <a href="/" class="gallery-item-title">Gold bracelet</a>
+    </div>
+  </div>
+  <script type="text/javascript">
+    gallery.init();
+  </script>
+</div>
+<div class="sponsors-list nclear">
+  <a class="sponsors-item" href="/"><img src="/assets/sponsor_1.jpg" alt=""></a>
+  <a class="sponsors-item" href="/"><img src="/assets/sponsor_2.jpg" alt=""></a>
+  <a class="sponsors-item" href="/"><img src="/assets/sponsor_3.jpg" alt="" style="top: -15px"></a>
+</div>
+<div class="main-slogan">«Каждый, кто любит яркое, красивое, модное и актуальное найдет на нашем сайте для себя подходящее изделие!»</div>
+<div class="ta-c">
+  <% link_to '#', class: 'main-catalog-link' do %>
+    <span>Каталог</span> &rarr;
+  <% end %>
+  <!-- <a class="main-catalog-link" href="/"><span>Каталог</span> &rarr;</a> -->
+</div>

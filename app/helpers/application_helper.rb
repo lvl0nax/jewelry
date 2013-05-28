@@ -13,7 +13,7 @@ module ApplicationHelper
   end
 
   def allcategories
-    if !!session[:categories]
+    if session[:categories].empty?
       @allCat = session[:categories]
     else
       @allCat = Category.select("id, title")
@@ -24,7 +24,7 @@ module ApplicationHelper
   def fiveproduct
     cat = allcategories
     @allPr = Array.new
-    for i in 0..4
+    for i in 0..3
       ##TODO: проверка на пустый категории
       tempCat = cat[rand(cat.size)] # Нашли случайную категорию
       prodAll = tempCat.Product.all # нашли все товары в нашей категории
@@ -46,7 +46,7 @@ module ApplicationHelper
       unless brands.blank?
         brands.collect! {|b| b.brand}
         brands.uniq!
-        session[:brands] = brands 
+        session[:brands] = brands
       end
     end
   end

@@ -1,19 +1,23 @@
-<li class="brs2-3" data-id="<%= product.id%>" data-name="<%= product.article%>" data-price="<%= product.price%>">
-  <span class="p-title">
-    <a href="<%= category_product_path(product.category, product)%>">
-      <%= image_tag "/thumb/#{product.article}.jpg", :alt => "test"%>
-    </a>
-  </span>
-  <span class="d-b ">
-    <span class="pr_art"><%= product.article %></span></br>
-    <span class="p-addcard fl-r" data-id="<%= product.id%>" data-name="<%= product.article%>" data-price="<%= product.price%>">
-      <%= image_tag "cart.jpg",{:width => 30, :class => "test"} %>
+<div class="product-list-item product-item-mini">
+  <a href="/categories/<%=product.category_id%>/products/<%= product.id %>" class="product-item-img">
+    <%= image_tag "/small/#{product.try(:article)}.jpg" %>
+  </a>
+  <div class="product-list-info">
+    <div class="product-list-title"><%= product.category.name if product.category_id > 0 %></div>
+    <div class="product-list-articles">
+      <div class="product-list-article">
+        Ар.:
+        <%= product.try(:article) %>
+      </div>
+      <div class="product-list-article"><%= product.try(:brand) %></div>
+    </div>
+    <div class="product-list-price">
+      <%= product.price.round(2)%> р.
+    </div>
+    <span class="btn" onclick='add_to_cart(<%= product.id%>);'>Оформить заказ</span>
+    <span class="on-sclad">
+      <i class="icon-ok"></i>
+      В наличии
     </span>
-    <%= product.brand %></br>
-    <%= product.price.round(2)%> р.</br>
-  </span>
-  <script type="text/javascript" src="//yandex.st/share/share.js" charset="utf-8"></script>
-  <div class="yashare-auto-init" data-yashareL10n="ru" data-yashareType="none" data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki,moimir"></div>
-
-</li>
-
+  </div>
+</div>
