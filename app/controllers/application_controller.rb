@@ -2,7 +2,7 @@ require 'RMagick'
 # -*- encoding : utf-8 -*-
 class ApplicationController < ActionController::Base
 
-  before_filter :search_init
+  before_filter :cart_init
   helper_method :all
   helper_method :logged_in?
   helper_method :rand_products
@@ -154,7 +154,14 @@ class ApplicationController < ActionController::Base
   end
 
 
+  def cart_init
 
+    @cart_items = []
+    unless session[:cart_items].blank?
+      @cart_items = session[:cart_items].map{|i| Product.find(i)}
+      @price = @cart_items.inject(0) {|sum, i| sum + i.price}
+    end
+  end
 
   private
 
@@ -206,9 +213,7 @@ class ApplicationController < ActionController::Base
     ims.collect!{|im| File.basename(im, ".*")}
   end
 
-  def search_init
-    @search = Search.first
-  end
+
 
 
 end

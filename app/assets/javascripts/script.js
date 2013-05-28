@@ -1,4 +1,55 @@
 
+function add_to_cart(product_id){
+
+  $.ajax({
+    type: "GET",
+    url: "/card/add_to_cart",
+    data: ({product: product_id}),
+    success: function(data){
+      /*alert('all ok');*/
+      var temp;
+      $('#scrollbar-content').html('').html(data.responseText);
+      temp = $('.basket-item-price').toArray();
+      var ttt = 0.0;
+      temp.forEach(function(i){ttt = ttt + parseFloat(i.textContent)});
+      $('#total').html('').html(ttt + 'p.')
+    },
+    error: function(data){
+      var temp;
+      $('#scrollbar-content').html('').html(data.responseText);
+      temp = $('.basket-item-price').toArray();
+      var ttt = 0.0;
+      temp.forEach(function(i){ttt = ttt + parseFloat(i.textContent)});
+      $('#total').html('').html(ttt + 'p.')
+      /*alert("something wrong")*/
+    }});
+}
+
+function remove_from_cart(product_id){
+  $.ajax({
+    type: "GET",
+    url: "/card/remove_from_cart",
+    data: ({product: product_id}),
+    success: function(data){
+      /*alert('all ok');*/
+      var temp;
+      $('#scrollbar-content').html('').html(data.responseText);
+      temp = $('.basket-item-price').toArray();
+      var ttt = 0.0;
+      temp.forEach(function(i){ttt = ttt + parseFloat(i.textContent)});
+      $('#total').html('').html(ttt + 'p.')
+    },
+    error: function(data){
+      var temp;
+      $('#scrollbar-content').html('').html(data.responseText);
+      temp = $('.basket-item-price').toArray();
+      var ttt = 0.0;
+      temp.forEach(function(i){ttt = ttt + parseFloat(i.textContent)});
+      $('#total').html('').html(ttt + 'p.')
+      basketScroller.update(false, true);
+      /*alert("something wrong")*/
+    }});
+}
 /* scrollbar */
 function Scrollbar(el, options) {
 

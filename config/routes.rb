@@ -32,14 +32,19 @@ AppTest::Application.routes.draw do
   get 'image_convert', :to => "application#image_convert"
   get 'clear_images', :to => "application#clear_images"
 
+  post '/card' => 'card#create'
+
   resources :products
   resources :card do
     collection do
       get 'add_to_card'
+      get 'add_to_cart'
+      get 'remove_from_cart'
       post 'change_status'
       get 'list'
       get 'show_card'
     end
+
   end
   # The priority is based upon order of creation:
   # first created -> highest priority.

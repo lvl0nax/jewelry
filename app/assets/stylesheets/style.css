@@ -417,3 +417,18 @@ body{font: 12px/1.321em Calibri, Arial; }
     -o-transition: all 0.1s ease-out;  /* Opera 10.50–12.00 */
     transition: all 0.1s ease-out;  /* Firefox 16+, IE 10+, Opera 12.50+ */
 }
+
+#new_card .actions input{
+    width: 100px;
+}
+#new_card input{
+    border: 1px solid gray;
+    height: 20px;
+}
+
+#new_card label{
+    color: #c393b4;
+    padding: 3px 0;
+    line-height: 25px;
+    font-size: 14px;
+}

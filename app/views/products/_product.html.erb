@@ -1,5 +1,3 @@
-
-
 <div class="product-list-item product-item-mini">
   <a href="/categories/<%=product.category_id%>/products/<%= product.id %>" class="product-item-img">
     <%= image_tag "/small/#{product.try(:article)}.jpg" %>
@@ -16,7 +14,7 @@
     <div class="product-list-price">
       <%= product.price.round(2)%> р.
     </div>
-    <span class="btn">Оформить заказ</span>
+    <span class="btn" onclick='add_to_cart(<%= product.id%>);'>Оформить заказ</span>
     <span class="on-sclad">
       <i class="icon-ok"></i>
       В наличии

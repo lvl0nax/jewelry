@@ -36,7 +36,7 @@
       <div class="product-price"><s></s></div>
       <div class="product-price"><%= @product.price %> р.</div>
     </div>
-    <span class="btn">ОФОРМИТЬ ЗАКАЗ</span>
+    <span class="btn" onclick='add_to_cart(<%= @product.id%>);'>ОФОРМИТЬ ЗАКАЗ</span>
     <span class="on-sclad">
       <i class="icon-ok"></i>
       Имеется в наличии
@@ -59,7 +59,7 @@
       <div class="product-list-price">
         <%= @prs1.price %> р.
       </div>
-      <span class="btn">ОФОРМИТЬ ЗАКАЗ</span>
+      <span class="btn" onclick='add_to_cart(<%= @prs1.id%>);'>ОФОРМИТЬ ЗАКАЗ</span>
       <span class="on-sclad">
         <i class="icon-ok"></i>
         В наличии
@@ -83,7 +83,7 @@
       <div class="product-list-price">
         <%= @prs4.price %> р.
       </div>
-      <span class="btn">ОФОРМИТЬ ЗАКАЗ</span>
+      <span class="btn" onclick='add_to_cart(<%= @prs4.id%>);'>ОФОРМИТЬ ЗАКАЗ</span>
       <span class="on-sclad">
         <i class="icon-ok"></i>
         В наличии
