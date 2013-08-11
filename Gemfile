@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.11'
+gem 'rails', '3.2.13'
 
 gem 'mysql2'
 
@@ -20,12 +20,16 @@ gem 'inherited_resources'
 
 gem 'has_scope', '0.5.1'
 
-gem "nifty-generators", :group => :development
-gem "bcrypt-ruby", :require => "bcrypt"
-gem "mocha", :group => :test
+gem 'nifty-generators', group: :development
+gem 'bcrypt-ruby', require: 'bcrypt'
+gem 'mocha', group: :test
 
 gem 'devise'
 gem 'cancan'
+gem 'sass'
+
+gem 'formtastic', '~> 2.1.1'
+gem 'activeadmin', '~> 0.4.3'
 
 gem 'omniauth'
 gem 'omniauth-oauth2', '1.0.3'
@@ -45,10 +49,9 @@ gem 'roo'
 gem 'rmagick'
 ##########################################################################################################
 
-gem "mocha", :group => :test
-gem 'tinymce_fm', :git=>"git://github.com/galdomedia/tinymce_fm.git"
-gem 'will_paginate'
+gem 'tinymce_fm', git: 'git://github.com/galdomedia/tinymce_fm.git'
+gem 'kaminari'
 
-gem "daemons"
-gem "delayed_job_active_record"
-gem "delayed_job_web"
+gem 'daemons'
+gem 'delayed_job_active_record'
+gem 'delayed_job_web'

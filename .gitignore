@@ -22,7 +22,6 @@ doc/
 *.swp
 *~
 .project
-.rvmrc
 .DS_Store
 pictures
 app/assets/images/thumb

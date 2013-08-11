@@ -138,15 +138,15 @@ class CardController < InheritedResources::Base
     @card = current_user.cards.build params[:card]
     sum = 0
     items = Product.select([:article, :price, :category_id]).find(session[:cart_items])
-    @card.cardjson = items.as_json
+    @card.cardjson = items.as_json.to_s
     items.each do |item|
       sum = sum + item.price
     end
     @card.cost = sum
 
     if @card.save
-      redirect_to root_path
       session[:cart_items].clear
+      redirect_to root_path
     else
       render action: :new
     end

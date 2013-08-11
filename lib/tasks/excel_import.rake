@@ -1,27 +1,31 @@
+# coding: utf-8
 def import_from_excel
   toCat = []
   objs = []
+  articles = []
 
   catAr = Category.all
   catAr.each {|c| toCat.push("('#{c.title}')")}
   sql = ActiveRecord::Base.connection()
-  sql.execute("TRUNCATE products ")
-  file_path = File.join(Rails.root, 'public', 'qwerty.xls')
-  tbl = Excel.new("qwerty.xls") #should be original name in root directory for the site
+  sql.execute('TRUNCATE products ')
+  #file_path = File.join(Rails.root, 'public', 'products.xls')
+  tbl = Excel.new('products.xls') #should be original name in root directory for the site
   tbl.default_sheet = tbl.sheets.first
 
   #TODO: customize to our product
 
   j = 0
-  2.upto(tbl.last_row) do |line|
+  1.upto(tbl.last_row) do |line|
     j=j+1
 
     article = tbl.cell(line, 'A')
-    next if article.blank?
-    price = tbl.cell(line, 'F')
+    next if article.blank? || (articles.include? article)
     type = tbl.cell(line, 'B')
-    brand = tbl.cell(line, 'D')
-    descr = tbl.cell(line, 'C')
+    next if type.blank?
+    type = 'серьги' if type.include? 'ерьги'
+    price = tbl.cell(line, 'D')
+    count = tbl.cell(line, 'E')
+    #descr = tbl.cell(line, 'C')
     #     check that category is exists in DB
     i = toCat.index("('#{type}')")
     if i.nil?
@@ -30,17 +34,17 @@ def import_from_excel
     else
       cat_id = i + 1
     end
-    objs.push("('#{article}', '#{price.to_i.abs}', '#{brand}','#{cat_id}')")
+    objs.push("('#{article}', '#{price.to_i.abs}', '#{cat_id}', '#{count}')")
   end
 
   #fill DB
-  sql.execute("TRUNCATE categories ")
-  sql.execute("INSERT INTO `categories` (`title`) VALUES " + toCat.join(','))
-  sql.execute("INSERT INTO `products` (`article`, `price`, `brand`, `category_id`) VALUES " + objs.join(','))
+  sql.execute('TRUNCATE categories ')
+  sql.execute('INSERT INTO categories (title) VALUES ' + toCat.join(',') )
+  sql.execute('INSERT INTO products (article, price, category_id, number) VALUES ' + objs.join(','))
 end
 
 namespace :excel do
-  desc "excel import"
+  desc 'excel import'
   task import: :environment do
     import_from_excel
   end

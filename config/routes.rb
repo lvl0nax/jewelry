@@ -1,5 +1,9 @@
 AppTest::Application.routes.draw do
 
+  ActiveAdmin.routes(self)
+
+  devise_for :admin_users, ActiveAdmin::Devise.config
+
   resources :infos
   mount TinymceFm::Engine => "/tinymce_fm"
 
