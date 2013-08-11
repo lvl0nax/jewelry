@@ -14,6 +14,8 @@ public/medium/
 public/original/
 public/big/
 public/small/
+public/assets/
+public/*.*
 .bundle
 log/*.log
 *.log
