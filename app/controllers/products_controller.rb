@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class ProductsController < InheritedResources::Base
-  before_filter :admin_require, :except => [ :show ]
+  before_filter :admin_require, :except => [ :show, :show ]
   belongs_to :category
   def show
     if !!resource.mtitle
@@ -9,7 +9,7 @@ class ProductsController < InheritedResources::Base
       @title = "#{resource.category.title} " + "#{resource.brand}"
     end
     tmp = all_photo_name
-    prs = Product.where(:article => tmp, :category_id => resource.category_id).sample(10)
+    prs = Product.where(article: tmp, category_id: resource.category_id).sample(10)
     @prs1 = prs[0]
     @prs2 = prs[1..4]
     @prs3 = prs[5..8]
@@ -30,9 +30,6 @@ class ProductsController < InheritedResources::Base
       when '2' then args.merge!({price: 1000..3000}) #prc = 1000..3000
       when '3' then args.merge!({price: 3000..1000000}) #prc = 3000..800000
     end
-    logger.debug '================================'
-    logger.debug args
-    logger.debug '================================'
     @products = Product.where(args).first(20)
     # respond_to :js, :json => { :res => "123" }
     # render :json => { :res => "123" }

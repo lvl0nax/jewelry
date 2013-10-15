@@ -8,10 +8,14 @@ gem 'execjs'
 gem 'therubyracer'
 gem 'json'
 
+gem 'haml-rails'
+gem 'haml'
+
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
+  gem 'haml_coffee_assets'
 end
 
 gem 'jquery-rails'
@@ -30,6 +34,7 @@ gem 'sass'
 
 gem 'formtastic', '~> 2.1.1'
 gem 'activeadmin', '~> 0.4.3'
+gem 'active_admin_editor'
 
 gem 'omniauth'
 gem 'omniauth-oauth2', '1.0.3'

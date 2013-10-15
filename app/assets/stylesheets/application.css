@@ -1,3 +1,5 @@
+/* = require active_admin/editor/wysiwyg */
+
 *{margin: 0; padding: 0; outline: none}
 /*@font-face {
     font-family: 'ParisianC';
@@ -522,3 +524,10 @@ ul.p-name li{
   /*display: none;*/
 }
 /*.gallery-item:first-child{ display: block}*/
+
+blockquote{padding-left: 20px}
+
+p.main-text_p{
+  font-size: 14px !important;
+  color: rgb(148, 148, 148) !important;
+}

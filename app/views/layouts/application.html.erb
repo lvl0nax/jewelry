@@ -4,6 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru">
 <head>
   <%= yield :meta %>
+  <meta name='yandex-verification' content='5890043fdabb6c43' /> 
   <meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />
   <title>Main page</title>
   <%= stylesheet_link_tag 'style' %>
@@ -22,7 +23,7 @@
       <div class="top-line"></div>
       <div class="right-side">
         <div class="right-side-top nclear">
-          <a class="icon-search" href="/search.html" title='Поиск'></a>
+          <!--<a class="icon-search" href="/search.html" title='Поиск'></a>-->
           <a href="/" id='logo' title="Bujua.ru">
             <%= image_tag 'logo.png', alt: 'Bujua.ru' %>
           </a>
@@ -35,8 +36,10 @@
           <% Page.all.each do |p| %>
              <%= link_to p.title, p , { class: 'nav-panel-item' }%>
           <% end %>
-          <a class="nav-panel-item" href="/">Страница 1</a>
-          <a class="nav-panel-item" href="/">Страница 2</a>
+          <% unless Page.first.present? %>
+            <a class="nav-panel-item" href="/">Страница 1</a>
+            <a class="nav-panel-item" href="/">Страница 2</a>
+          <% end %>
           <!--
             <div class="nav-panel-item has-drop-menu" href="/">
               <i class="drop-icon"></i>Èíäèâèäóàëüíûé ïîäáîð
@@ -156,7 +159,7 @@
   </div>
   <div id="footer">
       <div id="socials"></div>
-      &copy; 2013. Bujua.ru
+      &copy; Bujua 2008-2013
   </div>
 </div>
 <div id="node-heap">
