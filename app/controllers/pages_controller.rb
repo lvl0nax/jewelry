@@ -20,6 +20,7 @@ class PagesController < InheritedResources::Base #ApplicationController
   end
 
   def index
+    @banners = Banner.order(:num).limit(3)
     # if Page.all.blank?
     #   redirect_to new_page_path
     # else

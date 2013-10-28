@@ -39,7 +39,7 @@ body{font: 12px/1.321em Calibri, Arial; }
 
 #container{position: relative; width: 100%; min-height: 100%; background: #fff; overflow: hidden;}
 #content-wrapper{width: 980px; margin: 0 auto;}
-#content{width: 980px; margin: 0 auto; padding: 0 0 150px;}
+#content{width: 980px; margin: 0 auto; padding: 0 0 100px;}
 #footer{
     width: 980px;
     margin: 0 0 0 -490px;
@@ -431,4 +431,13 @@ body{font: 12px/1.321em Calibri, Arial; }
     padding: 3px 0;
     line-height: 25px;
     font-size: 14px;
+}
+
+.main-text > p{
+  font-size: 15px;
+  color: gray;
+}
+
+.with_border > input{
+  border: 1px solid #b0b0b0;
 }

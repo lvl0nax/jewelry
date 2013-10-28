@@ -12,9 +12,9 @@
       <div class="product-list-article"><%= product.try(:brand) %></div>
     </div>
     <div class="product-list-price">
-      <%= product.price.round(2)%> р.
+      <%= sprintf('%.02f', product.price) %> р.
     </div>
-    <span class="btn" onclick='add_to_cart(<%= product.id%>);'>Оформить заказ</span>
+    <span class="btn" onclick='add_to_cart(<%= product.id%>);'>В корзину</span>
     <span class="on-sclad">
       <i class="icon-ok"></i>
       В наличии

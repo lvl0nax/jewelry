@@ -65,12 +65,15 @@
   </script>
 </div>
 <div class="sponsors-list nclear">
-  <a class="sponsors-item" href="/"><img src="/assets/sponsor_1.jpg" alt=""></a>
-  <a class="sponsors-item" href="/"><img src="/assets/sponsor_2.jpg" alt=""></a>
-  <a class="sponsors-item" href="/"><img src="/assets/sponsor_3.jpg" alt="" style="top: -15px"></a>
+  <% @banners.each do |banner| %>
+      <a class="sponsors-item" href=<%= banner.lnk %>>
+        <img src="<%= banner.image_url(:thumb) %>" alt=<%= banner.alt_text %>>
+      </a>
+  <% end %>
+
 </div>
 <div class="main-slogan">«Каждый, кто любит яркое, красивое, модное и актуальное найдет на нашем сайте для себя подходящее изделие!»</div>
-<% render 'main_text' %>
+<%= render 'main_text' %>
 <div class="ta-c">
   <% link_to '#', class: 'main-catalog-link' do %>
     <span>Каталог</span> &rarr;
