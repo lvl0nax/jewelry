@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class CardController < InheritedResources::Base
-  before_filter :admin_require, :except => [ :list, :index, :add_to_card, :show_card ]
+  before_filter :admin_require, :except => [ :list, :index, :add_to_card, :add_to_cart, :remove_from_cart, :show_card]
 
   def index
     if !cookies[:card].nil?
