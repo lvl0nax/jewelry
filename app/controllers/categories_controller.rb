@@ -8,9 +8,8 @@ def show
   else
     @title = resource.title
   end
-  tmp = all_photo_name
-  @products = Product.where(article: tmp, category_id: @category.id).page(params[:page]).per(20)
-
+  #tmp = all_photo_name
+  @products = Product.where(img: true, category_id: @category.id).page(params[:page]).per(20)
 end
 
 def create

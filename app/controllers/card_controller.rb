@@ -1,6 +1,7 @@
 # -*- encoding : utf-8 -*-
 class CardController < InheritedResources::Base
-  before_filter :admin_require, :except => [ :list, :index, :add_to_card, :add_to_cart, :remove_from_cart, :show_card]
+  before_filter :admin_require, except: [:list, :index, :add_to_card, :add_to_cart, :remove_from_cart,
+                                         :show_card, :new, :create]
 
   def index
     if !cookies[:card].nil?
@@ -72,9 +73,7 @@ class CardController < InheritedResources::Base
         format.html {
           redirect_to '/card/list'
         }
-        format.json { render :json => {
-            :res => "1"
-        } }
+        format.json { render json: {res: '1' } }
       end
     end
 
@@ -90,12 +89,12 @@ class CardController < InheritedResources::Base
 
       if current_user.isAdmin?
         if !!u
-          @cards = Card.where(:user_id => u.id)
+          @cards = Card.where(user_id: u.id)
         else
           @cards = Card.all
         end
       else
-        @cards = Card.where(:user_id => current_user.id)
+        @cards = Card.where(user_id: current_user.id)
       end
     else
       redirect_to root_url
@@ -109,7 +108,7 @@ class CardController < InheritedResources::Base
   def change_status
 
     if (!current_user)
-      render :json => { :res => "0" }
+      render json: {res: '0'}
       return false
     end
 
@@ -117,27 +116,31 @@ class CardController < InheritedResources::Base
     @card.status = params[:st]
 
     if @card.save
-        render :json => { :res => "1" }
+        render json: {res: '1'}
     end
 
   end
 
   def show_card
     @card = Card.find(params[:id])
-    render :layout => false
+    render layout: false
   end
 
   def new
     if session[:cart_items].blank?
       redirect_to :back
     end
-    @card = current_user.cards.build
+    @card = current_user ? current_user.cards.build : Card.new
   end
 
   def create
-    @card = current_user.cards.build params[:card]
+    @card = current_user ? current_user.cards.build(params[:card]) : Card.new(params[:card])
     sum = 0
-    items = Product.select([:article, :price, :category_id]).find(session[:cart_items])
+    items = []
+    products = Product.select([:id, :article, :price, :category_id]).find(session[:cart_items])
+    session[:cart_items].each do |id|
+      items << products[products.index{|x| x.id == id}]
+    end
     @card.cardjson = items.as_json.to_s
     items.each do |item|
       sum = sum + item.price

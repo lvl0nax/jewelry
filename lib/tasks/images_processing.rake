@@ -2,6 +2,7 @@
 require 'RMagick'
 
 def convert_image
+  Product.update_all img: false
   failed = []
   flag = false
   counts_not_founded = 0
