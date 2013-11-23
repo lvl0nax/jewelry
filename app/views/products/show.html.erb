@@ -10,7 +10,7 @@
   <% if current_user.isAdmin? %>
     <%= link_to 'Редактировать продукт', edit_category_product_path(@product.category, @product) %>
     |
-    <% if (@product.info.blank?)%>
+    <% if @product.info.blank?%>
       <%= link_to 'Редактировать дополнительную информацию', new_info_path(:product_id => @product.id)%>
     <% else %>
       <%= link_to 'Редактировать дополнительную информацию', edit_info_path(@product.info)%>
@@ -20,8 +20,8 @@
 
 <div class="product-card nclear">
   <div class="product-imgwrap">
-    <a class="product-img tr-01" href="/big/<%= @product.try(:article)%>.jpg" rel="prettyPhoto">
-      <%= image_tag "/medium/#{@product.try(:article)}.jpg" %>
+    <a class="product-img tr-01" href="<%= @product.photo_url(:big)%>" rel="prettyPhoto">
+      <%= image_tag @product.photo_url(:medium) %>
       <i class="open-icon"></i>
     </a>
   </div>
@@ -30,13 +30,15 @@
     <div class="product-description"></div>
     <div class="product-articles">
       <div class="product-article">Артикул: <%= @product.article %></div>
-      <div class="product-article">Jablonex</div>
+      <div class="product-article"><%= @product.brand%> </div>
     </div>
     <div class="product-prices">
-      <div class="product-price"><s></s></div>
-      <div class="product-price"><%= @product.price %> р.</div>
+      <%- if @product.old_price.present? %>
+        <div class="product-price"><s><%= sprintf('%.02f', @product.try(:old_price)) %></s> руб.</div>
+      <%- end %>
+      <div class="product-price"><%= sprintf('%.02f', @product.price) %> руб.</div>
     </div>
-    <span class="btn" onclick='add_to_cart(<%= @product.id%>);'>ОФОРМИТЬ ЗАКАЗ</span>
+    <span class="btn" onclick='add_to_cart(<%= @product.id%>);'>В КОРЗИНУ</span>
     <span class="on-sclad">
       <i class="icon-ok"></i>
       Имеется в наличии
@@ -49,17 +51,17 @@
 </div>
 <div class="product-list">
   <div class="product-list-item product-item-big">
-    <a href="/categories/<%=@prs1.category_id%>/products/<%= @prs1.id %>" class="product-item-img"><%= image_tag "/medium/#{@prs1.try(:article)}.jpg" %></a>
+    <a href="/categories/<%=@prs1.category_id%>/products/<%= @prs1.id %>" class="product-item-img"><%= image_tag @prs1.photo_url(:medium) %></a>
     <div class="product-list-info">
       <div class="product-list-title"><%=@prs1.category.title%></div>
       <div class="product-list-articles">
         <div class="product-list-article">Арт.: <%= @prs1.article %></div>
-        <div class="product-list-article">Jablonex</div>
+        <div class="product-list-article"><%= @prs1.brand%></div>
       </div>
       <div class="product-list-price">
-        <%= @prs1.price %> р.
+        <%= sprintf('%.02f', @prs1.price) %> руб.
       </div>
-      <span class="btn" onclick='add_to_cart(<%= @prs1.id%>);'>ОФОРМИТЬ ЗАКАЗ</span>
+      <span class="btn" onclick='add_to_cart(<%= @prs1.id%>);'>В КОРЗИНУ</span>
       <span class="on-sclad">
         <i class="icon-ok"></i>
         В наличии
@@ -73,17 +75,17 @@
     <%= render @prs3%>
   </div>
   <div class="product-list-item product-item-big">
-    <a href="/categories/<%=@prs4.category_id%>/products/<%= @prs4.id %>" class="product-item-img"><%= image_tag "/medium/#{@prs4.try(:article)}.jpg" %></a>
+    <a href="/categories/<%=@prs4.category_id%>/products/<%= @prs4.id %>" class="product-item-img"><%= image_tag @prs4.photo_url(:medium) %></a>
     <div class="product-list-info">
       <div class="product-list-title"><%=@prs4.category.title%></div>
       <div class="product-list-articles">
         <div class="product-list-article">Арт.: <%= @prs4.article %></div>
-        <div class="product-list-article">Jablonex</div>
+        <div class="product-list-article"><%= @prs4.brand%></div>
       </div>
       <div class="product-list-price">
-        <%= @prs4.price %> р.
+        <%= sprintf('%.02f', @prs4.price) %> руб.
       </div>
-      <span class="btn" onclick='add_to_cart(<%= @prs4.id%>);'>ОФОРМИТЬ ЗАКАЗ</span>
+      <span class="btn" onclick='add_to_cart(<%= @prs4.id%>);'>В КОРЗИНУ</span>
       <span class="on-sclad">
         <i class="icon-ok"></i>
         В наличии

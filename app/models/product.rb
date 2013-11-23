@@ -3,9 +3,12 @@ require 'RMagick'
 class Product < ActiveRecord::Base
   belongs_to :category
 
+  mount_uploader :photo, PhotoUploader
 
-  def title
-    category.title + " " + self.brand
+  scope :with_image, -> { where('photo IS NOT NULL') }
+
+  def name
+    category.title + ' ' + self.brand
   end
 
   def desc
@@ -18,7 +21,7 @@ class Product < ActiveRecord::Base
   end
 
   def image_exist?
-    msk = File.join("**","medium", "#{self.article}.*")
+    msk = File.join('**', 'medium', "#{self.article}.*")
     nameF = Dir.glob(msk)
     File.basename(nameF.first) unless nameF.blank?
     #nameF.empty? ? true : false

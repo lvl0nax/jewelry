@@ -29,7 +29,16 @@
           </a>
         </div>
         <span class="telephone"><i class="icon-phone"></i>+7 (911) 709 61-61</span>
-        <span class="basket-title" onclick="basket.open()"><i class="icon-basket"></i><span class="basket-title-inner">Ваша корзина</span></span>
+        <span class="basket-title" onclick="basket.open()">
+          <i class="icon-basket"></i>
+          <span class="basket-title-inner">
+            Ваша корзина (
+            <span class='basket-count'>
+              <%= session[:cart_items].try(:count).to_i %>
+            </span>
+            )
+          </span>
+        </span>
       </div>
       <div class="left-side">
         <div class="nav-panel nclear">

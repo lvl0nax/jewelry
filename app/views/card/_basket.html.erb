@@ -18,7 +18,6 @@
   </div>
   <div class="basket-total">
     <%= link_to 'ОФОРМИТЬ ЗАКАЗ', new_card_path, class: 'btn fl-r'%>
-    Итого: <span id="total"><%= @price || 0 %> р.</span>
+    Итого: <span id="total"><%= sprintf('%.02f', @price) || 0 %> руб.</span>
   </div>
-
 </div>

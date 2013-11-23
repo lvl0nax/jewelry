@@ -28,7 +28,7 @@ def convert_image
     fname = p.split('.').first
     begin
       flag = true
-      Product.find_by_article(fname).update_attributes(img: true)
+      product = Product.find_by_article(fname)#.update_attributes(img: true)
       puts 'Product updated'
     rescue
       counts_not_founded +=1
@@ -40,47 +40,52 @@ def convert_image
       # TODO: delete all photos if file exists and product did not found
     else
       begin
+        puts "===================#{fname}======================"
         error_flag = true
-        clown = Magick::Image.read("#{Rails.root}/app/assets/images/bujua/#{p}").first
-        clown.write("#{Rails.root}/public/original/#{fname}.jpg")
-        # test.syswrite("#{Time.now} - read image \n") # - time action
-        puts("#{Time.now} - read image \n") # - time action
-        tmp = clown.resize_to_fit(317, 284)
-        # test.syswrite("resize image \n")
-        puts("resize image \n")
-        tmp.write("#{Rails.root}/public/medium/#{fname}.jpg")
-        # test.syswrite("sace to medium \n")
-        puts("save to medium \n")
-
-        tmp = clown.resize_to_fit(146, 131)
-        # test.syswrite("resize image \n")
-        puts("resize image \n")
-        tmp.write("#{Rails.root}/public/small/#{fname}.jpg")
-        # test.syswrite("sace to small \n")
-        puts("save to small \n")
-
-        tmp = clown.resize_to_fit(75, 68)
-        # test.syswrite("resize image \n")
-        puts("resize image \n")
-        tmp.write("#{Rails.root}/public/thumb/#{fname}.jpg")
-        # test.syswrite("sace to thumb \n")
-        puts("save to thumb \n")
-
-        tmp = clown.resize_to_fit(576, 369)
-        puts("resize to big \n")
-        # test.syswrite("resize to big \n")
-        tmp.write("#{Rails.root}/public/big/#{fname}.jpg")
-        # test.syswrite("save to big \n")
-        puts("save to big \n")
+        clown = File.open("#{Rails.root}/app/assets/images/bujua/#{p}")
+        product.photo = clown
+        product.save!
+        puts '+++++++++++++++ image uploaded ++++++++++++++++++'
+        #clown = Magick::Image.read("#{Rails.root}/app/assets/images/bujua/#{p}").first
+        #clown.write("#{Rails.root}/public/original/#{fname}.jpg")
+        ## test.syswrite("#{Time.now} - read image \n") # - time action
+        #puts("#{Time.now} - read image \n") # - time action
+        #tmp = clown.resize_to_fit(317, 284)
+        ## test.syswrite("resize image \n")
+        #puts("resize image \n")
+        #tmp.write("#{Rails.root}/public/medium/#{fname}.jpg")
+        ## test.syswrite("sace to medium \n")
+        #puts("save to medium \n")
+        #
+        #tmp = clown.resize_to_fit(146, 131)
+        ## test.syswrite("resize image \n")
+        #puts("resize image \n")
+        #tmp.write("#{Rails.root}/public/small/#{fname}.jpg")
+        ## test.syswrite("sace to small \n")
+        #puts("save to small \n")
+        #
+        #tmp = clown.resize_to_fit(75, 68)
+        ## test.syswrite("resize image \n")
+        #puts("resize image \n")
+        #tmp.write("#{Rails.root}/public/thumb/#{fname}.jpg")
+        ## test.syswrite("sace to thumb \n")
+        #puts("save to thumb \n")
+        #
+        #tmp = clown.resize_to_fit(576, 369)
+        #puts("resize to big \n")
+        ## test.syswrite("resize to big \n")
+        #tmp.write("#{Rails.root}/public/big/#{fname}.jpg")
+        ## test.syswrite("save to big \n")
+        #puts("save to big \n")
         error_flag = false
       rescue
+        puts '========image uploading was failed========='
         Product.find_by_article(fname).update_attributes(img: false) if error_flag
       end
     end
     File.delete("#{Rails.root}/app/assets/images/bujua/#{p}")
   }
 
-  puts "good images count = #{failed.size}"
   puts "unfounded products by images names = #{counts_not_founded}"
 end
 

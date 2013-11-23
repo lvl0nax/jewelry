@@ -1,18 +1,18 @@
 
 function add_to_cart(product_id){
-
   $.ajax({
     type: "GET",
     url: "/card/add_to_cart",
     data: ({product: product_id}),
     success: function(data){
-      /*alert('all ok');*/
       var temp;
       $('#scrollbar-content').html('').html(data.responseText);
       temp = $('.basket-item-price').toArray();
       var ttt = 0.0;
       temp.forEach(function(i){ttt = ttt + parseFloat(i.textContent)});
-      $('#total').html('').html(ttt + 'p.')
+      $('#total').html('').html(ttt + 'pуб.')
+      var count = parseInt($('.basket-count').text())
+      $('.basket-count').html(count + 1)
     },
     error: function(data){
       var temp;
@@ -20,7 +20,9 @@ function add_to_cart(product_id){
       temp = $('.basket-item-price').toArray();
       var ttt = 0.0;
       temp.forEach(function(i){ttt = ttt + parseFloat(i.textContent)});
-      $('#total').html('').html(ttt + 'p.')
+      $('#total').html('').html(ttt + 'pуб.')
+      var count = parseInt($('.basket-count').text())
+      $('.basket-count').html(count + 1)
       /*alert("something wrong")*/
     }});
 }
@@ -37,7 +39,9 @@ function remove_from_cart(product_id){
       temp = $('.basket-item-price').toArray();
       var ttt = 0.0;
       temp.forEach(function(i){ttt = ttt + parseFloat(i.textContent)});
-      $('#total').html('').html(ttt + 'p.')
+      $('#total').html('').html(ttt + 'pуб.')
+      var count = parseInt($('.basket-count').text())
+      $('.basket-count').html(count - 1)
     },
     error: function(data){
       var temp;
@@ -45,8 +49,10 @@ function remove_from_cart(product_id){
       temp = $('.basket-item-price').toArray();
       var ttt = 0.0;
       temp.forEach(function(i){ttt = ttt + parseFloat(i.textContent)});
-      $('#total').html('').html(ttt + 'p.')
+      $('#total').html('').html(ttt + 'pуб.')
       basketScroller.update(false, true);
+      var count = parseInt($('.basket-count').text())
+      $('.basket-count').html(count - 1)
       /*alert("something wrong")*/
     }});
 }

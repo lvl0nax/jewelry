@@ -9,7 +9,7 @@ def show
     @title = resource.title
   end
   #tmp = all_photo_name
-  @products = Product.where(img: true, category_id: @category.id).page(params[:page]).per(20)
+  @products = Product.with_image.where(category_id: @category.id).page(params[:page]).per(20)
 end
 
 def create

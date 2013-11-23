@@ -2,38 +2,35 @@
 <div id="main-gallery" class="nclear">
   <div id="gallery-big-show">
 
-    <%= image_tag "/medium/3333-4434.jpg", id: 'gallery-big-img-1', class: 'gallery-big-img' %>
-    <%= image_tag "/medium/125G10104.jpg", id: 'gallery-big-img-2', class: 'gallery-big-img' %>
-    <%= image_tag "/medium/3333-4434.jpg", id: 'gallery-big-img-3', class: 'gallery-big-img' %>
-
+    <%- @products.each_with_index do |product, i|%>
+      <%= image_tag product.photo_url(:medium), id: "gallery-big-img-#{i}", class: 'gallery-big-img' %>
+    <%- end %>
   </div>
   <div class="nclear">
     <div class="main-gallery-right">
-
-      <div id="gallery-product-info-1" class="gallery-product-info">
-        <div class="side-product-title">Gold bracelet (-20%)</div>
-        <div class="side-product-description">Crochet lace embroidered with Swarovski, glass bead with gilt findings.</div>
-        <span class="btn side-product-pricede-product-btn">Çàêàçàòü</span>
-        <div class="side-product-price"><s>3 600</s> Ð.-</div>
-        <div class="side-product-price"> 2 800 Ð.-</div>
-      </div>
-
-      <div id="gallery-product-info-2" class="gallery-product-info">
-        <div class="side-product-title">Gold bracelet 2 (-20%)</div>
-        <div class="side-product-description">Crochet lace embroidered with Swarovski, glass bead with gilt findings.</div>
-        <span class="btn side-product-btn">Çàêàçàòü</span>
-        <div class="side-product-price"><s>3 600</s> Ð.-</div>
-        <div class="side-product-price"> 2 800 Ð.-</div>
-      </div>
-
-      <div id="gallery-product-info-3" class="gallery-product-info">
-        <div class="side-product-title">Gold bracelet 3 (-20%)</div>
-        <div class="side-product-description">Crochet lace embroidered with Swarovski, glass bead with gilt findings.</div>
-        <span class="btn side-product-btn">Çàêàçàòü</span>
-        <div class="side-product-price"><s>3 600</s> Ð.-</div>
-        <div class="side-product-price"> 2 800 Ð.-</div>
-      </div>
-
+      <%- @products.each_with_index do |product, i|%>
+        <div id="gallery-product-info-<%=i%>" class="gallery-product-info">
+          <%- discount = (product.try(:old_price) - product.price) / product.try(:old_price) * 100 if product.old_price.present? %>
+          <div class="side-product-title">
+            <%= product.try(:title)%>
+            <%- if discount %>
+              (-
+              <%= discount.to_i %>
+              %)
+            <%- end %>
+          </div>
+          <div class="side-product-description"><%= product.try(:description) %></div>
+          <span class="btn side-product-pricede-product-btn">
+            <a style="color: white;" href= "/categories/<%=product.category_id%>/products/<%= product.id %>" >
+              Просмотр
+            </a>
+          </span>
+          <%- if product.old_price.present? %>
+            <div class="side-product-price"><s><%= sprintf('%.02f', product.try(:old_price)) %></s> руб.</div>
+          <%- end%>
+          <div class="side-product-price"> <%= sprintf('%.02f', product.price) %> руб.</div>
+        </div>
+      <%- end %>
       <div class="shapes">
         <div class="shape-left" onclick="gallery.prev()"><i class="tr-01"></i></div>
         <div class="shape-right" onclick="gallery.next()"><i class="tr-01"></i></div>
@@ -41,24 +38,15 @@
     </div>
   </div>
   <div class="main-gallery-previews">
-    <div class="gallery-item" onclick="gallery.show(1)" data-id='1'>
-      <a class="gallery-item-img" href="/">
-        <%= image_tag "/small/3333-4434.jpg"%>
-      </a>
-      <a href="/" class="gallery-item-title">Gold bracelet</a>
-    </div>
-    <div class="gallery-item" onclick="gallery.show(2)" data-id='2'>
-      <a class="gallery-item-img" href="/">
-        <%= image_tag "/small/125G10104.jpg" %>
-      </a>
-      <a href="/" class="gallery-item-title">Gold bracelet</a>
-    </div>
-    <div class="gallery-item" onclick="gallery.show(3)" data-id='3'>
-      <a class="gallery-item-img" href="/">
-        <%= image_tag "/small/3333-4434.jpg"%>
-      </a>
-      <a href="/" class="gallery-item-title">Gold bracelet</a>
-    </div>
+    <%- @products.each_with_index do |product, i|%>
+      <div class="gallery-item" onclick="gallery.show(<%= i %>)" data-id='<%= i %>'>
+        <a class="gallery-item-img" href="/">
+          <%= image_tag product.photo_url(:small) %>
+        </a>
+        <a href="/" class="gallery-item-title"><%= product.try(:title) %></a>
+      </div>
+    <%- end %>
+
   </div>
   <script type="text/javascript">
     gallery.init();
