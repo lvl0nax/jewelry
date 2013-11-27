@@ -29,6 +29,7 @@ def convert_image
     begin
       flag = true
       product = Product.find_by_article(fname)#.update_attributes(img: true)
+      puts '--------- product was found ----------' if product
       puts 'Product updated'
     rescue
       counts_not_founded +=1
