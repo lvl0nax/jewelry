@@ -2,7 +2,7 @@
 require 'RMagick'
 
 def convert_image
-  Product.update_all img: false
+  #Product.update_all for_main_page: false
   failed = []
   flag = false
   counts_not_founded = 0
@@ -80,7 +80,7 @@ def convert_image
         error_flag = false
       rescue
         puts '========image uploading was failed========='
-        Product.find_by_article(fname).update_attributes(img: false) if error_flag
+        #Product.find_by_article(fname).update_attributes(for_main_page: false) if error_flag
       end
     end
     File.delete("#{Rails.root}/app/assets/images/bujua/#{p}")
