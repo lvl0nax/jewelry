@@ -37,7 +37,7 @@ def convert_image
       flag = false
     end
 
-    if File.exists?("#{Rails.root}/public/original/#{fname}.jpg") || !flag
+    if !flag #File.exists?("#{Rails.root}/public/original/#{fname}.jpg") || !flag
       # TODO: delete all photos if file exists and product did not found
     else
       begin
