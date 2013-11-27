@@ -42,7 +42,7 @@ def convert_image
       begin
         puts "===================#{fname}======================"
         error_flag = true
-        clown = File.open("#{Rails.root}/app/assets/images/bujua/#{p}")
+        clown = File.open("#{Rails.root}/public/original/#{fname}.jpg")
         product.photo = clown
         product.save!
         puts '+++++++++++++++ image uploaded ++++++++++++++++++'
