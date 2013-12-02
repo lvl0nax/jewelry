@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class ProductsController < InheritedResources::Base
-  before_filter :admin_require, :except => [ :show, :show ]
+  before_filter :admin_require, :except => [ :show, :search ]
   belongs_to :category
   def show
     if !!resource.mtitle

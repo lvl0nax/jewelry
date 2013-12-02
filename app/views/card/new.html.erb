@@ -1,17 +1,23 @@
 <h2> Оформаление заказа. </h2>
 
+<br>
+<div>
+  <h3 style="color: indianred;"><%= flash[:notice] %> </h3>
+</div>
+<br>
 <% @cart_items.each do |cart_item| %>
-    <a href="/categories/<%=cart_item.category_id%>/products/<%= cart_item.id %>">
-      <%= image_tag "/small/#{cart_item.try(:article)}.jpg" %>
+    <a class="basket-item-img" href="/categories/<%=cart_item.category_id%>/products/<%= cart_item.id %>">
+      <%= image_tag cart_item.photo_url(:thumb) %>
     </a>
     <div class="basket-item-content">
       <div><a class="basket-item-title" href="/categories/<%=cart_item.category_id%>/products/<%= cart_item.id %>">
         <%= cart_item.category.name %>
       </a></div>
-      <div class="basket-item-price"><%= cart_item.price %></div>
+      <div class="basket-item-price"><%= sprintf('%.02f', cart_item.price) %> руб.</div>
     </div>
 <% end %>
 
+<div class='nclear'></div>
 
 <%= form_for @card, :url => card_path do |f| %>
 

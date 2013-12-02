@@ -441,3 +441,7 @@ body{font: 12px/1.321em Calibri, Arial; }
 .with_border > input{
   border: 1px solid #b0b0b0;
 }
+
+.field_with_errors input{
+  border-color: indianred !important;
+}

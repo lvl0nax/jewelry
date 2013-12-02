@@ -151,6 +151,7 @@ class CardController < InheritedResources::Base
       session[:cart_items].clear
       redirect_to root_path
     else
+      flash[:notice] = 'Пожалуйста, убедитесь что все необходимые поля заполнены! И повторите попытку снова.'
       render action: :new
     end
   end
