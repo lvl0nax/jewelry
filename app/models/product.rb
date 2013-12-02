@@ -45,4 +45,13 @@ class Product < ActiveRecord::Base
     #Description.first("product_article = '#{self.article}'")
   end
 
+  def as_json
+    {
+      id: id,
+      article: article,
+      price: price,
+      category: self.category.title
+    }
+  end
+
 end

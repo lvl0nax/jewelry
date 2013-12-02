@@ -5,6 +5,7 @@
   <h3 style="color: indianred;"><%= flash[:notice] %> </h3>
 </div>
 <br>
+
 <% @cart_items.each do |cart_item| %>
     <a class="basket-item-img" href="/categories/<%=cart_item.category_id%>/products/<%= cart_item.id %>">
       <%= image_tag cart_item.photo_url(:thumb) %>
@@ -15,9 +16,10 @@
       </a></div>
       <div class="basket-item-price"><%= sprintf('%.02f', cart_item.price) %> руб.</div>
     </div>
+    <div class='nclear'></div>
 <% end %>
 
-<div class='nclear'></div>
+
 
 <%= form_for @card, :url => card_path do |f| %>
 
