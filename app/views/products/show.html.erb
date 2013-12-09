@@ -50,48 +50,52 @@
   ПОХОЖИЕ ТОВАРЫ
 </div>
 <div class="product-list">
-  <div class="product-list-item product-item-big">
-    <a href="/categories/<%=@prs1.category_id%>/products/<%= @prs1.id %>" class="product-item-img"><%= image_tag @prs1.photo_url(:medium) %></a>
-    <div class="product-list-info">
-      <div class="product-list-title"><%=@prs1.category.title%></div>
-      <div class="product-list-articles">
-        <div class="product-list-article">Арт.: <%= @prs1.article %></div>
-        <div class="product-list-article"><%= @prs1.brand%></div>
+  <%- if @prs1 %>
+    <div class="product-list-item product-item-big">
+      <a href="/categories/<%=@prs1.category_id%>/products/<%= @prs1.id %>" class="product-item-img"><%= image_tag @prs1.photo_url(:medium) %></a>
+      <div class="product-list-info">
+        <div class="product-list-title"><%=@prs1.category.title%></div>
+        <div class="product-list-articles">
+          <div class="product-list-article">Арт.: <%= @prs1.article %></div>
+          <div class="product-list-article"><%= @prs1.brand%></div>
+        </div>
+        <div class="product-list-price">
+          <%= sprintf('%.02f', @prs1.price) %> руб.
+        </div>
+        <span class="btn" onclick='add_to_cart(<%= @prs1.id%>);'>В КОРЗИНУ</span>
+        <span class="on-sclad">
+          <i class="icon-ok"></i>
+          В наличии
+        </span>
       </div>
-      <div class="product-list-price">
-        <%= sprintf('%.02f', @prs1.price) %> руб.
-      </div>
-      <span class="btn" onclick='add_to_cart(<%= @prs1.id%>);'>В КОРЗИНУ</span>
-      <span class="on-sclad">
-        <i class="icon-ok"></i>
-        В наличии
-      </span>
     </div>
+  <%- end %>
+  <div class="product-list-box">
+    <%= render @prs2 if @prs2%>
   </div>
   <div class="product-list-box">
-    <%= render @prs2%>
+    <%= render @prs3 if @prs3%>
   </div>
-  <div class="product-list-box">
-    <%= render @prs3%>
-  </div>
-  <div class="product-list-item product-item-big">
-    <a href="/categories/<%=@prs4.category_id%>/products/<%= @prs4.id %>" class="product-item-img"><%= image_tag @prs4.photo_url(:medium) %></a>
-    <div class="product-list-info">
-      <div class="product-list-title"><%=@prs4.category.title%></div>
-      <div class="product-list-articles">
-        <div class="product-list-article">Арт.: <%= @prs4.article %></div>
-        <div class="product-list-article"><%= @prs4.brand%></div>
+  <%- if @prs4 %>
+    <div class="product-list-item product-item-big">
+      <a href="/categories/<%=@prs4.category_id%>/products/<%= @prs4.id %>" class="product-item-img"><%= image_tag @prs4.photo_url(:medium) %></a>
+      <div class="product-list-info">
+        <div class="product-list-title"><%=@prs4.category.title%></div>
+        <div class="product-list-articles">
+          <div class="product-list-article">Арт.: <%= @prs4.article %></div>
+          <div class="product-list-article"><%= @prs4.brand%></div>
+        </div>
+        <div class="product-list-price">
+          <%= sprintf('%.02f', @prs4.price) %> руб.
+        </div>
+        <span class="btn" onclick='add_to_cart(<%= @prs4.id%>);'>В КОРЗИНУ</span>
+        <span class="on-sclad">
+          <i class="icon-ok"></i>
+          В наличии
+        </span>
       </div>
-      <div class="product-list-price">
-        <%= sprintf('%.02f', @prs4.price) %> руб.
-      </div>
-      <span class="btn" onclick='add_to_cart(<%= @prs4.id%>);'>В КОРЗИНУ</span>
-      <span class="on-sclad">
-        <i class="icon-ok"></i>
-        В наличии
-      </span>
     </div>
-  </div>
+  <%- end %>
 </div>
 
 <% content_for :js do %>
