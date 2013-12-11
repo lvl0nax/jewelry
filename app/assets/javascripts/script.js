@@ -655,10 +655,10 @@ var gallery = new function(){
 
     gy.show = function(id){
         $('.gallery-product-info').fadeOut(100);
-        $('.gallery-big-img').fadeOut(100);
+        $('.gallery-big-img').removeClass('block').addClass('none');
 
         $('#gallery-product-info-' + id).fadeIn(100);
-        $('#gallery-big-img-' + id).fadeIn(100);
+        $('#gallery-big-img-' + id).removeClass('none').addClass('block');
 
         gy.current = indexOf(gy.ids, id);
     };
