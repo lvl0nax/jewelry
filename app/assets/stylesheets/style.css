@@ -307,8 +307,8 @@ body{font: 12px/1.321em Calibri, Arial; }
     z-index: 2;}
 #content .gallery-item{padding: 5px; background: #fff; float: left; overflow: hidden;
                       margin: 0 0 0 15px; width: 293px; height: 135px;}
-#content .gallery-item-img{float: left; max-width: 146px;}
-#content .gallery-item-img img{width: 100%}
+#content .gallery-item-img{float: left; max-width: 146px; line-height: 135px;}
+#content .gallery-item-img img{width: 100%; vertical-align: middle;}
 #content .gallery-item-title{text-decoration: none; text-transform: uppercase; padding: 10px 0 0; margin: 0 0 0 157px; display: block;}
 #content .gallery-item-title:hover{color: #c393b4;}
 
