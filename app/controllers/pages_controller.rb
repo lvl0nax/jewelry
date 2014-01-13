@@ -23,6 +23,7 @@ class PagesController < InheritedResources::Base #ApplicationController
     @banners = Banner.order(:num).limit(3)
     @products = Product.with_image.where(for_main_page: true).first(3)
     @products = Product.with_image.first(3) if @products.count < 3
+    @title = Dopinfo.where(tag: 'main').first.title
     # if Page.all.blank?
     #   redirect_to new_page_path
     # else
