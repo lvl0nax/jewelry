@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <p>
+      ФИО: <%= @card.fio %><br/>
+      Стоимость: <%= @card.cost%><br/>
+      Телефон: <%= @card.phone %><br/>
+      E-mail: <%= @card.email %><br/>
+      Заказ: <%= @card.cardjson %><br/>
+      Дата: <%= @card.created_at.localtime %><br/>
+      Курьер: <%= @card.has_courier ? 'Да' : 'Нет' %><br/>
+      Адрес: <%= @card.address %><br/>
+      Комментарий Заказчика: <%= @card.comment %><br/>
+    </p>
+  </body>
+</html>

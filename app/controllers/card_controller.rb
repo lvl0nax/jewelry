@@ -149,6 +149,7 @@ class CardController < InheritedResources::Base
 
     if @card.save
       session[:cart_items].clear
+      CardMailer.new_order_mail(@card).deliver
       redirect_to root_path
     else
       flash[:notice] = 'Пожалуйста, убедитесь что все необходимые поля заполнены! И повторите попытку снова.'
