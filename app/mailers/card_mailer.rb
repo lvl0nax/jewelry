@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class CardMailer < ActionMailer::Base
-  default from: 'bujua.ru'
+  default from: 'lvl0nax@yandex.ru'
   def new_order_mail(options)
     @card = options
     emails = 'lvl0nax@gmail.com'
