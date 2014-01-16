@@ -3,13 +3,13 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru">
 <head>
-  <%= yield :meta %>
-  <meta name='yandex-verification' content='5890043fdabb6c43' /> 
-  <meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />
   <title>
     <%- title='бижутерия и ювелирные украшения. Интернет магазин украшений и аксессуаров - Бужуа.ру'  %>
     <%= @title.present? ? @title : title %>
   </title>
+  <%= yield :meta %>
+  <meta name='yandex-verification' content='5890043fdabb6c43' /> 
+  <meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />
   <%= stylesheet_link_tag 'style' %>
   <%= stylesheet_link_tag 'prettyPhoto' %>
 
