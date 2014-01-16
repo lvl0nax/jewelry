@@ -44,11 +44,11 @@ AppTest::Application.configure do
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-      address: 'smtp.locum.ru',
+      address: 'smtp.gmail.ru',
       port: 25,
       domain: 'gmail.com', #'gmail.com'
       authentication: 'plain',
-      enable_starttls_auto: false,
+      enable_starttls_auto: true,
       user_name: 'monax.spam@gmail.com', #'monax.spam@gmail.com'
       password: 'code4gmail'
   }
