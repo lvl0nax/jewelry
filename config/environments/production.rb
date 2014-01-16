@@ -46,11 +46,11 @@ AppTest::Application.configure do
   config.action_mailer.smtp_settings = {
       address: 'smtp.locum.ru',
       port: 25,
-      domain: 'prima-aqua.ru', #'gmail.com'
+      domain: 'gmail.com', #'gmail.com'
       authentication: 'plain',
       enable_starttls_auto: false,
-      user_name: 'noreply@prima-aqua.ru', #'monax.spam@gmail.com'
-      password: 'secret'
+      user_name: 'monax.spam@gmail.com', #'monax.spam@gmail.com'
+      password: 'code4gmail'
   }
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
