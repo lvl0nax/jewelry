@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class ProductsController < InheritedResources::Base
-  before_filter :admin_require, :except => [ :show, :search ]
+  before_filter :admin_require, :except => [ :show, :search, :upload_photos ]
   belongs_to :category
   def show
     if !!resource.mtitle
@@ -41,6 +41,13 @@ class ProductsController < InheritedResources::Base
 
   def search_results
 
+  end
+
+  def upload_photos
+    puts params
+    # binding.pry
+    # puts '----------------------------------------------'
+    params[:product][:photo]
   end
 
 end
