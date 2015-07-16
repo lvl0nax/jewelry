@@ -49,3 +49,11 @@ gem 'delayed_job_active_record'
 gem 'delayed_job_web'
 
 gem 'carrierwave'
+gem 'unicorn'
+
+group :development do
+  gem 'capistrano'
+  gem 'capistrano-rails'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rvm'
+end
