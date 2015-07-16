@@ -19,11 +19,10 @@ set :keep_releases, 3
 set :user,            "hosting_lvl0nax"
 set :login,           "lvl0nax"
 
-# role :all, %w{hosting_lvl0nax@neon.locum.ru}
 # Git
 set :scm, :git
 set :repo_url, 'git@github.com:lvl0nax/jewelry.git'
-#set :ssh_options, forward_agent: true
+set :ssh_options, forward_agent: true
 set :branch, 'new_version'
 
 # RVM
