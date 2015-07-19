@@ -5,6 +5,7 @@
 # set :repository - Установить расположение вашего репозитория
 # У вас должна быть настроена авторизация ssh по сертификатам
 
+# require 'rvm/capistrano'
 # require 'bundler/capistrano'
 # load 'deploy/assets'
 
@@ -16,8 +17,8 @@ dpath = '/home/hosting_lvl0nax/projects/juwelry'
 set :deploy_to, dpath
 set :keep_releases, 3
 # set :deploy_server,   "neon.locum.ru"
-set :user,            "hosting_lvl0nax"
-set :login,           "lvl0nax"
+set :user, 'hosting_lvl0nax'
+set :login, 'lvl0nax'
 
 # Git
 set :scm, :git
@@ -30,9 +31,11 @@ set :rvm_type, :user
 
 # set :use_sudo, false
 
-rvm_ruby_string = "2.1.5"
-set :rake,            "rvm use #{rvm_ruby_string} do bundle exec rake"
-set :bundle_cmd,      "rvm use #{rvm_ruby_string} do bundle"
+set :rvm_ruby_version,  "2.1.5"
+set :rvm_path, '/usr/local/rvm'
+set :rvm_custom_path, '/usr/local/rvm'
+set :rake,           -> { "rvm use #{rvm_ruby_version} do bundle exec rake" }
+set :bundle_cmd,     -> { "rvm use #{rvm_ruby_version} do bundle" }
 
 set :linked_files, %w(
   config/database.yml
