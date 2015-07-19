@@ -1,77 +1,79 @@
-# -*- encoding : utf-8 -*-
-# _your_login_ - Поменять на ваш логин в панели управления
-# _your_project_ - Поменять на имя вашего проекта
-# _your_server_ - Поменять на имя вашего сервера (Указано на вкладке "FTP и SSH" вашей панели управления)
-# set :repository - Установить расположение вашего репозитория
-# У вас должна быть настроена авторизация ssh по сертификатам
+# encoding: utf-8
+# config valid only for Capistrano 3
+lock '3.3.5'
 
-# require 'rvm/capistrano'
-# require 'bundler/capistrano'
-# load 'deploy/assets'
+# Project configuration options
+# ------------------------------
 
-# ssh_options[:forward_agent] = true
+set :application,    'jewelry'
+set :login,          'lvl0nax'
+set :user,           'hosting_lvl0nax'
 
-# Settings
-set :application, 'jewelry'
-dpath = '/home/hosting_lvl0nax/projects/juwelry'
-set :deploy_to, dpath
-set :keep_releases, 3
-# set :deploy_server,   "neon.locum.ru"
-set :user, 'hosting_lvl0nax'
-set :login, 'lvl0nax'
+set :deploy_to,      "/home/#{fetch(:user)}/projects/#{fetch(:application)}"
+set :unicorn_conf,   "/etc/unicorn/#{fetch(:application)}.#{fetch(:login)}.rb"
+set :unicorn_pid,    "/var/run/unicorn/#{fetch(:user)}/" \
+                     "#{fetch(:application)}.#{fetch(:login)}.pid"
+set :bundle_without, [:development, :test]
+set :use_sudo,       false
 
-# Git
+set :repo_url,       'git@github.com:lvl0nax/jewelry.git'
+
+# Default branch is :master
+# ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
+
 set :scm, :git
-set :repo_url, 'git@github.com:lvl0nax/jewelry.git'
-set :ssh_options, forward_agent: true
-set :branch, 'new_version'
+set :format, :pretty
+set :pty, true
 
-# RVM
-set :rvm_type, :user
+# Change the verbosity level
+set :log_level, :info
 
-# set :use_sudo, false
+# Default value for :linked_files is []
+# set :linked_files, %w{config/database.yml}
 
-set :rvm_ruby_version,  "2.1.5"
-set :rvm_path, '/usr/local/rvm'
-set :rvm_custom_path, '/usr/local/rvm'
-set :rake,           -> { "rvm use #{rvm_ruby_version} do bundle exec rake" }
-set :bundle_cmd,     -> { "rvm use #{rvm_ruby_version} do bundle" }
+# Default value for linked_dirs is []
+set :linked_dirs, %w(bin log tmp/cache vendor/bundle public/system)
 
-set :linked_files, %w(
-  config/database.yml
-  config/secrets.yml
-)
+# Default value for keep_releases is 5
+# set :keep_releases, 5
 
-set :linked_dirs, %w( public/assets public/uploads public/system )
-#
-# before 'deploy:finalize_update', 'set_current_release'
-# task :set_current_release, :roles => :app do
-#   set :current_release, latest_release
-# end
+# You unlikely have to change below this line
+# -----------------------------------------------------------------------------
+
+# Configure RVM
+set :rvm_ruby_version, '2.1.5'
+set :rake,            "rvm use #{fetch(:rvm_ruby_version)} do bundle exec rake"
+set :bundle_cmd,      "rvm use #{fetch(:rvm_ruby_version)} do bundle"
+
+set :unicorn_start_cmd,
+    "(cd #{fetch(:deploy_to)}/current; rvm use #{fetch(:rvm_ruby_version)} " \
+    "do bundle exec unicorn_rails -Dc #{fetch(:unicorn_conf)})"
 
 # - for unicorn - #
-set :unicorn_rails, "/var/lib/gems/1.8/bin/unicorn_rails"
-set :unicorn_conf, "/etc/unicorn/juwelry.lvl0nax.rb"
-set :unicorn_pid, "/var/run/unicorn/hosting_lvl0nax/juwelry.lvl0nax.pid"
 namespace :deploy do
-  desc "Start application"
+  desc 'Start application'
   task :start do
     on roles(:app) do
-      run "#{unicorn_rails} -Dc #{unicorn_conf}"
+      execute unicorn_start_cmd
     end
   end
 
-  desc "Stop application"
+  desc 'Stop application'
   task :stop do
     on roles(:app) do
-      run "[ -f #{unicorn_pid} ] && kill -QUIT `cat #{unicorn_pid}`"
+      execute "[ -f #{fetch(:unicorn_pid)} ] && " \
+              "kill -QUIT `cat #{fetch(:unicorn_pid)}`"
     end
   end
 
-  desc "Restart Application"
+  after :publishing, :restart
+
+  desc 'Restart Application'
   task :restart do
     on roles(:app) do
-      run "[ -f #{unicorn_pid} ] && kill -USR2 `cat #{unicorn_pid}` || #{unicorn_rails} -Dc #{unicorn_conf}"
+      execute "[ -f #{fetch(:unicorn_pid)} ] && " \
+              "kill -USR2 `cat #{fetch(:unicorn_pid)}` || " \
+              "#{fetch(:unicorn_start_cmd)}"
     end
   end
 end

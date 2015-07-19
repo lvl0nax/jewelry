@@ -50,8 +50,10 @@ gem 'delayed_job_web'
 
 gem 'carrierwave'
 gem 'unicorn'
+gem 'unicorn-rails'
 
 group :development do
+  gem 'locum'
   gem 'capistrano'
   gem 'capistrano-rails'
   gem 'capistrano-bundler'
