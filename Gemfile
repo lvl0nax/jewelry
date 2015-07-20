@@ -12,6 +12,7 @@ gem 'haml'
 gem 'pry'
 
 gem 'sass-rails'
+gem 'sass'
 gem 'coffee-rails'
 gem 'uglifier'
 
