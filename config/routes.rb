@@ -2,6 +2,9 @@ Rails.application.routes.draw do
 
   resources :dopinfos
 
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
+
   resources :infos
   #for twitter authentfication
   match "/delayed_job" => DelayedJobWeb, :anchor => false, via: [:get, :post]
@@ -100,9 +103,6 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   root 'pages#index'#'categories#index'
-
-  devise_for :admin_users, ActiveAdmin::Devise.config
-  ActiveAdmin.routes(self)
 
   # See how all your routes lay out with "rake routes"
 
