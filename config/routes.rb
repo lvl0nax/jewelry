@@ -1,31 +1,28 @@
-AppTest::Application.routes.draw do
+Rails.application.routes.draw do
 
   resources :dopinfos
 
+  devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
-  devise_for :admin_users, ActiveAdmin::Devise.config
-
   resources :infos
-  mount TinymceFm::Engine => "/tinymce_fm"
-
   #for twitter authentfication
-  match "/delayed_job" => DelayedJobWeb, :anchor => false
-  match '/auth/:provider/callback' => 'authentications#create'
-  match '/user/test' => 'users#test'
+  match "/delayed_job" => DelayedJobWeb, :anchor => false, via: [:get, :post]
+  match '/auth/:provider/callback' => 'authentications#create', via: [:get, :post]
+  match '/user/test' => 'users#test', via: [:get, :post]
   resources :authentications
 
   devise_for :users, :path_prefix => 'd'
-  match '/user/:id' => 'users#show'
+  match '/user/:id' => 'users#show', via: [:get, :post]
   resources :users
 
   # post 'search' => "products#search"
-  get 'search' => "products#search"
+  get 'search' => 'products#search'
   # get 'test_search' => "products#search", :as => "test_search"
   resources :categories do
     resources :products
   end
-  match 'test' => 'searches#test'
+  match 'test' => 'searches#test', via: [:get, :post]
   get '/searches/test' => 'searches#test'
 
   resources :searches
@@ -40,7 +37,11 @@ AppTest::Application.routes.draw do
 
   post '/card' => 'card#create'
 
-  resources :products
+  resources :products do
+    collection do
+      post 'upload_photos'
+    end
+  end
   resources :card do
     collection do
       get 'add_to_card'
@@ -101,11 +102,11 @@ AppTest::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-   root :to => 'pages#index'#'categories#index'
+  root 'pages#index'#'categories#index'
 
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
-   match ':controller(/:action(/:id(.:format)))'
+   match ':controller(/:action(/:id(.:format)))', via: [:get, :post]
 end

@@ -1,5 +1,5 @@
 # coding: utf-8
-require 'RMagick'
+require 'mini_magick'
 
 def convert_image
   #Product.update_all for_main_page: false

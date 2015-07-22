@@ -17,6 +17,7 @@ public/small/
 public/assets/
 public/*.*
 .bundle
+.locum
 log/*.log
 *.log
 /tmp/

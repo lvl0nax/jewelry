@@ -1,3 +1,3 @@
 class Dopinfo < ActiveRecord::Base
-  attr_accessible :title, :tag
+  # attr_accessible :title, :tag
 end
