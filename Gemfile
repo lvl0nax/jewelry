@@ -42,6 +42,7 @@ gem 'omniauth-vkontakte'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 
+
 ##########################################################################################################
 #sudo apt-get install libxslt-dev libxml2-dev
 # библиотеки для дальнейшей корректной установки  нижеуказанных гемов.
