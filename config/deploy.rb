@@ -54,7 +54,7 @@ namespace :deploy do
   desc 'Start application'
   task :start do
     on roles(:app) do
-      execute unicorn_start_cmd
+      execute "#{fetch(:unicorn_start_cmd)}"
     end
   end
 
@@ -76,4 +76,15 @@ namespace :deploy do
               "#{fetch(:unicorn_start_cmd)}"
     end
   end
+
+  desc 'precompiling assets..............'
+  task :composer_install do
+    on roles(:web) do
+      within release_path do
+        execute "(cd #{fetch(:deploy_to)}/current; #{fetch(:rake)} assets:precompile RAILS_ENV=production"
+      end
+    end
+  end
+
+  after :publishing, 'deploy:composer_install'
 end
