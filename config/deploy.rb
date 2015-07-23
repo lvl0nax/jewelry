@@ -49,6 +49,10 @@ set :unicorn_start_cmd,
     "(cd #{fetch(:deploy_to)}/current; rvm use #{fetch(:rvm_ruby_version)} " \
     "do bundle exec unicorn_rails -Dc #{fetch(:unicorn_conf)})"
 
+set :assets_precompile_cmd,
+    "(cd #{fetch(:deploy_to)}/current; rvm use #{fetch(:rvm_ruby_version)} " \
+    "do bundle exec rake assets:prcompile"
+
 # - for unicorn - #
 namespace :deploy do
   desc 'Start application'
@@ -74,6 +78,14 @@ namespace :deploy do
       execute "[ -f #{fetch(:unicorn_pid)} ] && " \
               "kill -USR2 `cat #{fetch(:unicorn_pid)}` || " \
               "#{fetch(:unicorn_start_cmd)}"
+    end
+  end
+  after :publishing, :make_assets
+
+  desc 'Make assets'
+  task :make_assets do
+    on roles(:app) do
+      execute "#{fetch(:assets_precompile_cmd)}"
     end
   end
 
