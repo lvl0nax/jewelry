@@ -77,14 +77,14 @@ namespace :deploy do
     end
   end
 
-  desc 'precompiling assets..............'
-  task :composer_install do
-    on roles(:web) do
-      within release_path do
-        execute "(cd #{fetch(:deploy_to)}/current; #{fetch(:rake)} assets:precompile RAILS_ENV=production"
-      end
-    end
-  end
-
-  after :publishing, 'deploy:composer_install'
+  # desc 'precompiling assets..............'
+  # task :composer_install do
+  #   on roles(:web) do
+  #     within release_path do
+  #       execute "(cd #{fetch(:deploy_to)}/current; #{fetch(:rake)} assets:precompile RAILS_ENV=production"
+  #     end
+  #   end
+  # end
+  #
+  # after :publishing, 'deploy:composer_install'
 end
