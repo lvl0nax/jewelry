@@ -53,10 +53,4 @@ gem 'carrierwave'
 gem 'unicorn'
 gem 'unicorn-rails'
 
-group :development do
-  gem 'locum'
-  gem 'capistrano'
-  gem 'capistrano-rails'
-  gem 'capistrano-bundler'
-  gem 'capistrano-rvm'
-end
+gem 'capistrano', '~> 2.15'
