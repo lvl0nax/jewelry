@@ -4,26 +4,17 @@ class CardController < InheritedResources::Base
                                          :show_card, :new, :create]
 
   def index
-    if !cookies[:card].nil?
-      @card = JSON.parse(cookies[:card])
-    end
+    @card = JSON.parse(cookies[:card]) if cookies[:card].present?
 
-    if @card.blank?
-      redirect_to root_url
-    end
+    redirect_to root_url if @card.blank?
 
-    @hide_banner = true
-
-    @hide_card = true
+    @hide_banner = @hide_card = true
   end
 
   def add_to_cart
-
     session[:cart_items] ||= []
-    session[:cart_items] << Product.find(params[:product]).id
-    logger.debug 'test'
-    logger.debug session[:cart_items]
-    @cart_items = session[:cart_items].map{|i| Product.find(i)}
+    session[:cart_items] << (params[:product].to_i if Product.exists?(id: params[:product].to_i))
+    @cart_items = Product.where(id: session[:cart_items].map(&:to_i))
     #@price = @cart_items.inject(0) {|sum, i| sum + i.price}
     respond_to do |format|
       format.js {
@@ -32,14 +23,14 @@ class CardController < InheritedResources::Base
     end
   end
   def remove_from_cart
-    session[:cart_items].delete_at(session[:cart_items].index(Product.find(params[:product]).id))
-    logger.debug 'test'
+    id = (params[:product].to_i if Product.exists?(id: params[:product].to_i))
+    session[:cart_items].delete_at(session[:cart_items].index(id))
     respond_to do |format|
       format.js {
         if session[:cart_items].blank?
           render text: 'Ваша корзина пуста'
         else
-          @cart_items = session[:cart_items].map{|i| Product.find(i)}
+          @cart_items = Product.where(id: session[:cart_items].map(&:to_i))
           render partial: 'card/cart_item', collection: @cart_items
         end
       }
@@ -47,16 +38,11 @@ class CardController < InheritedResources::Base
   end
 
   def add_to_card
+    (@card = Card.new).user_id = current_user.try(:id)
 
-    @card = Card.new
-
-    if current_user
-      @card.user_id = current_user.id
-    end
-
-    if !cookies[:card].nil?
+    if cookies[:card].present?
       @card.cardjson = cookies[:card]
-      cookies[:card] = ""
+      cookies[:card] = ''
     end
 
     @card.phone = params[:phone]
@@ -80,44 +66,36 @@ class CardController < InheritedResources::Base
   end
 
   def list
-    if !!params[:format]
-      u = User.find(params[:format])
-    end
+    user = User.find(params[:format]) if params[:format]
 
     if current_user
-
-
-      if current_user.isAdmin?
-        if !!u
-          @cards = Card.where(user_id: u.id)
+      @cards =
+        if current_user.isAdmin?
+          if user
+            Card.where(user_id: user.id)
+          else
+            Card.all
+          end
         else
-          @cards = Card.all
+          Card.where(user_id: current_user.id)
         end
-      else
-        @cards = Card.where(user_id: current_user.id)
-      end
     else
       redirect_to root_url
     end
 
-    @hide_banner = true
-    @hide_search = true
-
+    @hide_banner = @hide_search = true
   end
 
   def change_status
 
-    if (!current_user)
-      render json: {res: '0'}
-      return false
+    unless current_user
+      render json: {res: '0'} and return false
     end
 
-    @card = Card.find_by_id(params[:id])
+    @card = Card.find_by(id: params[:id])
     @card.status = params[:st]
 
-    if @card.save
-        render json: {res: '1'}
-    end
+    render json: {res: '1'} if @card.save
 
   end
 
@@ -127,24 +105,15 @@ class CardController < InheritedResources::Base
   end
 
   def new
-    if session[:cart_items].blank?
-      redirect_to :back
-    end
+    redirect_to :back if session[:cart_items].blank?
     @card = current_user ? current_user.cards.build : Card.new
   end
 
   def create
     @card = current_user ? current_user.cards.build(params[:card]) : Card.new(params[:card])
-    sum = 0
-    items = []
     products = Product.select([:id, :article, :price, :category_id]).find(session[:cart_items])
-    session[:cart_items].each do |id|
-      items << products[products.index{|x| x.id == id}]
-    end
-    @card.cardjson = items.as_json.to_s
-    items.each do |item|
-      sum = sum + item.price
-    end
+    @card.cardjson = products.as_json.to_s
+    sum = products.sum(&:price)
     @card.cost = sum
 
     if @card.save

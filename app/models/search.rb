@@ -6,12 +6,11 @@ class Search < ActiveRecord::Base
   #private
     def find_products
       flag = 0
-      str = "SELECT * FROM products WHERE ("
-      products = Product.all
+      str = 'SELECT * FROM products WHERE ('
       s = self.category_id
       unless s.blank?
         #idArr = s.split(",")
-        str +=("products.category_id IN (" + s + "))")
+        str +=('products.category_id IN (' + s + '))')
         #logger.debug "++++++++++++++++++++++++++++++++++++++++"
         #logger.debug products.first.article
         flag = 1
@@ -20,24 +19,24 @@ class Search < ActiveRecord::Base
       s = self.min_price.to_s
       unless s.blank?
         if flag > 0
-          str += " AND ("
+          str += ' AND ('
         end
-        str += ("products.price >= " + s +")")
+        str += ('products.price >= ' + s +')')
         flag = 1
       end
 
       s = self.mas_price.to_s
       unless s.blank?
         if flag > 0
-          str += " AND ("
+          str += ' AND ('
         end
-        str +=("products.price <= " + s +")")
+        str +=('products.price <= ' + s +')')
         flag = 1
       end
 
       #TODO: add brand filter!!!
-logger.debug "++++++++++++++++++++++++++++++++++++++++"
-logger.debug str
+      logger.debug '++++++++++++++++++++++++++++++++++++++++'
+      logger.debug str
 
 
       #products = Product.where(:category_id => idArr)
@@ -49,8 +48,8 @@ logger.debug str
       else
         products = Product.find_by_sql(str)   #check it!!!!!
       end
-logger.debug "ccccccooooooouuunnnnnnttt-----------------"
-logger.debug products.count
+      logger.debug 'ccccccooooooouuunnnnnnttt-----------------'
+      logger.debug products.count
 
       products
     end

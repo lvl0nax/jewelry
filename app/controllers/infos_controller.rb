@@ -9,9 +9,7 @@ class InfosController < InheritedResources::Base
   def create
     @info = Info.new(params[:info])
     create!{
-
       category_product_path(@info.find_category, @info.find_product)
-      
     }
     #redirect_to Product.find_by_article(@description.product_article)
  end
@@ -20,7 +18,6 @@ class InfosController < InheritedResources::Base
     update! {  
       category_product_url(@info.find_category, @info.find_product) 
     }
-    
   end
 
 end

@@ -155,65 +155,39 @@ class ApplicationController < ActionController::Base
 
 
   def cart_init
-
     @cart_items = []
-    unless session[:cart_items].blank?
-      @cart_items = session[:cart_items].map{|i| Product.find(i)}
-      @price = @cart_items.inject(0) {|sum, i| sum + i.price}
+    if session[:cart_items].present?
+      @cart_items = Product.find(session[:cart_items].map(&:to_i))
+      @price = @cart_items.sum(&:price)
     end
   end
 
   private
 
   def admin_require
-    unless is_admin?
-      deny_access
-    end
-      #    unless logged_in?
-      #      flash[:error] = t('users.must_login')
-      #      redirect_to login_url # halts request cycle
-      #    end
+    deny_access unless is_admin?
   end
 
   def deny_access
-    flash[:error] = "you have no accessible right/ access denied."
+    flash[:error] = 'you have no accessible right access denied.'
     redirect_to pages_path #root_url
   end
 
 
   def is_admin?
-    if current_user
-      !!current_user.isAdmin?
-    else
-      return false
-    end
+    current_user.try(:isAdmin?)
   end
 
   def rand_products
     ims = all_photo_name
-
-    #ims.shuffle!
-
-    #tmp = ims.first(5)
     tmp = [ims[rand(ims.length-1)],ims[rand(ims.length-1)],ims[rand(ims.length-1)],ims[rand(ims.length-1)],ims[rand(ims.length-1)]]
 
-    Product.where(:article => tmp)
+    Product.where(article: tmp)
   end
-
 
   def all_photo_name
-    mask = File.join("**", "thumb", "*.jpg" )
+    mask = File.join('**', 'thumb', '*.jpg')
     ims = Dir.glob(mask)
-    #mask = File.join("**", "bujua", "*.JPG" )
-      #imNameL = Dir.glob(mask)
-      #ims = ims + imNameL #list of all images
-    #ims = ims + Dir.glob(mask)
-      #ims.collect!{|im| File.basename(im, ".jpg")}
-      #ims.collect!{|im| File.basename(im, ".JPG")}
     ims.collect!{|im| File.basename(im, ".*")}
   end
-
-
-
-
 end

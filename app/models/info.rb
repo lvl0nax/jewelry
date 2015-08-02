@@ -1,13 +1,10 @@
 class Info < ActiveRecord::Base
 
-def find_product
-    @product = Product.find_by_article(self.product_article)
-    #@product = Product.find(:article => self.product_article)
+  def find_product
+    Product.find_by(article: self.product_article)
   end
 
   def find_category
-    @product = Product.find_by_article(self.product_article)
-    @product.category
+    Product.find_by(article: self.product_article).category
   end
-  
 end

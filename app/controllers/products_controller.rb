@@ -3,11 +3,7 @@ class ProductsController < InheritedResources::Base
   before_filter :admin_require, :except => [ :show, :search, :upload_photos ]
   belongs_to :category
   def show
-    if !!resource.mtitle
-      @title = resource.mtitle
-    else
-      @title = "#{resource.category.title} " + "#{resource.brand}"
-    end
+    @title = resource.mtitle || "#{resource.category.title} " + "#{resource.brand}"
     prs = Product.with_image.where(category_id: resource.category_id).sample(10)
     @prs1 = prs[0]
     @prs2 = prs[1..4]
@@ -17,21 +13,14 @@ class ProductsController < InheritedResources::Base
 
   def search
     args = {}
-    args.merge!({category_id: params[:category]}) unless params[:category].blank?
-    args.merge!({brand: params[:brand]}) unless params[:brand].blank?
-    # category = params[:category] || nil
-    # price = params[:price] || nil
-    # brand = ''
-    # args.merge!({category_id: params[:category]}) if params[:category]
-    # prc = 0..1000
+    args[:category_id] = params[:category] if params[:category].present?
+    args[:brand] = params[:brand] if params[:brand].present?
     case params[:price]
-      when '1' then args.merge!({price: 0..1000}) #prc = 0..1000
-      when '2' then args.merge!({price: 1000..3000}) #prc = 1000..3000
-      when '3' then args.merge!({price: 3000..1000000}) #prc = 3000..800000
+      when '1' then args[:price] = 0..1000 #prc = 0..1000
+      when '2' then args[:price] = 1000..3000 #prc = 1000..3000
+      when '3' then args[:price] = 3000..1000000 #prc = 3000..800000
     end
     @products = Product.with_image.where(args).first(20)
-    # respond_to :js, :json => { :res => "123" }
-    # render :json => { :res => "123" }
     if @products.blank?
       render text: 'По Вашему запросу ни чего не найдено! Измените параметры и повторите попытку позже.'
     else
@@ -39,14 +28,9 @@ class ProductsController < InheritedResources::Base
     end
   end
 
-  def search_results
-
-  end
+  def search_results; end
 
   def upload_photos
-    puts params
-    # binding.pry
-    # puts '----------------------------------------------'
     params[:product][:photo]
   end
 

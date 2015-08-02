@@ -12,11 +12,7 @@ class PagesController < InheritedResources::Base #ApplicationController
   # thumbs_subdir 'small'
 
   def show
-    @title = if resource.mtitle.present?
-      resource.mtitle
-    else
-      resource.title
-    end
+    @title = resource.mtitle || resource.title
   end
 
   def index

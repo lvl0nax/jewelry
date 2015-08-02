@@ -10,37 +10,25 @@ class Product < ActiveRecord::Base
   end
 
   def desc
-    if Info.find_by_product_article(self.article).blank?
-
-      return nil
-    else
-      Info.find_by_product_article(self.article).content
-    end
+    Info.find_by(product_article: self.article).try(:content)
   end
 
   def image_exist?
     msk = File.join('**', 'medium', "#{self.article}.*")
     nameF = Dir.glob(msk)
-    File.basename(nameF.first) unless nameF.blank?
-    #nameF.empty? ? true : false
+    File.basename(nameF.first) if nameF.present?
   end
 
   def discount
-
-    #TODO: Price with discount should be printed on site
-
-    if Info.find_by_product_article(self.article).blank?
-      return nil
-    else
-      t = Info.find_by_product_article(self.article).discount
-      total_price = self.price * (100 - t) / 100
+    info = Info.find_by(product_article: self.article)
+    if info.present?
+      t = info.discount
+      self.price * (100 - t) / 100
     end
   end
 
   def info
-    #Description.find_by_product_article(self.article)
-    Info.where(:product_article => self.article).first
-    #Description.first("product_article = '#{self.article}'")
+    Info.where(product_article: self.article).first
   end
 
   def as_json
@@ -51,5 +39,4 @@ class Product < ActiveRecord::Base
       category: self.category.title
     }
   end
-
 end

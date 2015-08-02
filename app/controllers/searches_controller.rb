@@ -7,31 +7,22 @@ class SearchesController < ApplicationController
 
   def create
     @search = Search.create!(params[:search])
-    logger.debug "==============category id ==============="
-    logger.debug @search.category_id
-    logger.debug "===============params ==================="
-    logger.debug params[:search][:category_id].join(",")
-    @search.category_id = params[:search][:category_id].join(",")
-    @search.save
+    @search.category_id = params[:search][:category_id].join(',')
+    @search.save!
     respond_with @search
-    #redirect_to @search
   end
 
   def update
-
-
-      respond_with @search
-
+    respond_with @search
   end
 
   def show
-    @search = Search.find(params[:id])
-    respond_with @search
+    respond_with(@search = Search.find(params[:id]))
   end
 
 
   def test
-    @test = "its successful example!! Nice work!s"
+    @test = 'its successful example!! Nice work!s'
     
     # correct code  
       flag = 0
@@ -85,7 +76,6 @@ class SearchesController < ApplicationController
   end
 
   def index
-    @search = Search.last
-    respond_with @search
+    respond_with(@search = Search.last)
   end
 end

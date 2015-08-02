@@ -11,17 +11,15 @@ class User < ActiveRecord::Base
   has_many :cards
 
   def apply_omniauth(omniauth)
-    self.email = omniauth['info']['nickname'] + "@mail.com" if email.blank?
-    authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
+    self.email = omniauth['info']['nickname'] + '@mail.com' if email.blank?
+    authentications.build(provider: omniauth['provider'], uid: omniauth['uid'])
   end
 
   def password_required?
-    (authentications.empty? || !password.blank?) && super
+    (authentications.empty? || password.present?) && super
   end
 
   def isAdmin?
-     self === User.first ? true : false
+     self.id == User.minimum(:id)
   end
-
-
 end
