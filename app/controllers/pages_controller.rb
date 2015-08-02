@@ -12,10 +12,10 @@ class PagesController < InheritedResources::Base #ApplicationController
   # thumbs_subdir 'small'
 
   def show
-    if !!resource.mtitle
-      @title = resource.mtitle
+    @title = if resource.mtitle.present?
+      resource.mtitle
     else
-      @title = resource.title
+      resource.title
     end
   end
 
@@ -24,19 +24,9 @@ class PagesController < InheritedResources::Base #ApplicationController
     @products = Product.with_image.where(for_main_page: true).first(3)
     @products = Product.with_image.first(3) if @products.count < 3
     @title = Dopinfo.where(tag: 'main').first.try(:title)
-    # if Page.all.blank?
-    #   redirect_to new_page_path
-    # else
-    #   @page = Page.first
-    #   render "show"
-    # end
-    # respond_to do |format|
-    #   format.html {render layout: 'application_new.html.erb'}
-    # end
   end
 
   def import_excel
-
     #for CATEGORY model
     catAr = Category.all
     toCat = []
@@ -45,8 +35,6 @@ class PagesController < InheritedResources::Base #ApplicationController
     else
       last = catAr.last.id
     end
-
-
 
     objs = []
     sql = ActiveRecord::Base.connection()

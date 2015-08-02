@@ -26,7 +26,7 @@ task :copy_config_secrets, roles => :app do
   prod_config = "#{shared_path}/config/secrets.yml"
   run "cp #{prod_config} #{release_path}/config/secrets.yml"
 end
-
+  
 # В rails 3 по умолчанию включена функция assets pipelining,
 # которая позволяет значительно уменьшить размер статических
 # файлов css и js.
