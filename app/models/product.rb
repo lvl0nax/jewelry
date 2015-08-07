@@ -46,7 +46,7 @@ class Product < ActiveRecord::Base
 
   def self.append_new(products)
     self.connection.execute(
-      'INSERT INTO products (article, price, category_id, number) VALUES ' + products.join(',')
+      'INSERT INTO products (article, price, category_id, number, created_at, updated_at) VALUES ' + products.join(',')
     )
   end
 end

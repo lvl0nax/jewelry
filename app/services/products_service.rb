@@ -18,9 +18,10 @@ class ProductsService
       type = 'серьги' if type.include? 'ерьги'
       price = @table.cell(line, 'D')
       count = @table.cell(line, 'E')
+      time =  Time.zone.now.to_s.sub(' UTC', '')
       cat_id =
         ::Category.find_or_create_by(title: type).try(:id)
-      products.push("('#{article}', '#{price.to_f.abs}', '#{cat_id}', '#{count.to_i}')")
+      products.push("('#{article}', '#{price.to_f.abs}', '#{cat_id}', '#{count.to_i}', '#{time}', '#{time}')")
       if i == 1000
         ::Product.append_new(products)
         products = []
