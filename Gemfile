@@ -54,3 +54,4 @@ gem 'unicorn'
 gem 'unicorn-rails'
 
 gem 'capistrano', '~> 2.15'
+gem 'capistrano-sidekiq', github: 'seuros/capistrano-sidekiq'

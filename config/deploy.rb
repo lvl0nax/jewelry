@@ -103,6 +103,7 @@ task :create_custome_symlink do
   run "ln -nfs #{shared_path}/public/tmp                 #{release_path}/public/tmp"
 end
 
+set :sidekiq_options_per_process, ["--queue high", "--queue default --queue low"]
 
 # - for unicorn - #
 namespace :deploy do
