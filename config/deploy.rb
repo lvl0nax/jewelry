@@ -100,7 +100,7 @@ after 'deploy:update_code', :create_custome_symlink
 desc 'Make symlink for additional bujua files'
 task :create_custome_symlink do
   run "ln -nfs #{shared_path}/uploads                    #{release_path}/public/uploads"
-  run "ln -nfs #{shared_path}/public/uploads/tmp         #{release_path}/public/uploads/tmp"
+  run "ln -nfs #{shared_path}/public/tmp                 #{release_path}/public/tmp"
 end
 
 
