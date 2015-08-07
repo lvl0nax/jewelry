@@ -1,6 +1,10 @@
 ActiveAdmin.register_page 'Dashboard' do
   content title: 'upload images' do
     div do
+      render 'unprocessed_files'
+    end
+
+    div do
       render 'upload_form'
     end
   end

@@ -1,9 +1,11 @@
-<%= form_for(:product, url: upload_photos_products_path, :html => { :multipart => true }) do |f| %>
-  <div class="field">
-    <%= f.label :photo %><br>
-    <%= f.file_field :photo, :multiple => true %>
-  </div>
+<%= form_for(:product, url: process_pictures_admin_products_path, html: {multipart: true}) do |f| %>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'pictures'%>
+  </div>
+<% end %>
+
+<%= form_for(:product, url: process_products_admin_products_path, html: {multipart: true}, remote: true) do |f| %>
+  <div class="actions">
+    <%= f.submit 'products' %>
   </div>
 <% end %>

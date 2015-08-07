@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
 
   resources :dopinfos
 
@@ -7,7 +9,6 @@ Rails.application.routes.draw do
 
   resources :infos
   #for twitter authentfication
-  match "/delayed_job" => DelayedJobWeb, :anchor => false, via: [:get, :post]
   match '/auth/:provider/callback' => 'authentications#create', via: [:get, :post]
   match '/user/test' => 'users#test', via: [:get, :post]
   resources :authentications
@@ -27,19 +28,19 @@ Rails.application.routes.draw do
 
   resources :searches
   resources :pages do
-
-    get 'import_excell', :on => :collection
+    get 'import_excell', on: :collection
   end
 
-  get 'import_excel', :to => "application#import_excel"
-  get 'image_convert', :to => "application#image_convert"
-  get 'clear_images', :to => "application#clear_images"
+  get 'import_excel', to: 'application#import_excel'
+  get 'image_convert', to: 'application#image_convert'
+  get 'clear_images', to: 'application#clear_images'
 
   post '/card' => 'card#create'
 
   resources :products do
     collection do
-      post 'upload_photos'
+      post 'pictures_process'
+      post 'products_process'
     end
   end
   resources :card do

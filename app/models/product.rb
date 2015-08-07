@@ -39,4 +39,14 @@ class Product < ActiveRecord::Base
       category: self.category.title
     }
   end
+
+  def self.truncate_table
+    self.connection.execute('TRUNCATE products')
+  end
+
+  def self.append_new(products)
+    self.connection.execute(
+      'INSERT INTO products (article, price, category_id, number) VALUES ' + products.join(',')
+    )
+  end
 end

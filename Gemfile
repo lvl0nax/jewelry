@@ -36,6 +36,7 @@ gem 'omniauth-facebook'
 # библиотеки для дальнейшей корректной установки  нижеуказанных гемов.
 gem 'nokogiri'
 gem 'roo'
+gem 'roo-xls'
 ##########################################################################################################
 
 ##########################################################################################################
@@ -45,9 +46,8 @@ gem 'mini_magick'
 
 gem 'kaminari'
 
-gem 'daemons'
-gem 'delayed_job_active_record'
-gem 'delayed_job_web'
+gem 'sidekiq'
+gem 'sinatra'
 
 gem 'carrierwave'
 gem 'unicorn'

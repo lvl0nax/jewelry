@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class ProductsController < InheritedResources::Base
-  before_filter :admin_require, :except => [ :show, :search, :upload_photos ]
+  before_filter :admin_require, except: [:show, :search, :upload_photos]
   belongs_to :category
   def show
     @title = resource.mtitle || "#{resource.category.title} " + "#{resource.brand}"
@@ -30,8 +30,14 @@ class ProductsController < InheritedResources::Base
 
   def search_results; end
 
-  def upload_photos
-    params[:product][:photo]
+  def pictures_process
+    PictureWorker.perform_async
+    render nothing: true
+  end
+
+  def products_process
+    ProductsWorker.perform_async
+    render nothing: true
   end
 
 end
