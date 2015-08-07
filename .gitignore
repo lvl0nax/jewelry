@@ -25,6 +25,7 @@ doc/
 *.swp
 *~
 .project
+.idea/
 .DS_Store
 pictures
 app/assets/images/thumb
