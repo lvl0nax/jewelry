@@ -7,15 +7,14 @@ class FileService
     @files.each do |img|
       begin
         file_name = File.basename(img)
-        file = File.join(Rails.root, 'public', 'tmp', file_name)
         article = file_name.split('.').first
         product = Product.find_by(article: article)
         if product
-          product.photo = File.open(file)
+          product.photo = File.open(img)
           product.save!
         end
       ensure
-        File.delete(file)
+        File.delete(img)
       end
     end
   end
